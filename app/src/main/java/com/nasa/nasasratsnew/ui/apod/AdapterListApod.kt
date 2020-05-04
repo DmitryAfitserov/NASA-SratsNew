@@ -17,5 +17,5 @@ class AdapterListApod(private val context: Activity, private val title: Array<St
         return super.getView(position, convertView, parent)
     }
 
-    
+
 }
