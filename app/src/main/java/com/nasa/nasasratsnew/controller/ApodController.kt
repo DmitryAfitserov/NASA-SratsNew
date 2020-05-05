@@ -2,26 +2,27 @@ package com.nasa.nasasratsnew.controller
 
 
 
-import android.app.DownloadManager
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProviders
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.nasa.nasasratsnew.ui.apod.ApodViewModel
+import com.nasa.nasasratsnew.data.ApodData
+import com.nasa.nasasratsnew.ui.apod.ApodListFragment
 
-class ApodController(val activity: FragmentActivity) {
+class ApodController(private val activity: FragmentActivity, private val apodListFragment: ApodListFragment, private var listApodData:ArrayList<ApodData>) {
 
     private var URL = "https://api.nasa.gov/planetary/apod?api_key=mtLZUxtBo45hYfKLteWj3rH8qBv0b93cZz7aXqDe"
 
-    private lateinit var apodViewModel: ApodViewModel
 
-    fun getStartData(){
-        Log.d("Controller", "getStartData")
 
-        apodViewModel = ViewModelProviders.of(activity).get(ApodViewModel::class.java)
+    fun work(){
+
+         if (listApodData.size < 4){
+             getStartData()
+         }
+
         val queue = Volley.newRequestQueue(activity)
 
 
@@ -34,6 +35,16 @@ class ApodController(val activity: FragmentActivity) {
             Response.ErrorListener { error ->  Log.d("Controller", "error load url"+ error) })
 
         queue.add(stringRequest)
+    }
+
+    private fun getStartData(){
+        
+
+
+
+
+
+        apodListFragment.statrDataAvailable()
     }
 
 }
