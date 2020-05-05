@@ -11,12 +11,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nasa.nasasratsnew.R
 import com.nasa.nasasratsnew.controller.ApodController
 import com.nasa.nasasratsnew.data.ApodData
-import com.nasa.nasasratsnew.interfaces.InterfaceApod
+import com.nasa.nasasratsnew.interfaces.InterfaceForListApod
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
-class ApodListFragment : ListFragment(), InterfaceApod {
+class ApodListFragment : ListFragment(), InterfaceForListApod {
 
     private lateinit var controller:ApodController
     private var apodViewModel: ApodViewModel? = null
@@ -40,7 +40,7 @@ class ApodListFragment : ListFragment(), InterfaceApod {
             pullToRefresh.setRefreshing(false)
         }
 
-        controller = ApodController(activity!!, this, listApod!!)
+        controller = ApodController(context!!, this, listApod!!)
 
             controller.work()
 

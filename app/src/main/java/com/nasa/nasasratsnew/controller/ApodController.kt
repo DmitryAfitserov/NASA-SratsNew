@@ -3,6 +3,7 @@ package com.nasa.nasasratsnew.controller
 
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.text.format.DateUtils
 
 import android.util.Log
@@ -18,15 +19,16 @@ import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ApodController(private val activity: FragmentActivity, private val apodListFragment: ApodListFragment, private var listApodData:ArrayList<ApodData>) {
+class ApodController(private val context: Context, private val apodListFragment: ApodListFragment, private var listApodData:ArrayList<ApodData>) {
 
     private var URL = "https://api.nasa.gov/planetary/apod?api_key=mtLZUxtBo45hYfKLteWj3rH8qBv0b93cZz7aXqDe"
     private var URL_date = "&date="
 
-    private var dateFormate:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+    private var dateFormat:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
     private var dateNow:Date = Date()
     private var listURL = arrayListOf<String?>()
-    private val startCountObjects:Int = 10
+    private val startCountObjects:Int = 5
+    private val callback = { response() }
 
 
 
@@ -41,22 +43,23 @@ class ApodController(private val activity: FragmentActivity, private val apodLis
 
     private fun getStartData(){
         creatorURL(startCountObjects)
-
-
-
-
-
+        for(i in 0..startCountObjects){
+            RequestByUrl(context, i, listURL[i], callback() )
+        }
 
         apodListFragment.statrDataAvailable()
     }
 
-    private fun getURl(){
-        val queue = Volley.newRequestQueue(activity)
 
 
+    private fun requestByURL(id:Int, UrlReady: String?){
+
+
+
+        val queue = Volley.newRequestQueue(context)
 
         val stringRequest = StringRequest(
-            Request.Method.GET, URL,
+            Request.Method.GET, UrlReady,
             Response.Listener<String> { response ->
                 Log.d("Controller", response.toString())
             },
@@ -80,11 +83,16 @@ class ApodController(private val activity: FragmentActivity, private val apodLis
         for (count in 0..countCreateURL){
             cal.add(Calendar.DATE, -(ofsetDay + count))
             workDate = cal.time
-            listURL.add(URL + URL_date + dateFormate.format(workDate))
+            listURL.add(URL + URL_date + dateFormat.format(workDate))
           //  Log.d("MyCont", listURL.get(count))
             cal.time = dateNow
         }
 
     }
+
+    fun response(){
+
+    }
+
 
 }

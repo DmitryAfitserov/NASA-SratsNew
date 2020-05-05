@@ -1,6 +1,6 @@
 package com.nasa.nasasratsnew.interfaces
 
-interface InterfaceApod {
+interface InterfaceForListApod {
 
     fun statrDataAvailable()
 
