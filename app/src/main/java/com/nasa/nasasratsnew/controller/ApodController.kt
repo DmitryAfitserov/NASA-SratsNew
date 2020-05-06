@@ -47,7 +47,7 @@ class ApodController(private val context: Context, private val apodListFragment:
         creatorURL(startCountObjects)
         for(i in 0..startCountObjects){
            // RequestByUrl(context, i, listURL[i], callback )
-            CreatorApodObject(i, context, listURL[i], "rr", callbackToController)
+            CreatorApodObject(i, context, listURL[i], "ru", callbackToController)
         }
 
         apodListFragment.statrDataAvailable()

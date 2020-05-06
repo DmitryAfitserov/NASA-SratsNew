@@ -10,6 +10,8 @@ class CreatorApodObject (val id:Int, private val context: Context,
                          var callbackToController: (id:Int, apod:ApodData) -> Unit){
 
     private val callbackToCreator = {response:String -> responseFromNasa(response)}
+    private val callbackToCreatorText = {response:String -> responseTextTranslate(response)}
+    private val callbackToCreatorTitle = {response:String -> responseTitleTranslate(response)}
 
     init{
         RequestByUrl(context, nasaUrl, callbackToCreator )
@@ -36,20 +38,29 @@ class CreatorApodObject (val id:Int, private val context: Context,
         Log.d("MyCont", "id = $id , date= $date , typemedia= $typeMedia")
 
         return apod
-
     }
 
     private fun translate(apodEnglish:ApodData){
-        Log.d("MyCont", "response language")
+
+        val translateUrlTitle = creatorTranslateUrl(apodEnglish.title)
+        val translateUrlText = creatorTranslateUrl(apodEnglish.text)
+        Log.d("MyCont", translateUrlTitle)
+        Log.d("MyCont", translateUrlText)
+        RequestByUrl(context, translateUrlText, callbackToCreatorText)
+        RequestByUrl(context, translateUrlTitle, callbackToCreatorTitle)
+
+
 
 
 
     }
 
-    private fun creatorTranslateUrl(text:String){
+    private fun creatorTranslateUrl(text:String): String{
         val yandexUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200501T062736Z.e9edef3c7dc2f9b4.f15c6e7469b76e0aa102f6f4fa840a76692ff4dd&format=plain&options=1"
-        val textUrl = "text=my%20house%20is%20new"
-        val languageUrl = "&lang=en-ru"
+        val textUrl = "&text="
+        val languageUrl = "&lang=en-"
+
+        return yandexUrl + languageUrl + language + textUrl + text
     }
 
     private fun parserTranslateJson(response: String) :String{
@@ -58,6 +69,20 @@ class CreatorApodObject (val id:Int, private val context: Context,
 
         return textTranslate
 
+    }
+    private fun responseTextTranslate(textTranslate: String){
+        val text = parserTranslateJson(textTranslate)
+
+    }
+    private fun responseTitleTranslate(titleTranslate: String){
+        val text = parserTranslateJson(titleTranslate)
+
+    }
+
+    private fun sednTranslatedApod(text: String){
+        
+
+        callbackToController.invoke(id, apod)
     }
 
 
