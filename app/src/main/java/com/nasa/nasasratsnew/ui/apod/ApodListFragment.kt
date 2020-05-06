@@ -22,6 +22,8 @@ class ApodListFragment : ListFragment(), InterfaceForListApod {
     private lateinit var controller:ApodController
     private var apodViewModel: ApodViewModel? = null
     private var listApod:MutableList<ApodData?>? = null
+    private var listAdapterApod:AdapterListApod? = null
+
 
 
     override fun onCreateView(
@@ -55,10 +57,18 @@ class ApodListFragment : ListFragment(), InterfaceForListApod {
         return root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        listAdapterApod = AdapterListApod(activity!!, listApod!!)
+        listAdapter = listAdapterApod
+
+        super.onActivityCreated(savedInstanceState)
+    }
+
     private fun showStartContent(){
         (activity as AppCompatActivity).toolbar.visibility = View.VISIBLE
         (activity as AppCompatActivity).drawer_layout.visibility = View.VISIBLE
         (activity as AppCompatActivity).nav_view.visibility = View.VISIBLE
+        listAdapterApod!!.notifyDataSetChanged()
 
 
     }

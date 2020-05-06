@@ -2,23 +2,13 @@ package com.nasa.nasasratsnew.controller
 
 
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.text.format.DateUtils
 
-import android.util.Log
-import androidx.fragment.app.FragmentActivity
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import android.content.Context
+
 import com.nasa.nasasratsnew.data.ApodData
 import com.nasa.nasasratsnew.ui.apod.ApodListFragment
-import org.json.JSONObject
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ApodController(private val context: Context, private val apodListFragment: ApodListFragment, private var listApodData:MutableList<ApodData?>) {
 
@@ -91,8 +81,8 @@ class ApodController(private val context: Context, private val apodListFragment:
 
             if(listTemp.size == startCountObjects + 1 ){
                 listTemp.sortBy { it.id }
-                for(apod in listTemp){
-                    listApodData.add(apod)
+                for(apodObject in listTemp){
+                    listApodData.add(apodObject)
 
                 }
                 apodListFragment.statrDataAvailable()
