@@ -7,7 +7,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 
-class RequestByUrl(private val context: Context,private val id:Int, private val url:String?,var myCAllback: (id:Int, response:String) -> Unit){
+class RequestByUrl(private val context: Context, private val url:String?,var callbackToCreator: (response:String) -> Unit){
 
     init {
         createQuery()
@@ -21,8 +21,8 @@ class RequestByUrl(private val context: Context,private val id:Int, private val 
             Request.Method.GET, url,
             Response.Listener<String> { response ->
 
-                Log.d("MyCont", "id = $id  " + response.toString())
-                myCAllback.invoke(id, response.toString())
+              //  Log.d("MyCont", response.toString())
+                callbackToCreator.invoke(response.toString())
             },
             Response.ErrorListener { error ->  Log.d("MyCont", "error load url"+ error) })
 

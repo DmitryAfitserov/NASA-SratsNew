@@ -29,13 +29,14 @@ class ApodController(private val context: Context, private val apodListFragment:
     private var dateNow:Date = Date()
     private var listURL = arrayListOf<String?>()
     private val startCountObjects:Int = 5
-    private val callback = {id:Int, response:String -> response(id, response) }
+    private val callbackToController = {id:Int, apod:ApodData -> response() }
 
 
 
     fun work(){
 
          if (listApodData.size < startCountObjects){
+
              getStartData()
          }
 
@@ -45,7 +46,8 @@ class ApodController(private val context: Context, private val apodListFragment:
     private fun getStartData(){
         creatorURL(startCountObjects)
         for(i in 0..startCountObjects){
-            RequestByUrl(context, i, listURL[i], callback )
+           // RequestByUrl(context, i, listURL[i], callback )
+            CreatorApodObject(i, context, listURL[i], "rr", callbackToController)
         }
 
         apodListFragment.statrDataAvailable()
@@ -76,9 +78,9 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     }
 
-    private fun response(id:Int, response:String){
-        parserNasaJson(id, response)
-      //  Log.d("MyCont", " $id response $response")
+    private fun response(){
+    //    parserNasaJson(id, response)
+        Log.d("MyCont", "response not language")
     }
 
     private fun parserNasaJson(id:Int, response: String) :ApodData{
