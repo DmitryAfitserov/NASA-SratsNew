@@ -29,7 +29,7 @@ class ApodController(private val context: Context, private val apodListFragment:
     private var dateNow:Date = Date()
     private var listURL = arrayListOf<String?>()
     private val startCountObjects:Int = 5
-    private val callbackToController = {id:Int, apod:ApodData -> response() }
+    private val callbackToController = {id:Int, apod:ApodData? -> response(id, apod) }
 
 
 
@@ -78,33 +78,12 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     }
 
-    private fun response(){
-    //    parserNasaJson(id, response)
-        Log.d("MyCont", "response not language")
+    private fun response(id:Int, apod:ApodData?){
+
+
+        Log.d("MyCont", "all is OK")
     }
 
-    private fun parserNasaJson(id:Int, response: String) :ApodData{
-        val json= JSONObject(response)
-        val date:String = json.getString("date")
-        val text:String = json.getString("explanation")
-        val typeMedia:String = json.getString("media_type")
-        val title:String = json.getString("title")
-        val url:String = json.getString("url")
-        val hdUrl:String? = json.optString("hdurl")
-
-        var apod = ApodData(id, date, text, typeMedia, title)
-        apod.url = url
-        apod.hdUrl = hdUrl
-        Log.d("MyCont", "id = $id , date= $date , typemedia= $typeMedia")
-
-        return apod
-
-
-
-
-
-
-    }
 
 
 }
