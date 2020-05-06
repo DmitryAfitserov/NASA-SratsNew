@@ -1,6 +1,7 @@
 package com.nasa.nasasratsnew.ui.apod
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +21,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod {
 
     private lateinit var controller:ApodController
     private var apodViewModel: ApodViewModel? = null
-    private var listApod:ArrayList<ApodData>? = null
+    private var listApod:MutableList<ApodData?>? = null
 
 
     override fun onCreateView(
@@ -63,6 +64,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod {
     }
 
     override fun statrDataAvailable() {
+        Log.d("MyCont", "showStartContent()")
         showStartContent()
     }
 }

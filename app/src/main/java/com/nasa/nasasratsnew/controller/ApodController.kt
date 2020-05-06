@@ -20,17 +20,23 @@ import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ApodController(private val context: Context, private val apodListFragment: ApodListFragment, private var listApodData:ArrayList<ApodData>) {
+class ApodController(private val context: Context, private val apodListFragment: ApodListFragment, private var listApodData:MutableList<ApodData?>) {
 
     private var URL = "https://api.nasa.gov/planetary/apod?api_key=mtLZUxtBo45hYfKLteWj3rH8qBv0b93cZz7aXqDe"
     private var URL_date = "&date="
 
     private var dateFormat:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
     private var dateNow:Date = Date()
-    private var listURL = arrayListOf<String?>()
-    private val startCountObjects:Int = 5
-    private val callbackToController = {id:Int, apod:ApodData? -> response(id, apod) }
 
+    private var listURL = arrayListOf<String?>()
+
+    private val startCountObjects:Int = 5 // 6 is really
+
+    private val callbackToController = {apod:ApodData? -> response(apod) }
+
+    private var listTemp = mutableListOf<ApodData>()
+
+    private var isStartData = true
 
 
     fun work(){
@@ -46,11 +52,11 @@ class ApodController(private val context: Context, private val apodListFragment:
     private fun getStartData(){
         creatorURL(startCountObjects)
         for(i in 0..startCountObjects){
-           // RequestByUrl(context, i, listURL[i], callback )
+
             CreatorApodObject(i, context, listURL[i], "ru", callbackToController)
         }
 
-        apodListFragment.statrDataAvailable()
+
     }
 
 
@@ -78,10 +84,24 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     }
 
-    private fun response(id:Int, apod:ApodData?){
+    private fun response(apod:ApodData?){
+
+        if(isStartData){
+            listTemp.add(apod!!)
+
+            if(listTemp.size == startCountObjects + 1 ){
+                listTemp.sortBy { it.id }
+                for(apod in listTemp){
+                    listApodData.add(apod)
+
+                }
+                apodListFragment.statrDataAvailable()
+                listTemp.clear()
+                isStartData = false
+            }
+        }
 
 
-        Log.d("MyCont", "all is OK")
     }
 
 
