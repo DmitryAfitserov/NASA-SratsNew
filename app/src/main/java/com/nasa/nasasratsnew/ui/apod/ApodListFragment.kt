@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.ViewModelProviders
@@ -17,7 +18,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
-class ApodListFragment : ListFragment(), InterfaceForListApod {
+class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScrollListener {
+
 
     private lateinit var controller:ApodController
     private var apodViewModel: ApodViewModel? = null
@@ -47,6 +49,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod {
 
             controller.work()
 
+        listView.setOnScrollListener(this)
 
 //        val textView: TextView = root.findViewById(R.id.text_home)
 //        homeViewModel.text.observe(this, Observer {
@@ -73,8 +76,26 @@ class ApodListFragment : ListFragment(), InterfaceForListApod {
 
     }
 
+
+
     override fun statrDataAvailable() {
         Log.d("MyCont", "showStartContent()")
         showStartContent()
     }
+
+
+    override fun onScroll(
+        view: AbsListView?,
+        firstVisibleItem: Int,
+        visibleItemCount: Int,
+        totalItemCount: Int
+    ) {
+        Log.d("MyCont", "firstVisibleItem $firstVisibleItem , visibleItemCount = $visibleItemCount , totalItemCount = $totalItemCount")
+    }
+
+    override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
+        Log.d("MyCont", "scrollState = $scrollState")
+    }
 }
+
+

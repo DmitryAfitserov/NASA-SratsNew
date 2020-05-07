@@ -29,7 +29,7 @@ class AdapterListApod(private val activity: FragmentActivity, private val list: 
 
             holder.text = retView.findViewById(R.id.text) as TextView?
 
-            holder.text?.text = getItem(position)?.text
+            holder.text?.text = getItem(position)?.textTranslate
 
             retView.tag = holder
 
