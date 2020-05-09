@@ -25,7 +25,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     private var apodViewModel: ApodViewModel? = null
     private var listApod:MutableList<ApodData?>? = null
     private var listAdapterApod:AdapterListApod? = null
-    private var sendedFirstItem = -1
+    private var sendedFirstItem = 0
 
 
 
@@ -48,7 +48,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
         controller = ApodController(context!!, this, listApod!!)
 
-            controller.work()
+            controller.work(0)
 
 
 
@@ -94,13 +94,14 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     ) {
         if(firstVisibleItem > sendedFirstItem){
             sendedFirstItem = firstVisibleItem
-            controller.work()
+            controller.work(sendedFirstItem)
+            Log.d("MyCont", "onScroll()")
         }
-        Log.d("MyCont", "firstVisibleItem $firstVisibleItem , visibleItemCount = $visibleItemCount , totalItemCount = $totalItemCount")
+
     }
 
     override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
-        Log.d("MyCont", "scrollState = $scrollState")
+
     }
 }
 

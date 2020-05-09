@@ -4,6 +4,7 @@ package com.nasa.nasasratsnew.controller
 
 
 import android.content.Context
+import android.util.Log
 
 import com.nasa.nasasratsnew.data.ApodData
 import com.nasa.nasasratsnew.ui.apod.ApodListFragment
@@ -32,15 +33,20 @@ class ApodController(private val context: Context, private val apodListFragment:
     private var isStartData = true
 
 
-    fun work(firstVisibleItem:Int){
+    fun work(firstVisibleItem:Int): Boolean{
 
-         if (listApodData.size < startCountObjects){
-
+        if (listApodData.size < startCountObjects){
+             Log.d("MyCont", "startCountObjects = 5")
              getData(startCountObjects)
          }
-        if(firstVisibleItem +3 < listApodData.size){
+        if(firstVisibleItem +10 > listApodData.size && !isStartData){
+            if(listApodData.size < listURL.size){
+                return false
+            }
+            Log.d("MyCont", "usuallycountObjects = 3")
             getData(usuallycountObjects)
         }
+        return true
 
 
     }
@@ -64,7 +70,7 @@ class ApodController(private val context: Context, private val apodListFragment:
     }
 
 
-    
+
     private fun creatorURL(countCreateURL:Int){
 
         while (listURL.size < listApodData.size){
@@ -89,17 +95,14 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     private fun responseFromCreator(apod:ApodData?){
 
-        if(isStartData){
-            listTemp.add(apod!!)
+         listTemp.add(apod!!)
 
-            if(listTemp.size == startCountObjects + 1 ){
+        if(isStartData){
+            if(listTemp.size ==startCountObjects + 1 ){
                 responseSuccessLoad()
-                isStartData = false
             }
         } else {
-            listTemp.add(apod!!)
-
-            if(listTemp.size == usuallycountObjects + 1){
+            if(listTemp.size ==usuallycountObjects + 1 ){
                 responseSuccessLoad()
             }
         }
@@ -108,6 +111,7 @@ class ApodController(private val context: Context, private val apodListFragment:
     }
 
     private fun responseSuccessLoad(){
+        Log.d("MyCont", "responseSuccessLoad")
         listTemp.sortBy { it.id }
         for(apodObject in listTemp){
             listApodData.add(apodObject)
@@ -115,6 +119,11 @@ class ApodController(private val context: Context, private val apodListFragment:
         }
         apodListFragment.statrDataAvailable()
         listTemp.clear()
+
+        if(isStartData){
+            getData(usuallycountObjects)
+            isStartData =false
+        }
 
     }
 
