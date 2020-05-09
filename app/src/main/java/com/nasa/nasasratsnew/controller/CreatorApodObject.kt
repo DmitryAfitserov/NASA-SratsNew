@@ -19,6 +19,10 @@ class CreatorApodObject (val id:Int, private val context: Context,
     }
 
     private fun responseFromNasa(response:String){
+        if(response.equals("error")){
+           // apod.
+            callbackToController(null)
+        }
         parserNasaJson(response)
         language?.let { translate(apod) } ?: run { callbackToController(apod) }
 

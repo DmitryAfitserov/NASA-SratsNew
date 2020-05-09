@@ -82,6 +82,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     override fun statrDataAvailable() {
         Log.d("MyCont", "showStartContent()")
+        listApod!!.add(null)
         showStartContent()
     }
 

@@ -48,7 +48,6 @@ class ApodController(private val context: Context, private val apodListFragment:
         }
         return true
 
-
     }
 
 //    private fun getStartData(){

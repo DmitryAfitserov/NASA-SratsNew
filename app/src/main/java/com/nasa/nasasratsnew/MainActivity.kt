@@ -1,6 +1,7 @@
 package com.nasa.nasasratsnew
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
@@ -29,6 +30,20 @@ class MainActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         toolbar.visibility = View.INVISIBLE
         setSupportActionBar(toolbar)
+        var i = "ero"
+        var u = "e"
+        var o = "ro"
+
+        if(i == u + o){
+            Log.d("MyCont", "==")
+        }
+
+        if(i.equals(u + o)){
+            Log.d("MyCont", "equals")
+        }
+        if(i === u + o){
+            Log.d("MyCont", "===")
+        }
 
 
         drawerLayout = findViewById(R.id.drawer_layout)

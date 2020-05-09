@@ -24,7 +24,8 @@ class RequestByUrl(private val context: Context, private val url:String?,var cal
               //  Log.d("MyCont", response.toString())
                 callbackToCreator.invoke(response.toString())
             },
-            Response.ErrorListener { error ->  Log.d("MyCont", "error load url"+ error) })
+            Response.ErrorListener { error ->  Log.d("MyCont", "error load url"+ error)
+                callbackToCreator.invoke("error")})
 
         queue.add(stringRequest)
     }
