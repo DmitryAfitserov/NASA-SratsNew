@@ -22,36 +22,49 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     private val startCountObjects:Int = 5 // 6 is really
 
-    private val callbackToController = {apod:ApodData? -> response(apod) }
+    private val usuallycountObjects:Int = 3 // 4 is really
+
+
+    private val callbackToController = {apod:ApodData? -> responseFromCreator(apod) }
 
     private var listTemp = mutableListOf<ApodData>()
 
     private var isStartData = true
 
 
-    fun work(){
+    fun work(firstVisibleItem:Int){
 
          if (listApodData.size < startCountObjects){
 
-             getStartData()
+             getData(startCountObjects)
          }
-
-
-    }
-
-    private fun getStartData(){
-        creatorURL(startCountObjects)
-        for(i in 0..startCountObjects){
-
-            CreatorApodObject(i, context, listURL[i], "ru", callbackToController)
+        if(firstVisibleItem +3 < listApodData.size){
+            getData(usuallycountObjects)
         }
 
 
     }
 
+//    private fun getStartData(){
+//        creatorURL(startCountObjects)
+//        for(i in 0..startCountObjects){
+//
+//            CreatorApodObject(i, context, listURL[i], "ru", callbackToController)
+//        }
+//
+//
+//    }
+
+    private fun getData(countLoadObjects:Int){
+        creatorURL(countLoadObjects)
+        for(i in listApodData.size..listApodData.size+countLoadObjects){
+            CreatorApodObject(i, context, listURL[i], "ru", callbackToController)
+        }
+
+    }
 
 
-
+    
     private fun creatorURL(countCreateURL:Int){
 
         while (listURL.size < listApodData.size){
@@ -74,23 +87,34 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     }
 
-    private fun response(apod:ApodData?){
+    private fun responseFromCreator(apod:ApodData?){
 
         if(isStartData){
             listTemp.add(apod!!)
 
             if(listTemp.size == startCountObjects + 1 ){
-                listTemp.sortBy { it.id }
-                for(apodObject in listTemp){
-                    listApodData.add(apodObject)
-
-                }
-                apodListFragment.statrDataAvailable()
-                listTemp.clear()
+                responseSuccessLoad()
                 isStartData = false
+            }
+        } else {
+            listTemp.add(apod!!)
+
+            if(listTemp.size == usuallycountObjects + 1){
+                responseSuccessLoad()
             }
         }
 
+
+    }
+
+    private fun responseSuccessLoad(){
+        listTemp.sortBy { it.id }
+        for(apodObject in listTemp){
+            listApodData.add(apodObject)
+
+        }
+        apodListFragment.statrDataAvailable()
+        listTemp.clear()
 
     }
 

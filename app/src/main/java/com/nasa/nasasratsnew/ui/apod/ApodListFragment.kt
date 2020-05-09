@@ -25,6 +25,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     private var apodViewModel: ApodViewModel? = null
     private var listApod:MutableList<ApodData?>? = null
     private var listAdapterApod:AdapterListApod? = null
+    private var sendedFirstItem = -1
 
 
 
@@ -49,7 +50,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
             controller.work()
 
-        listView.setOnScrollListener(this)
+
 
 //        val textView: TextView = root.findViewById(R.id.text_home)
 //        homeViewModel.text.observe(this, Observer {
@@ -63,6 +64,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         listAdapterApod = AdapterListApod(activity!!, listApod!!)
         listAdapter = listAdapterApod
+        listView.setOnScrollListener(this)
 
         super.onActivityCreated(savedInstanceState)
     }
@@ -90,6 +92,10 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         visibleItemCount: Int,
         totalItemCount: Int
     ) {
+        if(firstVisibleItem > sendedFirstItem){
+            sendedFirstItem = firstVisibleItem
+            controller.work()
+        }
         Log.d("MyCont", "firstVisibleItem $firstVisibleItem , visibleItemCount = $visibleItemCount , totalItemCount = $totalItemCount")
     }
 
