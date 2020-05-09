@@ -9,22 +9,23 @@ class CreatorApodObject (val id:Int, private val context: Context,
                          private val nasaUrl:String?, private val language:String?,
                          var callbackToController: (apod:ApodData?) -> Unit){
 
-    private val callbackToCreator = {response:String -> responseFromNasa(response)}
-    private val callbackToCreatorText = {response:String -> responseTextTranslate(response)}
-    private val callbackToCreatorTitle = {response:String -> responseTitleTranslate(response)}
+    private val callbackToCreator = {response:String, status:Boolean -> responseFromNasa(response, status)}
+    private val callbackToCreatorText = {response:String, status:Boolean -> responseTextTranslate(response, status)}
+    private val callbackToCreatorTitle = {response:String, status:Boolean -> responseTitleTranslate(response, status)}
     private var apod:ApodData? = null
 
     init{
         RequestByUrl(context, nasaUrl, callbackToCreator )
     }
 
-    private fun responseFromNasa(response:String){
-        if(response.equals("error")){
-           // apod.
-            callbackToController(null)
+    private fun responseFromNasa(response:String, status:Boolean){
+        if(status){
+            parserNasaJson(response)
+            language?.let { translate(apod) } ?: run { callbackToController(apod) }
+        } else {
+            errorLoad(response)
         }
-        parserNasaJson(response)
-        language?.let { translate(apod) } ?: run { callbackToController(apod) }
+
 
     }
 
@@ -70,14 +71,24 @@ class CreatorApodObject (val id:Int, private val context: Context,
         return textTranslateNew
 
     }
-    private fun responseTextTranslate(textTranslate: String){
-        val text = parserTranslateJson(textTranslate)
-        sendTranslatedApod(text, 2)
+    private fun responseTextTranslate(textTranslate: String, status:Boolean){
+        if(status){
+            val text = parserTranslateJson(textTranslate)
+            sendTranslatedApod(text, 2)
+        } else {
+            errorLoad(textTranslate)
+        }
+
 
     }
-    private fun responseTitleTranslate(titleTranslate: String){
-        val text = parserTranslateJson(titleTranslate)
-        sendTranslatedApod(text, 1)
+    private fun responseTitleTranslate(titleTranslate: String, status:Boolean){
+        if(status){
+            val text = parserTranslateJson(titleTranslate)
+            sendTranslatedApod(text, 1)
+        } else {
+            errorLoad(titleTranslate)
+        }
+
 
     }
 
@@ -93,6 +104,11 @@ class CreatorApodObject (val id:Int, private val context: Context,
         }
 
 
+    }
+
+    private fun errorLoad(error:String){
+        Log.d("MyCont", "private fun errorLoad $error")
+        
     }
 
 
