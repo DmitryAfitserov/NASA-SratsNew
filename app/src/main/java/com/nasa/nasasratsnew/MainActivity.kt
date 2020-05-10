@@ -15,27 +15,32 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.View
+import android.widget.ImageView
+import com.google.android.material.appbar.AppBarLayout
 
 class MainActivity : AppCompatActivity() {
 
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var toolbar: Toolbar
+    private lateinit var appBarLauout: AppBarLayout
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
+    private lateinit var imageNasa: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbar)
-    //    toolbar.visibility = View.INVISIBLE
+        appBarLauout = findViewById(R.id.app_bar_layout)
+
         setSupportActionBar(toolbar)
 
 
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
-     //   drawerLayout.visibility = View.INVISIBLE
-     //   navView.visibility = View.INVISIBLE
+        imageNasa = findViewById(R.id.nasa_start_image)
+        imageNasa.visibility = View.INVISIBLE
 
 
         val navController = findNavController(R.id.nav_host_fragment)
