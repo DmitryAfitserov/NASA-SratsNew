@@ -31,8 +31,6 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     private var listTemp = mutableListOf<ApodData>()
 
-  //  private var isStartData = true
-
     private var keyBatch:Int = 1
 
 
@@ -44,14 +42,16 @@ class ApodController(private val context: Context, private val apodListFragment:
              getData(startCountObjects)
 
          }
-        if(firstVisibleItem +10 > listApodData.size && keyBatch > 1){
+        if(firstVisibleItem +10 > listApodData.size && listApodData.isNotEmpty()){
             if(listApodData.size < listURL.size){
+                Log.d("MyCont", "listApodData.size < listURL.size")
                 return false
             }
             Log.d("MyCont", "usuallycountObjects = 3")
             keyBatch++
             getData(usuallycountObjects)
         }
+        Log.d("MyCont", "work")
         return true
 
     }
