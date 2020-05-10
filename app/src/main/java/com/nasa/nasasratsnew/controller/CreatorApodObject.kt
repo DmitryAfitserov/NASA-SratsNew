@@ -7,7 +7,7 @@ import org.json.JSONObject
 
 class CreatorApodObject (val id:Int, private val context: Context,
                          private val nasaUrl:String?, private val language:String?,
-                         var callbackToController: (apod:ApodData?) -> Unit){
+                         var callbackToController: (apod:ApodData?, error: String?) -> Unit){
 
     private val callbackToCreator = {response:String, status:Boolean -> responseFromNasa(response, status)}
     private val callbackToCreatorText = {response:String, status:Boolean -> responseTextTranslate(response, status)}
@@ -21,7 +21,7 @@ class CreatorApodObject (val id:Int, private val context: Context,
     private fun responseFromNasa(response:String, status:Boolean){
         if(status){
             parserNasaJson(response)
-            language?.let { translate(apod) } ?: run { callbackToController(apod) }
+            language?.let { translate(apod) } ?: run { callbackToController(apod, null) }
         } else {
             errorLoad(response)
         }
@@ -100,15 +100,16 @@ class CreatorApodObject (val id:Int, private val context: Context,
         }
 
         if(apod?.titleTranslate != null && apod?.textTranslate != null){
-            callbackToController.invoke(apod)
+            callbackToController.invoke(apod, null)
         }
 
 
     }
 
     private fun errorLoad(error:String){
+        callbackToController.invoke(null, error)
         Log.d("MyCont", "private fun errorLoad $error")
-        
+
     }
 
 

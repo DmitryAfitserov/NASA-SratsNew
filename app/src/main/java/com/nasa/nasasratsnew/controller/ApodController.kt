@@ -26,7 +26,7 @@ class ApodController(private val context: Context, private val apodListFragment:
     private val usuallycountObjects:Int = 3 // 4 is really
 
 
-    private val callbackToController = {apod:ApodData? -> responseFromCreator(apod) }
+    private val callbackToController = {apod:ApodData?, error:String? -> responseFromCreator(apod, error) }
 
     private var listTemp = mutableListOf<ApodData>()
 
@@ -92,9 +92,14 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     }
 
-    private fun responseFromCreator(apod:ApodData?){
+    private fun responseFromCreator(apod:ApodData?, error:String?){
 
-         listTemp.add(apod!!)
+        error?.let {
+            responseErrorLoad(it)
+            return
+        }
+
+        listTemp.add(apod!!)
 
         if(isStartData){
             if(listTemp.size ==startCountObjects + 1 ){
@@ -123,6 +128,10 @@ class ApodController(private val context: Context, private val apodListFragment:
             getData(usuallycountObjects)
             isStartData =false
         }
+
+    }
+
+    private fun responseErrorLoad(error:String){
 
     }
 
