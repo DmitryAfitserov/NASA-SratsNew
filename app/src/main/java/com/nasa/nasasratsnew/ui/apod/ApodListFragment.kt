@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ImageView
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nasa.nasasratsnew.R
 import com.nasa.nasasratsnew.controller.ApodController
@@ -143,7 +145,10 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     }
 
-
+    override fun onListItemClick(l: ListView?, v: View?, position: Int, id: Long) {
+        Log.d("MyCont", "position = $position ")
+        Navigation.findNavController(view!!).navigate(R.id.to_fragment_apod)
+    }
 }
 
 

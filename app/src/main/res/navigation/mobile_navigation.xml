@@ -9,7 +9,26 @@
         android:id="@+id/nav_apod"
         android:name="com.nasa.nasasratsnew.ui.apod.ApodListFragment"
         android:label="@string/menu_apod"
-        tools:layout="@layout/list_fragment_apod" />
+        tools:layout="@layout/list_fragment_apod">
+
+        <action
+            android:id="@+id/to_fragment_apod"
+            app:destination="@+id/fragment_apod"
+            app:popUpTo="@id/nav_apod"
+            />
+
+    </fragment>
+
+
+
+
+
+
+    <fragment
+        android:id="@+id/fragment_apod"
+        android:name="com.nasa.nasasratsnew.ui.apod.ApodFragment"
+        android:label="@string/fragment_apod"
+        tools:layout="@layout/fragment_apod_layout" />
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -40,4 +59,6 @@
         android:name="com.nasa.nasasratsnew.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
+
 </navigation>
