@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScrollListener {
 
 
+
     private lateinit var controller:ApodController
     private var apodViewModel: ApodViewModel? = null
     private var listApod:MutableList<ApodData?>? = null
@@ -80,10 +81,15 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
 
 
-    override fun statrDataAvailable() {
-        Log.d("MyCont", "showStartContent()")
+
+    override fun dataAvailable() {
+        Log.d("MyCont", "showContent()")
         listApod!!.add(null)
         showStartContent()
+    }
+
+    override fun errorLoadData(error: String) {
+        Log.d("MyCont", "error showContent() = $error")
     }
 
 

@@ -26,11 +26,14 @@ class ApodController(private val context: Context, private val apodListFragment:
     private val usuallycountObjects:Int = 3 // 4 is really
 
 
-    private val callbackToController = {apod:ApodData?, error:String? -> responseFromCreator(apod, error) }
+    private val callbackToController =
+        {apod:ApodData?, error:String?, keyBatch:Int -> responseFromCreator(apod, error, keyBatch) }
 
     private var listTemp = mutableListOf<ApodData>()
 
     private var isStartData = true
+
+    private var keyBatch:Int = 1
 
 
     fun work(firstVisibleItem:Int): Boolean{
@@ -63,7 +66,7 @@ class ApodController(private val context: Context, private val apodListFragment:
     private fun getData(countLoadObjects:Int){
         creatorURL(countLoadObjects)
         for(i in listApodData.size..listApodData.size+countLoadObjects){
-            CreatorApodObject(i, context, listURL[i], "ru", callbackToController)
+            CreatorApodObject(i,keyBatch,  context, listURL[i], "ru", callbackToController)
         }
 
     }
@@ -92,25 +95,28 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     }
 
-    private fun responseFromCreator(apod:ApodData?, error:String?){
+    private fun responseFromCreator(apod:ApodData?, error:String?, key:Int){
 
-        error?.let {
-            responseErrorLoad(it)
-            return
-        }
+        if(key == keyBatch){   // check batch
 
-        listTemp.add(apod!!)
-
-        if(isStartData){
-            if(listTemp.size ==startCountObjects + 1 ){
-                responseSuccessLoad()
+            error?.let {
+                responseErrorLoad(it)
+                return
             }
-        } else {
-            if(listTemp.size ==usuallycountObjects + 1 ){
-                responseSuccessLoad()
-            }
-        }
 
+            listTemp.add(apod!!)
+
+            if(isStartData){
+                if(listTemp.size ==startCountObjects + 1 ){
+                    responseSuccessLoad()
+                }
+            } else {
+                if(listTemp.size ==usuallycountObjects + 1 ){
+                    responseSuccessLoad()
+                }
+            }
+
+        }
 
     }
 
@@ -121,7 +127,7 @@ class ApodController(private val context: Context, private val apodListFragment:
             listApodData.add(apodObject)
 
         }
-        apodListFragment.statrDataAvailable()
+        apodListFragment.dataAvailable()
         listTemp.clear()
 
         if(isStartData){
@@ -133,6 +139,10 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     private fun responseErrorLoad(error:String){
 
+        keyBatch =+ 1
+        listTemp.clear()
+
+        apodListFragment.errorLoadData(error)
     }
 
 

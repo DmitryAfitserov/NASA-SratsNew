@@ -5,9 +5,10 @@ import android.util.Log
 import com.nasa.nasasratsnew.data.ApodData
 import org.json.JSONObject
 
-class CreatorApodObject (val id:Int, private val context: Context,
+class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val context: Context,
                          private val nasaUrl:String?, private val language:String?,
-                         var callbackToController: (apod:ApodData?, error: String?) -> Unit){
+                         var callbackToController: (apod:ApodData?, error: String?, keyBatch:Int) -> Unit){
+
 
     private val callbackToCreator = {response:String, status:Boolean -> responseFromNasa(response, status)}
     private val callbackToCreatorText = {response:String, status:Boolean -> responseTextTranslate(response, status)}
@@ -21,7 +22,7 @@ class CreatorApodObject (val id:Int, private val context: Context,
     private fun responseFromNasa(response:String, status:Boolean){
         if(status){
             parserNasaJson(response)
-            language?.let { translate(apod) } ?: run { callbackToController(apod, null) }
+            language?.let { translate(apod) } ?: run { callbackToController(apod, null, keyBatch_) }
         } else {
             errorLoad(response)
         }
@@ -100,14 +101,14 @@ class CreatorApodObject (val id:Int, private val context: Context,
         }
 
         if(apod?.titleTranslate != null && apod?.textTranslate != null){
-            callbackToController.invoke(apod, null)
+            callbackToController.invoke(apod, null, keyBatch_)
         }
 
 
     }
 
     private fun errorLoad(error:String){
-        callbackToController.invoke(null, error)
+        callbackToController.invoke(null, error, keyBatch_)
         Log.d("MyCont", "private fun errorLoad $error")
 
     }
