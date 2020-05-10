@@ -28,28 +28,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbar)
-        toolbar.visibility = View.INVISIBLE
+    //    toolbar.visibility = View.INVISIBLE
         setSupportActionBar(toolbar)
-        var i = "ero"
-        var u = "e"
-        var o = "ro"
-
-        if(i == u + o){
-            Log.d("MyCont", "==")
-        }
-
-        if(i.equals(u + o)){
-            Log.d("MyCont", "equals")
-        }
-        if(i === u + o){
-            Log.d("MyCont", "===")
-        }
 
 
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
-        drawerLayout.visibility = View.INVISIBLE
-        navView.visibility = View.INVISIBLE
+     //   drawerLayout.visibility = View.INVISIBLE
+     //   navView.visibility = View.INVISIBLE
 
 
         val navController = findNavController(R.id.nav_host_fragment)

@@ -24,7 +24,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     private lateinit var controller:ApodController
     private var apodViewModel: ApodViewModel? = null
-    private var listApod:MutableList<ApodData?>? = null
+    private lateinit var listApod:MutableList<ApodData?>
     private var listAdapterApod:AdapterListApod? = null
     private var sendedFirstItem = 0
 
@@ -47,9 +47,12 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
             pullToRefresh.setRefreshing(false)
         }
 
-        controller = ApodController(context!!, this, listApod!!)
+
+
+        controller = ApodController(context!!, this, listApod)
 
             controller.work(0)
+
 
 
 
@@ -67,15 +70,30 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         listAdapter = listAdapterApod
         listView.setOnScrollListener(this)
 
+        if(listApod.isNotEmpty()){
+            showViewElements()
+        } else {
+            hideViewElements()
+        }
+
         super.onActivityCreated(savedInstanceState)
     }
 
-    private fun showStartContent(){
-        (activity as AppCompatActivity).toolbar.visibility = View.VISIBLE
-        (activity as AppCompatActivity).drawer_layout.visibility = View.VISIBLE
-        (activity as AppCompatActivity).nav_view.visibility = View.VISIBLE
-        listAdapterApod!!.notifyDataSetChanged()
+    private fun showViewElements(){
+        if(listApod.size < controller.startCountObjects +2 ){
 
+            (activity as AppCompatActivity).toolbar.visibility = View.VISIBLE
+            (activity as AppCompatActivity).drawer_layout.visibility = View.VISIBLE
+            (activity as AppCompatActivity).nav_view.visibility = View.VISIBLE
+
+        }
+
+
+    }
+    private fun hideViewElements(){
+        (activity as AppCompatActivity).toolbar.visibility = View.INVISIBLE
+        (activity as AppCompatActivity).drawer_layout.visibility = View.INVISIBLE
+        (activity as AppCompatActivity).nav_view.visibility = View.INVISIBLE
 
     }
 
@@ -85,10 +103,15 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     override fun dataAvailable() {
         Log.d("MyCont", "showContent()")
         listApod!!.add(null)
-        showStartContent()
+
+        showViewElements()
+        listAdapterApod!!.notifyDataSetChanged()
     }
 
     override fun errorLoadData(error: String) {
+        showViewElements()
+        listAdapterApod!!.notifyDataSetChanged()
+
         Log.d("MyCont", "error showContent() = $error")
     }
 
@@ -110,6 +133,8 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
 
     }
+
+
 }
 
 

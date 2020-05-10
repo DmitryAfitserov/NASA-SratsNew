@@ -21,7 +21,7 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     private var listURL = arrayListOf<String?>()
 
-    private val startCountObjects:Int = 5 // 6 is really
+    val startCountObjects:Int = 5 // 6 is really
 
     private val usuallycountObjects:Int = 3 // 4 is really
 
@@ -31,7 +31,7 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     private var listTemp = mutableListOf<ApodData>()
 
-    private var isStartData = true
+  //  private var isStartData = true
 
     private var keyBatch:Int = 1
 
@@ -40,28 +40,21 @@ class ApodController(private val context: Context, private val apodListFragment:
 
         if (listApodData.size < startCountObjects){
              Log.d("MyCont", "startCountObjects = 5")
+            keyBatch = 1
              getData(startCountObjects)
+
          }
-        if(firstVisibleItem +10 > listApodData.size && !isStartData){
+        if(firstVisibleItem +10 > listApodData.size && keyBatch > 1){
             if(listApodData.size < listURL.size){
                 return false
             }
             Log.d("MyCont", "usuallycountObjects = 3")
+            keyBatch++
             getData(usuallycountObjects)
         }
         return true
 
     }
-
-//    private fun getStartData(){
-//        creatorURL(startCountObjects)
-//        for(i in 0..startCountObjects){
-//
-//            CreatorApodObject(i, context, listURL[i], "ru", callbackToController)
-//        }
-//
-//
-//    }
 
     private fun getData(countLoadObjects:Int){
         creatorURL(countLoadObjects)
@@ -106,7 +99,7 @@ class ApodController(private val context: Context, private val apodListFragment:
 
             listTemp.add(apod!!)
 
-            if(isStartData){
+            if(keyBatch == 1){
                 if(listTemp.size ==startCountObjects + 1 ){
                     responseSuccessLoad()
                 }
@@ -130,17 +123,28 @@ class ApodController(private val context: Context, private val apodListFragment:
         apodListFragment.dataAvailable()
         listTemp.clear()
 
-        if(isStartData){
+        if(keyBatch == 1){
+            keyBatch++
             getData(usuallycountObjects)
-            isStartData =false
+
         }
 
     }
 
     private fun responseErrorLoad(error:String){
 
-        keyBatch =+ 1
+        if(keyBatch == 1){
+            keyBatch = 0
+            listURL.clear()
+        } else {
+            keyBatch =+ 1
+            for(i in 0..usuallycountObjects){
+                listURL.removeAt(listURL.size - 1)
+            }
+        }
+
         listTemp.clear()
+        Log.d("MyCont", "responseErrorLoad")
 
         apodListFragment.errorLoadData(error)
     }
