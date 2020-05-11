@@ -34,8 +34,10 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
             } else {
                 holder = convertView.tag as ViewHolder
-                
-                retView = convertView
+                holder.text?.text = (getItem(position) as ApodData).id.toString()
+
+               // retView = convertView
+                return convertView
             }
 //        } else {
 //
