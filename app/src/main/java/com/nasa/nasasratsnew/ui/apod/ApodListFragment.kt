@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.content_main.*
 class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScrollListener {
 
 
-
     private lateinit var controller:ApodController
     private var apodViewModel: ApodViewModel? = null
     private lateinit var listApod:MutableList<ApodData?>
@@ -48,7 +47,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         val root = inflater.inflate(R.layout.list_fragment_apod, null)
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
         pullToRefresh.setOnRefreshListener{
-            pullToRefresh.setRefreshing(false)
+            pullToRefresh.isRefreshing = false
         }
 
 
@@ -108,6 +107,34 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         }
     }
 
+    private fun showViewErrorElements(){
+        (activity as AppCompatActivity).layout_error.visibility = View.VISIBLE
+
+        val progressBar = (activity as AppCompatActivity).progress_bar_error
+        progressBar.visibility = View.INVISIBLE
+
+        val textViewError = (activity as AppCompatActivity).text_view_error
+        textViewError.visibility = View.VISIBLE
+
+        val buttonError = (activity as AppCompatActivity).button_error
+        buttonError.visibility = View.VISIBLE
+        buttonError.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
+            controller.work(0)
+        }
+
+    }
+    private fun hideViewErrorElements(){
+        if(listApod.isNotEmpty() && listApod.size < controller.startCountObjects + 2) {
+
+            (activity as AppCompatActivity).layout_error.visibility = View.INVISIBLE
+            (activity as AppCompatActivity).text_view_error.visibility = View.INVISIBLE
+            (activity as AppCompatActivity).button_error.visibility = View.INVISIBLE
+            (activity as AppCompatActivity).progress_bar_error.visibility = View.INVISIBLE
+        }
+    }
+
+
 
 
 
@@ -116,12 +143,18 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
       //  listApod!!.add(null)
 
         showViewElements()
+        hideViewErrorElements()
         listAdapterApod!!.notifyDataSetChanged()
     }
 
     override fun errorLoadData(error: String) {
         showViewElements()
-        listAdapterApod!!.notifyDataSetChanged()
+       // listAdapterApod!!.notifyDataSetChanged()
+        if(listApod.isEmpty()){
+            showViewErrorElements()
+        } else {
+
+        }
 
         Log.d("MyCont", "error showContent() = $error")
     }
