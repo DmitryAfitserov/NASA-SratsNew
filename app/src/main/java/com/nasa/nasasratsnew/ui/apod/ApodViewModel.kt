@@ -7,7 +7,7 @@ import com.nasa.nasasratsnew.data.ApodData
 
 class ApodViewModel : ViewModel() {
 
-    val listApodData = mutableListOf<ApodData?>()
+    val listApodData = mutableListOf<Any?>()
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"

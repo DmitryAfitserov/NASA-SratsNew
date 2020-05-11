@@ -27,7 +27,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     private lateinit var controller:ApodController
     private var apodViewModel: ApodViewModel? = null
-    private lateinit var listApod:MutableList<ApodData?>
+    private lateinit var listApod:MutableList<Any?>
     private var listAdapterApod:AdapterListApod? = null
     private var sendedFirstItem = 0
 
@@ -135,9 +135,6 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     }
 
 
-
-
-
     override fun dataAvailable() {
         Log.d("MyCont", "showContent()")
       //  listApod!!.add(null)
@@ -153,7 +150,8 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         if(listApod.isEmpty()){
             showViewErrorElements()
         } else {
-
+            listApod.add(Boolean)
+            listAdapterApod!!.notifyDataSetChanged()
         }
 
         Log.d("MyCont", "error showContent() = $error")

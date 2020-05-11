@@ -41,7 +41,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7000004">
+        app:layout_constraintVertical_bias="0.7000004"
+        android:visibility="invisible">
 
 
         <TextView
@@ -50,6 +51,7 @@
             android:layout_height="wrap_content"
             android:text="Error load data"
             android:textSize="20sp"
+            android:visibility="invisible"
 
             />
 
@@ -58,14 +60,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="repite" />
+            android:text="repite"
+            android:visibility="invisible"/>
 
         <ProgressBar
             android:id="@+id/progress_bar_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-
+            android:visibility="invisible"
             />
 
     </LinearLayout>
