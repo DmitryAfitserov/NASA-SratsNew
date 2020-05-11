@@ -20,7 +20,7 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
         val holder: ViewHolder
         val retView: View
 
-        if(getItem(position) is ApodData){
+      //  if(getItem(position) is ApodData){
 
             if(convertView == null){
                 retView = vi.inflate(R.layout.custom_item_apod, null)
@@ -28,34 +28,37 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
                 holder.text = retView.findViewById(R.id.text) as TextView?
 
-                holder.text?.text = (getItem(position) as ApodData).textTranslate
+                holder.text?.text = (getItem(position) as ApodData).id.toString()
 
                 retView.tag = holder
 
             } else {
                 holder = convertView.tag as ViewHolder
+                
                 retView = convertView
             }
-        } else {
-
-            if(convertView == null){
-                retView = vi.inflate(R.layout.custom_item_apod_error, null)
-                holder = ViewHolder()
-
-                holder.text = retView.findViewById(R.id.text) as TextView?
-
-
-                retView.tag = holder
-
-            } else {
-                holder = convertView.tag as ViewHolder
-                retView = convertView
-            }
-
-        }
+//        } else {
+//
+//            if(convertView == null){
+//                retView = vi.inflate(R.layout.custom_item_apod_error, null)
+//                holder = ViewHolder()
+//
+//                holder.text = retView.findViewById(R.id.text) as TextView?
+//
+//
+//                retView.tag = holder
+//
+//            } else {
+//                holder = convertView.tag as ViewHolder
+//                retView = convertView
+//            }
+//
+//        }
 
         return retView
     }
+
+
 
     internal class ViewHolder {
         var text: TextView? = null

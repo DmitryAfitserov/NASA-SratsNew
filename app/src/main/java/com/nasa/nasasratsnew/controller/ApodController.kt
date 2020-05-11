@@ -36,6 +36,7 @@ class ApodController(private val context: Context, private val apodListFragment:
 
     fun work(firstVisibleItem:Int): Boolean{
 
+
         if (listApodData.size < startCountObjects && listURL.isEmpty()){
              Log.d("MyCont", "startCountObjects = 5")
             keyBatch = 1
@@ -46,6 +47,10 @@ class ApodController(private val context: Context, private val apodListFragment:
             if(listApodData.size < listURL.size){
                 Log.d("MyCont", " return false")
                 return false
+            }
+            if(listApodData[listApodData.size -1] is Boolean){
+                listApodData.removeAt(listApodData.size -1)
+                Log.d("MyCont", "delete null")
             }
             Log.d("MyCont", "usuallycountObjects = 3")
             keyBatch++
@@ -59,7 +64,7 @@ class ApodController(private val context: Context, private val apodListFragment:
     private fun getData(countLoadObjects:Int){
         creatorURL(countLoadObjects)
         for(i in listApodData.size..listApodData.size+countLoadObjects){
-            CreatorApodObject(i,keyBatch,  context, listURL[i], "ru", callbackToController)
+            CreatorApodObject(i,keyBatch,  context, listURL[i], null, callbackToController)
         }
 
     }

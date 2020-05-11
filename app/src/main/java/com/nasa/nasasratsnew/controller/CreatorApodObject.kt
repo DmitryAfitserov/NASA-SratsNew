@@ -101,6 +101,7 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
         }
 
         if(apod?.titleTranslate != null && apod?.textTranslate != null){
+            Log.d("MyCont", "id = $id , date= ${apod!!.date} , text translate = ${apod!!.textTranslate}e")
             callbackToController.invoke(apod, null, keyBatch_)
         }
 

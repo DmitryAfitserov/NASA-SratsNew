@@ -142,6 +142,10 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         showViewElements()
         hideViewErrorElements()
         listAdapterApod!!.notifyDataSetChanged()
+
+        for(apod in listApod){
+            Log.d("MyCont", "error showContent() listSize = ${(apod as ApodData).id}")
+        }
     }
 
     override fun errorLoadData(error: String) {
@@ -150,11 +154,11 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         if(listApod.isEmpty()){
             showViewErrorElements()
         } else {
-            listApod.add(Boolean)
+            listApod.add(true)
             listAdapterApod!!.notifyDataSetChanged()
         }
 
-        Log.d("MyCont", "error showContent() = $error")
+        Log.d("MyCont", "error showContent() listSize = ${listApod.size}")
     }
 
 
