@@ -34,6 +34,7 @@ class ApodController(private val context: Context, private val apodListFragment:
     private var keyBatch:Int = 1
 
 
+
     fun work(firstVisibleItem:Int): Boolean{
 
 
@@ -49,7 +50,7 @@ class ApodController(private val context: Context, private val apodListFragment:
                 return false
             }
             if(listApodData[listApodData.size -1] is Boolean){
-                listApodData.removeAt(listApodData.size -1)
+
                 Log.d("MyCont", "delete null")
             }
             Log.d("MyCont", "usuallycountObjects = 3")

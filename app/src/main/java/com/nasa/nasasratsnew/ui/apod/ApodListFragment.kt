@@ -154,8 +154,11 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         if(listApod.isEmpty()){
             showViewErrorElements()
         } else {
-            listApod.add(true)
-            listAdapterApod!!.notifyDataSetChanged()
+            if(listApod[listApod.size -1] !is Boolean){
+                listApod.add(true)
+                listAdapterApod!!.notifyDataSetChanged()
+            }
+
         }
 
         Log.d("MyCont", "error showContent() listSize = ${listApod.size}")
