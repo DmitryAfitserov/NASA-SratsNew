@@ -50,6 +50,7 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
             }
         } else {
 
+            if(getItem(position) == true){
                 retView = vi.inflate(R.layout.custom_item_apod_error, null)
                 retView.id = id
                 holder = ViewHolder()
@@ -59,6 +60,19 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
 
                 retView.tag = holder
+            } else {
+
+                    retView = vi.inflate(R.layout.custom_item_apod_loading, null)
+                    retView.id = id
+                    holder = ViewHolder()
+                    Log.d("MyCont", "convertView = $")
+
+                //    holder.text = retView.findViewById(R.id.text) as TextView?
+
+
+                    retView.tag = holder
+
+            }
         }
 
         return retView

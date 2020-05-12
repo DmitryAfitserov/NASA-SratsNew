@@ -83,7 +83,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     }
 
     private fun showViewElements(){
-        if(listApod.size < controller.startCountObjects +2 ){
+        if(listApod.size < controller.startCountObjects +3 ){
 
             (activity as AppCompatActivity).toolbar.visibility = View.VISIBLE
             (activity as AppCompatActivity).app_bar_layout.visibility = View.VISIBLE
@@ -125,7 +125,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     }
     private fun hideViewErrorElements(){
-        if(listApod.isNotEmpty() && listApod.size < controller.startCountObjects + 2) {
+        if(listApod.isNotEmpty() && listApod.size < controller.startCountObjects + 3) {
 
             (activity as AppCompatActivity).layout_error.visibility = View.INVISIBLE
             (activity as AppCompatActivity).text_view_error.visibility = View.INVISIBLE
@@ -143,25 +143,24 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         hideViewErrorElements()
         listAdapterApod!!.notifyDataSetChanged()
 
-        for(apod in listApod){
-            Log.d("MyCont", "error showContent() listSize = ${(apod as ApodData).id}")
-        }
+//        for(apod in listApod){
+//            Log.d("MyCont", "error showContent() listSize = ${(apod as ApodData).id}")
+//        }
     }
 
     override fun errorLoadData(error: String) {
         showViewElements()
-       // listAdapterApod!!.notifyDataSetChanged()
         if(listApod.isEmpty()){
             showViewErrorElements()
         } else {
-            if(listApod[listApod.size -1] !is Boolean){
-                listApod.add(true)
+                if(sendedFirstItem > 2){
+                    sendedFirstItem -= 2
+                }
                 listAdapterApod!!.notifyDataSetChanged()
-            }
+
 
         }
 
-        Log.d("MyCont", "error showContent() listSize = ${listApod.size}")
     }
 
 
