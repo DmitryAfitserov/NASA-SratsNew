@@ -42,10 +42,8 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
             } else {
                 holder = convertView.tag as ViewHolder
                 holder.text?.text = (getItem(position) as ApodData).id.toString()
-                Log.d("MyCont", "convertView = ${convertView.id}")
 
 
-               // retView = convertView
                 return convertView
             }
         } else {
@@ -54,7 +52,6 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                 retView = vi.inflate(R.layout.custom_item_apod_error, null)
                 retView.id = id
                 holder = ViewHolder()
-                Log.d("MyCont", "convertView = $")
 
                 holder.text = retView.findViewById(R.id.text) as TextView?
 
@@ -65,7 +62,6 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                     retView = vi.inflate(R.layout.custom_item_apod_loading, null)
                     retView.id = id
                     holder = ViewHolder()
-                    Log.d("MyCont", "convertView = $")
 
                 //    holder.text = retView.findViewById(R.id.text) as TextView?
 

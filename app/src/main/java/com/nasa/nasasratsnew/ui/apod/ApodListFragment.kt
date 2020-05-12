@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
-import android.widget.ImageView
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.ListFragment
@@ -14,10 +13,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nasa.nasasratsnew.R
-import com.nasa.nasasratsnew.controller.ApodController
-import com.nasa.nasasratsnew.data.ApodData
+import com.nasa.nasasratsnew.controller.ApodControllerText
 import com.nasa.nasasratsnew.interfaces.InterfaceForListApod
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -25,7 +22,7 @@ import kotlinx.android.synthetic.main.content_main.*
 class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScrollListener {
 
 
-    private lateinit var controller:ApodController
+    private lateinit var controller:ApodControllerText
     private var apodViewModel: ApodViewModel? = null
     private lateinit var listApod:MutableList<Any?>
     private var listAdapterApod:AdapterListApod? = null
@@ -50,14 +47,9 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
             pullToRefresh.isRefreshing = false
         }
 
-
-
-        controller = ApodController(context!!, this, listApod)
+        controller = ApodControllerText(context!!, this, listApod)
 
             controller.work(0)
-
-
-
 
 //        val textView: TextView = root.findViewById(R.id.text_home)
 //        homeViewModel.text.observe(this, Observer {
@@ -137,15 +129,13 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     override fun dataAvailable() {
         Log.d("MyCont", "showContent()")
-      //  listApod!!.add(null)
 
         showViewElements()
         hideViewErrorElements()
         listAdapterApod!!.notifyDataSetChanged()
 
-//        for(apod in listApod){
 //            Log.d("MyCont", "error showContent() listSize = ${(apod as ApodData).id}")
-//        }
+
     }
 
     override fun errorLoadData(error: String) {

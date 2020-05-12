@@ -110,7 +110,7 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
 
     private fun errorLoad(error:String){
         callbackToController.invoke(null, error, keyBatch_)
-        Log.d("MyCont", "private fun errorLoad $error")
+    //    Log.d("MyCont", "private fun errorLoad $error")
 
     }
 

@@ -11,7 +11,7 @@ import com.nasa.nasasratsnew.ui.apod.ApodListFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ApodController(private val context: Context, private val apodListFragment: ApodListFragment, private var listApodData:MutableList<Any?>) {
+class ApodControllerText(private val context: Context, private val apodListFragment: ApodListFragment, private var listApodData:MutableList<Any?>) {
 
     private var URL = "https://api.nasa.gov/planetary/apod?api_key=mtLZUxtBo45hYfKLteWj3rH8qBv0b93cZz7aXqDe"
     private var URL_date = "&date="
