@@ -160,13 +160,13 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     }
 
 
-    override fun onListItemClick(l: ListView?, v: View?, position: Int, id: Long) {
+    override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
         Log.d("MyCont", "position = $position ")
         if(position == listApod.size - 1){
             if(listApod[listApod.size - 1] == true){
-                val progressBar = v?.findViewById<ProgressBar>(R.id.progress_bar_error_item)
+                val progressBar = v.findViewById<ProgressBar>(R.id.progress_bar_error_item)
                 progressBar?.visibility = View.VISIBLE
-                v?.findViewById<TextView>(R.id.text_view_error_item)?.visibility = View.INVISIBLE
+                v.findViewById<TextView>(R.id.text_view_error_item)?.visibility = View.INVISIBLE
                 controller.work(sendedFirstItem)
             }
         } else {

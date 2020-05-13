@@ -19,8 +19,13 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/fragment_preferences"
+        android:name="com.nasa.nasasratsnew.ui.CustomPreferenceFragment"
+        android:label="@string/settings" />
 
-
+    <action android:id="@+id/to_fragment_preferences"
+        app:destination="@id/fragment_preferences"/>
 
 
 
