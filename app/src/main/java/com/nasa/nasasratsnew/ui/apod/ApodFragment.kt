@@ -1,24 +1,12 @@
 package com.nasa.nasasratsnew.ui.apod
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.telecom.Call
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.nasa.nasasratsnew.R
-import com.nasa.nasasratsnew.controller.ApodControllerImage
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.Target
-import kotlinx.android.synthetic.main.fragment_apod_layout.*
-import java.net.URL
-import kotlin.concurrent.thread
 
 class ApodFragment : Fragment(){
 

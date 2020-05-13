@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nasa.nasasratsnew.R
-import com.nasa.nasasratsnew.controller.ApodControllerImage
 import com.nasa.nasasratsnew.controller.ApodControllerText
 import com.nasa.nasasratsnew.interfaces.InterfaceForListApod
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -24,12 +23,10 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
 
     private lateinit var controller:ApodControllerText
- //   private lateinit var controllerImage:ApodControllerImage
     private var apodViewModel: ApodViewModel? = null
     private lateinit var listApod:MutableList<Any?>
     private var listAdapterApod:AdapterListApod? = null
     private var sendedFirstItem = 0
-    private val callbackFromImageController = {responseImage()}
 
 
 
@@ -51,7 +48,6 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         }
 
         controller = ApodControllerText(context!!, this, listApod)
-    //    controllerImage = ApodControllerImage(context!!, listApod, callbackFromImageController)
 
 
             controller.work(0)
@@ -84,8 +80,6 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
             (activity as AppCompatActivity).toolbar.visibility = View.VISIBLE
             (activity as AppCompatActivity).app_bar_layout.visibility = View.VISIBLE
-         //   (activity as AppCompatActivity).drawer_layout.visibility = View.VISIBLE
-          //  (activity as AppCompatActivity).nav_view.visibility = View.VISIBLE
             (activity as AppCompatActivity).nasa_start_image.visibility = View.INVISIBLE
 
         }
@@ -96,10 +90,6 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         if(listApod.size == 0){
         (activity as AppCompatActivity).toolbar.visibility = View.INVISIBLE
         (activity as AppCompatActivity).app_bar_layout.visibility = View.INVISIBLE
-
-
-       // (activity as AppCompatActivity).drawer_layout.visibility = View.INVISIBLE
-       // (activity as AppCompatActivity).nav_view.visibility = View.INVISIBLE
         (activity as AppCompatActivity).nasa_start_image.visibility = View.VISIBLE
         }
     }
@@ -138,7 +128,6 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         showViewElements()
         hideViewErrorElements()
         listAdapterApod!!.notifyDataSetChanged()
-   //     controllerImage.loadImages()
 
 //            Log.d("MyCont", "error showContent() listSize = ${(apod as ApodData).id}")
 
@@ -158,11 +147,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         }
 
     }
-
-    private fun responseImage(){
-        Log.d("MyCont", " responseImage()  ")
-       // listAdapterApod!!.notifyDataSetChanged()
-    }
+    
 
 
     override fun onScroll(
