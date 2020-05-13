@@ -25,6 +25,7 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val holder: ViewHolder
         val retView: View
+        val typeMediaImage = "image"
 
 
 
@@ -40,21 +41,17 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                 holder.text?.text = (getItem(position) as ApodData).id.toString()
 
 
-//                (getItem(position) as ApodData).bitmap?.let {
-//                    holder.image = retView.findViewById(R.id.imageView) as ImageView?
-//                    holder.image!!.setImageBitmap(it) }
+                if((getItem(position) as ApodData).typeMedia == typeMediaImage){
+                    holder.image = retView.findViewById(R.id.imageView) as ImageView?
 
-//                (getItem(position) as ApodData).image?.let {
-//                    holder.image = retView.findViewById(R.id.imageView) as ImageView?
-//                    holder.image = it }
-                holder.image = retView.findViewById(R.id.imageView) as ImageView?
+                    Picasso.get()
+                        .load((getItem(position) as ApodData).url)
+                        //  .placeholder(R.drawable.user_placeholder)
+                        //  .error(R.drawable.user_placeholder_error)
+                        // .transform(trans)
+                        .into(holder.image)
+                }
 
-                Picasso.get()
-                    .load((getItem(position) as ApodData).url)
-                    //  .placeholder(R.drawable.user_placeholder)
-                    //  .error(R.drawable.user_placeholder_error)
-                    // .transform(trans)
-                    .into(holder.image)
 
 
 
@@ -64,26 +61,23 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                 holder = convertView.tag as ViewHolder
                 holder.text?.text = (getItem(position) as ApodData).id.toString()
 
-//                (getItem(position) as ApodData).bitmap?.let {
-//                    if(holder.image == null){
-//                        holder.image = convertView.findViewById(R.id.imageView) as ImageView?
-//                    }
-//                    holder.image?.setImageBitmap(it) }
 
-//                (getItem(position) as ApodData).image?.let {
-//                    if(holder.image == null){
-//                        holder.image = convertView.findViewById(R.id.imageView) as ImageView?
-//                    }
-//                    holder.image = it }
+                if((getItem(position) as ApodData).typeMedia == typeMediaImage) {
 
-                holder.image = convertView.findViewById(R.id.imageView) as ImageView?
+                 //   holder.image = convertView.findViewById(R.id.imageView) as ImageView?
 
-                Picasso.get()
-                    .load((getItem(position) as ApodData).url)
-                    //  .placeholder(R.drawable.user_placeholder)
-                    //  .error(R.drawable.user_placeholder_error)
-                    // .transform(trans)
-                    .into(holder.image)
+                    Picasso.get()
+                        .load((getItem(position) as ApodData).url)
+                        //  .placeholder(R.drawable.user_placeholder)
+                        //  .error(R.drawable.user_placeholder_error)
+                        .into(holder.image)
+                } else {
+                    Picasso.get()
+                        .load(R.drawable.nasa)
+                        //  .placeholder(R.drawable.user_placeholder)
+                        //  .error(R.drawable.user_placeholder_error)
+                        .into(holder.image)
+                }
 
 
                 return convertView

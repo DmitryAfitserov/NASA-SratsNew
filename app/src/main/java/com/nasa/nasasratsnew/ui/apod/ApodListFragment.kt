@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ListView
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.ViewModelProviders
@@ -17,6 +19,7 @@ import com.nasa.nasasratsnew.controller.ApodControllerText
 import com.nasa.nasasratsnew.interfaces.InterfaceForListApod
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.list_fragment_apod.*
 
 
 class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScrollListener {
@@ -123,7 +126,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
 
     override fun dataAvailable() {
-        Log.d("MyCont", "showContent()")
+       // Log.d("MyCont", "showContent()")
 
         showViewElements()
         hideViewErrorElements()
@@ -138,16 +141,16 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         if(listApod.isEmpty()){
             showViewErrorElements()
         } else {
-                if(sendedFirstItem > 2){
-                    sendedFirstItem -= 2
-                }
-                listAdapterApod!!.notifyDataSetChanged()
 
+//                if(sendedFirstItem > 2){
+//                    sendedFirstItem -= 2
+//                }
+                listAdapterApod!!.notifyDataSetChanged()
 
         }
 
     }
-    
+
 
 
     override fun onScroll(
@@ -170,7 +173,16 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     override fun onListItemClick(l: ListView?, v: View?, position: Int, id: Long) {
         Log.d("MyCont", "position = $position ")
-        Navigation.findNavController(view!!).navigate(R.id.to_fragment_apod)
+        if(position == listApod.size - 1){
+            if(listApod[listApod.size - 1] == true){
+                val progressBar = v?.findViewById<ProgressBar>(R.id.progress_bar_error_item)
+                progressBar?.visibility = View.VISIBLE
+                v?.findViewById<TextView>(R.id.text_view_error_item)?.visibility = View.INVISIBLE
+                controller.work(sendedFirstItem)
+            }
+        } else {
+            Navigation.findNavController(view!!).navigate(R.id.to_fragment_apod)
+        }
     }
 }
 
