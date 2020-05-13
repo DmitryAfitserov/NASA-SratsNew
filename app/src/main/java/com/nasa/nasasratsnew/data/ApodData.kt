@@ -1,5 +1,7 @@
 package com.nasa.nasasratsnew.data
 
+import android.graphics.Bitmap
+
 data class ApodData(val id:Int, val date:String, val text: String , val typeMedia: String, val title:String){
 
 
@@ -8,6 +10,7 @@ data class ApodData(val id:Int, val date:String, val text: String , val typeMedi
 
     var textTranslate:String? = null
     var titleTranslate:String? = null
+    var bitmap:Bitmap? = null
 
 
 

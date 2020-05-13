@@ -32,30 +32,7 @@ class ApodFragment : Fragment(){
      //   var image = ImageView(context)
 
 
-        var target = object: Target{
-            override fun onBitmapFailed(errorDrawable: Drawable?) {
-                Log.d("MyCont", "onBitmapFailed()")
-               // TO,DO("not implemented") To change body of created functions use File | Settings | File Templates.
-            }
 
-            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-                Log.d("MyCont", "onPrepareLoad()")
-             //  TO,DO("not implemented") To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                imageView.setImageBitmap(bitmap)
-                Log.d("MyCont", "onBitmapLoaded()")
-                //  TO,DO("not implemented") To change body of created functions use File | Settings | File Templates.
-            }
-        }
-
-
-        Picasso.with(context)
-            .load("https://apod.nasa.gov/apod/image/2005/PorpoiseGalaxy_HubbleFraile_960.jpg")
-          //  .placeholder(R.drawable.user_placeholder)
-          //  .error(R.drawable.user_placeholder_error)
-            .into(target)
 
 
 
