@@ -19,18 +19,15 @@ import com.nasa.nasasratsnew.controller.ApodControllerText
 import com.nasa.nasasratsnew.interfaces.InterfaceForListApod
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.list_fragment_apod.*
 
 
 class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScrollListener {
-
 
     private lateinit var controller:ApodControllerText
     private var apodViewModel: ApodViewModel? = null
     private lateinit var listApod:MutableList<Any?>
     private var listAdapterApod:AdapterListApod? = null
     private var sendedFirstItem = 0
-
 
 
     override fun onCreateView(
@@ -84,9 +81,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
             (activity as AppCompatActivity).toolbar.visibility = View.VISIBLE
             (activity as AppCompatActivity).app_bar_layout.visibility = View.VISIBLE
             (activity as AppCompatActivity).nasa_start_image.visibility = View.INVISIBLE
-
         }
-
 
     }
     private fun hideViewElements(){
@@ -126,7 +121,6 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
 
     override fun dataAvailable() {
-       // Log.d("MyCont", "showContent()")
 
         showViewElements()
         hideViewErrorElements()
@@ -141,12 +135,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         if(listApod.isEmpty()){
             showViewErrorElements()
         } else {
-
-//                if(sendedFirstItem > 2){
-//                    sendedFirstItem -= 2
-//                }
                 listAdapterApod!!.notifyDataSetChanged()
-
         }
 
     }
@@ -168,8 +157,8 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     }
 
     override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
-
     }
+
 
     override fun onListItemClick(l: ListView?, v: View?, position: Int, id: Long) {
         Log.d("MyCont", "position = $position ")
