@@ -24,7 +24,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
 
     private lateinit var controller:ApodControllerText
-    private lateinit var controllerImage:ApodControllerImage
+ //   private lateinit var controllerImage:ApodControllerImage
     private var apodViewModel: ApodViewModel? = null
     private lateinit var listApod:MutableList<Any?>
     private var listAdapterApod:AdapterListApod? = null
@@ -51,7 +51,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         }
 
         controller = ApodControllerText(context!!, this, listApod)
-        controllerImage = ApodControllerImage(context!!, listApod, callbackFromImageController)
+    //    controllerImage = ApodControllerImage(context!!, listApod, callbackFromImageController)
 
 
             controller.work(0)
@@ -138,7 +138,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         showViewElements()
         hideViewErrorElements()
         listAdapterApod!!.notifyDataSetChanged()
-        controllerImage.loadImages()
+   //     controllerImage.loadImages()
 
 //            Log.d("MyCont", "error showContent() listSize = ${(apod as ApodData).id}")
 
@@ -161,7 +161,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     private fun responseImage(){
         Log.d("MyCont", " responseImage()  ")
-        listAdapterApod!!.notifyDataSetChanged()
+       // listAdapterApod!!.notifyDataSetChanged()
     }
 
 

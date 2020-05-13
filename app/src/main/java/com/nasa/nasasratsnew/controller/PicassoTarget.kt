@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
+import java.lang.Exception
 
 class PicassoTarget(var id:Int, var  callbackToController: (id:Int, isError:Boolean, bitmap:Bitmap?) -> Unit) : Target {
 
@@ -12,12 +13,11 @@ class PicassoTarget(var id:Int, var  callbackToController: (id:Int, isError:Bool
 
     }
 
-
-    override fun onBitmapFailed(errorDrawable: Drawable?) {
+    override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
         Log.d("MyCont", "onBitmapFailed()")
         callbackToController.invoke(id, true, null)
-
     }
+
 
 
     override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
