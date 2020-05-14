@@ -21,6 +21,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.preference.PreferenceManager
 import com.google.android.material.appbar.AppBarLayout
 
 class MainActivity : AppCompatActivity() {
@@ -92,8 +93,8 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun preferencesGetIsUseHD(){
-        val prefs: SharedPreferences = this.getSharedPreferences(
-        "com.example.app", Context.MODE_PRIVATE)
+        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        Log.d("MyCont", " getSharedPreferences" + prefs.getBoolean(key_use_hd, false))
         isHDImage = prefs.getBoolean(key_use_hd, false)
 
     }

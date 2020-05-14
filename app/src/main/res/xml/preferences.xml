@@ -12,7 +12,6 @@
     <ListPreference
         android:summary="%s"
         android:defaultValue="fd"
-
         android:key="language"
         android:title="title"
         android:dialogTitle="title dia"
