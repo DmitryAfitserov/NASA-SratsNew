@@ -17,6 +17,15 @@
     <string name="settings">Settings</string>
 
 
+    //preferences
+    <string name="settings_use_hd">HD изображения</string>
+    <string name="settings_use_hd_summary">загружать изображения в HD</string>
+    <string name="language">Язык текста</string>
+    <string name="language_title_dialog">Веберите язык</string>
+
+
+
+
 
 
 </resources>

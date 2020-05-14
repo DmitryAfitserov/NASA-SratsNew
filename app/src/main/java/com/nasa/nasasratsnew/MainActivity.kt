@@ -34,8 +34,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navView: NavigationView
     private lateinit var imageNasa: ImageView
     private lateinit var navController: NavController
-    companion object { var isHDImage = false}
-    private val key_use_hd = "use_hd"
+    companion object {
+        var isHDImage = false
+        var language = "en"
+        val key_use_hd = "use_hd"
+        val key_language = "language"
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,9 +99,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun preferencesGetIsUseHD(){
         val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        Log.d("MyCont", " getSharedPreferences" + prefs.getBoolean(key_use_hd, false))
         isHDImage = prefs.getBoolean(key_use_hd, false)
-
+        language = prefs.getString(key_language, "en")!!
     }
+
 
 }

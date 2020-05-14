@@ -5,16 +5,17 @@
 
     <SwitchPreference
         android:key="use_hd"
-        android:title="dfdf"
+        android:title="@string/settings_use_hd"
+        android:summary="@string/settings_use_hd_summary"
         android:defaultValue="false"/>
 
 
     <ListPreference
         android:summary="%s"
-        android:defaultValue="fd"
+        android:defaultValue="en"
         android:key="language"
-        android:title="title"
-        android:dialogTitle="title dia"
+        android:title="@string/language"
+        android:dialogTitle="@string/language_title_dialog"
         android:entries="@array/language"
         android:entryValues="@array/language_key"
         />

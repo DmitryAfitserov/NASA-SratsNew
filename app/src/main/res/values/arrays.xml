@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="language">
-        <item>Бразилия</item>
-        <item>Аргентина</item>
-        <item>Колумбия</item>
-        <item>Чили</item>
-        <item>Уругвай</item>
+        <item>Английский</item>
+        <item>Итальянский</item>
+        <item>Испанский</item>
+        <item>Китайский</item>
+
+        <item>Немецкий</item>
+        <item>Русский</item>
+        <item>Французский</item>
+        <item>Японский</item>
     </string-array>
 
     <string-array name="language_key">
-        <item>fd</item>
-        <item>df</item>
-        <item>d4</item>
-        <item>d1</item>
-        <item>d7</item>
+        <item>en</item>
+        <item>it</item>
+        <item>es</item>
+        <item>zh</item>
+
+        <item>de</item>
+        <item>ru</item>
+        <item>fr</item>
+        <item>ja</item>
     </string-array>
 
 </resources>
