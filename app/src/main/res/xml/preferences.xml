@@ -4,37 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreference
-        android:key="dfdf"
-        android:title="dfdf" />
-
-    <CheckBoxPreference
-        android:key="chb3"
-        android:summary="Description of checkbox 3"
-        android:title="CheckBox 3" />
+        android:key="use_hd"
+        android:title="dfdf"
+        android:defaultValue="false"/>
 
 
-    <PreferenceScreen
-        android:key="button_voicem454ail_category_key"
-        android:persistent="false"
-        android:summary="Description of screen"
-        android:title="cvcv">
-        <PreferenceCategory
-            app:title="sdsd">
+    <ListPreference
+        android:summary="%s"
+        android:defaultValue="fd"
 
-        <CheckBoxPreference
-            android:key="chb3"
-            android:summary="Description of checkbox 3"
-            android:title="CheckBox 3" />
-
-        <SwitchPreference
-            android:key="dfjkdf"
-            android:title="dffgdf" />
-        <SwitchPreference
-            android:key="dfkjdf"
-            android:title="d.,df" />
-        </PreferenceCategory>
+        android:key="language"
+        android:title="title"
+        android:dialogTitle="title dia"
+        android:entries="@array/language"
+        android:entryValues="@array/language_key"
+        />
 
 
-    </PreferenceScreen>
 
 </PreferenceScreen>

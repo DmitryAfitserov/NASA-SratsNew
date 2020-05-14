@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language">
+        <item>Бразилия</item>
+        <item>Аргентина</item>
+        <item>Колумбия</item>
+        <item>Чили</item>
+        <item>Уругвай</item>
+    </string-array>
+
+    <string-array name="language_key">
+        <item>fd</item>
+        <item>df</item>
+        <item>d4</item>
+        <item>d1</item>
+        <item>d7</item>
+    </string-array>
+
+</resources>

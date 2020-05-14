@@ -1,5 +1,7 @@
 package com.nasa.nasasratsnew
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,6 +33,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navView: NavigationView
     private lateinit var imageNasa: ImageView
     private lateinit var navController: NavController
+    companion object { var isHDImage = false}
+    private val key_use_hd = "use_hd"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +62,9 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        preferencesGetIsUseHD()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -82,8 +89,13 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
     
-    fun showViews(){
-        navView
-        
+
+
+    private fun preferencesGetIsUseHD(){
+        val prefs: SharedPreferences = this.getSharedPreferences(
+        "com.example.app", Context.MODE_PRIVATE)
+        isHDImage = prefs.getBoolean(key_use_hd, false)
+
     }
+
 }
