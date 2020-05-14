@@ -18,6 +18,8 @@
         android:persistent="false"
         android:summary="Description of screen"
         android:title="cvcv">
+        <PreferenceCategory
+            app:title="sdsd">
 
         <CheckBoxPreference
             android:key="chb3"
@@ -30,6 +32,7 @@
         <SwitchPreference
             android:key="dfkjdf"
             android:title="d.,df" />
+        </PreferenceCategory>
 
 
     </PreferenceScreen>

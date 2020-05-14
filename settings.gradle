@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='NASA Srats New'
+rootProject.name='NASA Stars News'
