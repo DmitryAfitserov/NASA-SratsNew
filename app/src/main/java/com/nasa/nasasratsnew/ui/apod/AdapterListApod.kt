@@ -53,8 +53,6 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                 }
 
 
-
-
                 retView.tag = holder
 
             } else {
@@ -64,13 +62,23 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
                 if((getItem(position) as ApodData).typeMedia == typeMediaImage) {
 
-                 //   holder.image = convertView.findViewById(R.id.imageView) as ImageView?
-
-                    Picasso.get()
+                    holder.image?.let {
+                        Picasso.get()
                         .load((getItem(position) as ApodData).url)
                         //  .placeholder(R.drawable.user_placeholder)
                         //  .error(R.drawable.user_placeholder_error)
-                        .into(holder.image)
+                        .into(it)
+                    } ?: run {
+
+                        holder.image = convertView.findViewById(R.id.imageView) as ImageView?
+                        Picasso.get()
+                            .load((getItem(position) as ApodData).url)
+                            //  .placeholder(R.drawable.user_placeholder)
+                            //  .error(R.drawable.user_placeholder_error)
+                            .into(holder.image)
+
+                    }
+
                 } else {
                     Picasso.get()
                         .load(R.drawable.nasa)

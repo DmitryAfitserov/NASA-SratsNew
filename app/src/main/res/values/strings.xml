@@ -7,21 +7,33 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+
+
+
+
+    //toolbar
+    <string name="settings">Насторйки</string>
+    <string name="fragment_apod">Day news</string>
     <string name="menu_apod">Day news</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="fragment_apod">Day news</string>
-    <string name="settings">Settings</string>
 
 
     //preferences
+
+    <string name="language_group">Язык</string>
+    <string name="image_group">Изображение</string>
+
     <string name="settings_use_hd">HD изображения</string>
     <string name="settings_use_hd_summary">загружать изображения в HD</string>
     <string name="language">Язык текста</string>
     <string name="language_title_dialog">Веберите язык</string>
+
+    <string name="show_two_texts">Показыать два текста</string>
+    <string name="show_two_texts_summary">Показывать оригинал и перевод текста</string>
 
 
 

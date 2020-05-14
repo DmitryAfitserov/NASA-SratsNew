@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var isHDImage = false
         var language = "en"
+        val languageDefault = "en"
         val key_use_hd = "use_hd"
         val key_language = "language"
     }

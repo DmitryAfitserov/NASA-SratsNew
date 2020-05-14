@@ -21,15 +21,18 @@ class CustomPreferenceFragment : PreferenceFragmentCompat(),
 
         super.onCreate(savedInstanceState)
         addPreferencesFromResource(R.xml.preferences)
+
+
+
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        Log.d("MyCont", "onSharedPreferenceChanged")
+
         if(key == MainActivity.key_use_hd){
             MainActivity.isHDImage = sharedPreferences?.getBoolean(key, false)!!
 
         } else if (key == MainActivity.key_language){
-            MainActivity.language = sharedPreferences?.getString(key, "en")!!
+            MainActivity.language = sharedPreferences?.getString(key, MainActivity.languageDefault)!!
         }
     }
 

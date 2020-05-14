@@ -2,11 +2,12 @@ package com.nasa.nasasratsnew.controller
 
 import android.content.Context
 import android.util.Log
+import com.nasa.nasasratsnew.MainActivity
 import com.nasa.nasasratsnew.data.ApodData
 import org.json.JSONObject
 
 class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val context: Context,
-                         private val nasaUrl:String?, private val language:String?,
+                         nasaUrl:String?,
                          var callbackToController: (apod:ApodData?, error: String?, keyBatch:Int) -> Unit){
 
 
@@ -22,7 +23,11 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
     private fun responseFromNasa(response:String, status:Boolean){
         if(status){
             parserNasaJson(response)
-            language?.let { translate(apod) } ?: run { callbackToController(apod, null, keyBatch_) }
+            if(MainActivity.language != MainActivity.languageDefault){
+                translate(apod)
+            } else {
+                callbackToController(apod, null, keyBatch_)
+            }
         } else {
             errorLoad(response)
         }
@@ -61,7 +66,7 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
         val textUrl = "&text="
         val languageUrl = "&lang=en-"
 
-        return yandexUrl + languageUrl + language + textUrl + text
+        return yandexUrl + languageUrl + MainActivity.language + textUrl + text
     }
 
     private fun parserTranslateJson(response: String) :String{

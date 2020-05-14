@@ -5,6 +5,7 @@ package com.nasa.nasasratsnew.controller
 
 import android.content.Context
 import android.util.Log
+import com.nasa.nasasratsnew.MainActivity
 
 import com.nasa.nasasratsnew.data.ApodData
 import com.nasa.nasasratsnew.ui.apod.ApodListFragment
@@ -49,10 +50,6 @@ class ApodControllerText(private val context: Context, private val apodListFragm
                 Log.d("MyCont", " return false")
                 return false
             }
-//            if(listApodData[listApodData.size -1] is Boolean){
-//
-//                Log.d("MyCont", "delete null")
-//            }
             Log.d("MyCont", "usuallycountObjects = 3")
             keyBatch++
             getData(usuallycountObjects)
@@ -71,7 +68,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
 
         for(i in listSize..listSize+countLoadObjects){
-            CreatorApodObject(i,keyBatch,  context, listURL[i], null, callbackToController)
+            CreatorApodObject(i,keyBatch,  context, listURL[i], callbackToController)
         }
 
     }

@@ -3,22 +3,41 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <SwitchPreference
-        android:key="use_hd"
-        android:title="@string/settings_use_hd"
-        android:summary="@string/settings_use_hd_summary"
-        android:defaultValue="false"/>
+
+    <PreferenceCategory
+        android:title="@string/language_group"
+        >
+        <ListPreference
+            android:summary="%s"
+            android:defaultValue="en"
+            android:key="language"
+            android:title="@string/language"
+            android:dialogTitle="@string/language_title_dialog"
+            android:entries="@array/language"
+            android:entryValues="@array/language_key"
+            />
+
+        <SwitchPreference
+            android:key="show_two_texts"
+            android:title="@string/show_two_texts"
+            android:summary="@string/show_two_texts_summary"
+            android:selectable="false"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/image_group"
+        >
+
+        <SwitchPreference
+            android:key="use_hd"
+            android:title="@string/settings_use_hd"
+            android:summary="@string/settings_use_hd_summary"
+            android:defaultValue="false"/>
 
 
-    <ListPreference
-        android:summary="%s"
-        android:defaultValue="en"
-        android:key="language"
-        android:title="@string/language"
-        android:dialogTitle="@string/language_title_dialog"
-        android:entries="@array/language"
-        android:entryValues="@array/language_key"
-        />
+    </PreferenceCategory>
 
 
 
