@@ -20,7 +20,7 @@
             android:key="show_two_texts"
             android:title="@string/show_two_texts"
             android:summary="@string/show_two_texts_summary"
-            android:selectable="false"
+
             android:defaultValue="false"/>
 
     </PreferenceCategory>

@@ -80,11 +80,24 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                     }
 
                 } else {
-                    Picasso.get()
-                        .load(R.drawable.nasa)
-                        //  .placeholder(R.drawable.user_placeholder)
-                        //  .error(R.drawable.user_placeholder_error)
-                        .into(holder.image)
+
+                    holder.image?.let {
+
+                        Picasso.get()
+                            .load(R.drawable.nasa)
+                            //  .placeholder(R.drawable.user_placeholder)
+                            //  .error(R.drawable.user_placeholder_error)
+                            .into(holder.image)
+
+                    } ?: run {
+                        holder.image = convertView.findViewById(R.id.imageView) as ImageView?
+                        Picasso.get()
+                            .load((getItem(position) as ApodData).url)
+                            //  .placeholder(R.drawable.user_placeholder)
+                            //  .error(R.drawable.user_placeholder_error)
+                            .into(holder.image)
+                    }
+
                 }
 
 
