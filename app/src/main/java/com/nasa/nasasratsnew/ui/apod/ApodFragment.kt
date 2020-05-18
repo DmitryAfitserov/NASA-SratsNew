@@ -22,6 +22,8 @@ class ApodFragment : Fragment(){
 
 
         Log.d("MyCont", "isHDImage  @${MainActivity.isHDImage}")
+        Log.d("MyCont", "language  @${MainActivity.language}")
+        Log.d("MyCont", "twoText  @${MainActivity.twoText}")
 
 
 

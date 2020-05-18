@@ -37,9 +37,15 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var isHDImage = false
         var language = "en"
+        var twoText = false
+
+        val twoTextDefault = false
         val languageDefault = "en"
+        var isHDImageDefault = false
+
         val key_use_hd = "use_hd"
         val key_language = "language"
+        val key_two_text = "show_two_texts"
     }
 
 
@@ -70,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        preferencesGetIsUseHD()
+        getPreferencesData()
 
     }
 
@@ -98,10 +104,11 @@ class MainActivity : AppCompatActivity() {
     
 
 
-    private fun preferencesGetIsUseHD(){
+    private fun getPreferencesData(){
         val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        isHDImage = prefs.getBoolean(key_use_hd, false)
+        isHDImage = prefs.getBoolean(key_use_hd, isHDImageDefault)
         language = prefs.getString(key_language, "en")!!
+        twoText = prefs.getBoolean(key_two_text, twoTextDefault)
     }
 
 
