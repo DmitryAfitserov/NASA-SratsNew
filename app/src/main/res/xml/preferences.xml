@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
@@ -17,11 +17,11 @@
             />
 
         <SwitchPreference
-            android:key="show_two_texts"
-            android:title="@string/show_two_texts"
-            android:summary="@string/show_two_texts_summary"
 
-            android:defaultValue="false"/>
+            android:defaultValue="false"
+            android:key="show_two_texts"
+            android:summary="@string/show_two_texts_summary"
+            android:title="@string/show_two_texts" />
 
     </PreferenceCategory>
 

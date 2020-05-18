@@ -63,9 +63,7 @@ class CustomPreferenceFragment : PreferenceFragmentCompat(),
             switchPreference?.isChecked = false
         } else {
             switchPreference?.isSelectable = true
-            switchPreference?.isEnabled = true
-            switchPreference?.isCopyingEnabled = true
-            switchPreference?.isPersistent = true
+            switchPreference?.disableDependentsState = true
 
 
         }
