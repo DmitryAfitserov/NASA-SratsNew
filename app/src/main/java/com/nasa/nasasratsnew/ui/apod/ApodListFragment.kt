@@ -138,10 +138,14 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     override fun dataAvailable() {
 
+
         showViewElements()
         hideViewErrorElements()
         hideProgressBarScrollUpdate()
         listAdapterApod!!.notifyDataSetChanged()
+        if(listApod.size < sendedFirstItem){
+            sendedFirstItem =1
+        }
 
 //            Log.d("MyCont", "error showContent() listSize = ${(apod as ApodData).id}")
 

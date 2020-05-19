@@ -115,7 +115,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
             cal.add(Calendar.DATE, -(ofsetDay + count))
             workDate = cal.time
             listURL.add(URL + URL_date + dateFormat.format(workDate))
-            Log.d("MyCont", listURL[count]!!)
+//            Log.d("MyCont", listURL[count]!!)
             cal.time = dateNow
         }
 
