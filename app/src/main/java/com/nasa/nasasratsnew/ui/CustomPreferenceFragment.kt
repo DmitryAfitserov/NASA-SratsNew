@@ -1,19 +1,21 @@
 package com.nasa.nasasratsnew.ui
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
-import androidx.preference.ListPreference
-import 	androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
-import androidx.preference.get
+import android.view.View
+import androidx.preference.*
+import androidx.recyclerview.widget.RecyclerView
 import com.nasa.nasasratsnew.MainActivity
 import com.nasa.nasasratsnew.R
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 class CustomPreferenceFragment : PreferenceFragmentCompat(),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
-
+    private lateinit var defaultView: View
 
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -25,11 +27,9 @@ class CustomPreferenceFragment : PreferenceFragmentCompat(),
         super.onCreate(savedInstanceState)
         addPreferencesFromResource(R.xml.preferences)
 
-        manageSwitchTwoText()
+
 
     }
-
-
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
 
@@ -45,6 +45,7 @@ class CustomPreferenceFragment : PreferenceFragmentCompat(),
         }
     }
 
+
     override fun onPause() {
         super.onPause()
         preferenceScreen.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
@@ -53,20 +54,24 @@ class CustomPreferenceFragment : PreferenceFragmentCompat(),
     override fun onResume() {
         super.onResume()
         preferenceScreen.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
+        manageSwitchTwoText()
     }
+
 
     private fun manageSwitchTwoText(){
         val languageValue = preferenceManager.sharedPreferences.getString(MainActivity.key_language, MainActivity.languageDefault)
-        val switchPreference = preferenceScreen.get<SwitchPreference>(MainActivity.key_two_text)
+        val switchPreference: CustomSwitchPreferences? = preferenceScreen.get<CustomSwitchPreferences>(MainActivity.key_two_text)
+
         if (languageValue == MainActivity.languageDefault){
             switchPreference?.isSelectable = false
             switchPreference?.isChecked = false
         } else {
             switchPreference?.isSelectable = true
-            switchPreference?.disableDependentsState = true
-
 
         }
+
+
     }
+
 
 }

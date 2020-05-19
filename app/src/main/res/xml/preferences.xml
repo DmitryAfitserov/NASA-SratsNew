@@ -16,7 +16,7 @@
             android:entryValues="@array/language_key"
             />
 
-        <SwitchPreference
+        <com.nasa.nasasratsnew.ui.CustomSwitchPreferences
 
             android:defaultValue="false"
             android:key="show_two_texts"
