@@ -24,7 +24,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
     val startCountObjects:Int = 5 // 6 is really
 
-    private val usuallycountObjects:Int = 3 // 4 is really
+    private val usuallyCountObjects:Int = 3 // 4 is really
 
 
     private val callbackToController =
@@ -33,26 +33,44 @@ class ApodControllerText(private val context: Context, private val apodListFragm
     private var listTemp = mutableListOf<ApodData>()
 
     private var keyBatch:Int = 1
+    private var isSaveList = false
 
 
 
     fun work(firstVisibleItem:Int): Boolean{
 
+        if(firstVisibleItem == -1){
+            Log.d("MyCont", "firstVisibleItem == -1")
+            keyBatch = -1
+            isSaveList = true
+            listURL.clear()
+            creatorURL(startCountObjects)
 
-        if (listApodData.isEmpty() && listURL.isEmpty()){
+            for(i in 0..startCountObjects){
+                CreatorApodObject(i,keyBatch,  context, listURL[i], callbackToController)
+            }
+        }
+
+
+        if (listApodData.isEmpty() && listURL.isEmpty() && !isSaveList){
              Log.d("MyCont", "startCountObjects = 5")
             keyBatch = 1
              getData(startCountObjects)
 
          }
-        if(firstVisibleItem +11 > listApodData.size && listApodData.isNotEmpty()){
+        if(firstVisibleItem +11 > listApodData.size && listApodData.isNotEmpty() && !isSaveList){
             if(listApodData.size < listURL.size){
                 Log.d("MyCont", " return false")
                 return false
             }
             Log.d("MyCont", "usuallycountObjects = 3")
-            keyBatch++
-            getData(usuallycountObjects)
+            if(keyBatch < 2){
+                keyBatch = 2
+            } else {
+                keyBatch++
+            }
+
+            getData(usuallyCountObjects)
         }
         Log.d("MyCont", "work")
         return true
@@ -78,9 +96,10 @@ class ApodControllerText(private val context: Context, private val apodListFragm
     private fun creatorURL(countCreateURL:Int){
 
         var listSize = 0
-        if(listApodData.isNotEmpty()){
+        if(listApodData.isNotEmpty() && !isSaveList){
             listSize = listApodData.size - 1
         }
+
 
         while (listURL.size < listSize){
             listURL.add(null)
@@ -96,7 +115,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
             cal.add(Calendar.DATE, -(ofsetDay + count))
             workDate = cal.time
             listURL.add(URL + URL_date + dateFormat.format(workDate))
-          //  Log.d("MyCont", listURL.get(count))
+            Log.d("MyCont", listURL[count]!!)
             cal.time = dateNow
         }
 
@@ -113,12 +132,13 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
             listTemp.add(apod!!)
 
-            if(keyBatch == 1){
+            if(keyBatch <= 1){
                 if(listTemp.size ==startCountObjects + 1 ){
+                    Log.d("MyCont", "keyBatch <= 1")
                     responseSuccessLoad()
                 }
             } else {
-                if(listTemp.size ==usuallycountObjects + 1 ){
+                if(listTemp.size ==usuallyCountObjects + 1 ){
                     responseSuccessLoad()
                 }
             }
@@ -130,20 +150,31 @@ class ApodControllerText(private val context: Context, private val apodListFragm
     private fun responseSuccessLoad(){
         Log.d("MyCont", "responseSuccessLoad")
         listTemp.sortBy { it.id }
-        if(listApodData.isNotEmpty()){
-            listApodData.removeAt(listApodData.size -1)
-        }
-        for(apodObject in listTemp){
-            listApodData.add(apodObject)
+        if(isSaveList){
+            Log.d("MyCont", "isSaveList == true")
+            listApodData.clear()
+            listApodData.addAll(listTemp)
+            isSaveList =false
+            keyBatch = 1
+        } else {
+            if(listApodData.isNotEmpty()){
+                listApodData.removeAt(listApodData.size -1)
+            }
+            for(apodObject in listTemp){
+                listApodData.add(apodObject)
 
+            }
         }
+
+
+
         listApodData.add(false)
         apodListFragment.dataAvailable()
         listTemp.clear()
 
         if(keyBatch == 1){
             keyBatch++
-            getData(usuallycountObjects)
+            getData(usuallyCountObjects)
 
         }
 
@@ -159,7 +190,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
             if(listApodData[listApodData.size -1] != true){
                 listApodData[listApodData.size -1] = true
             }
-            for(i in 0..usuallycountObjects){
+            for(i in 0..usuallyCountObjects){
                 listURL.removeAt(listURL.size - 1)
             }
         }
