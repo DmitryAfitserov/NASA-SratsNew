@@ -2,6 +2,7 @@ package com.nasa.nasasratsnew.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.util.AttributeSet
 import android.util.Log
@@ -13,35 +14,28 @@ import com.nasa.nasasratsnew.R
 class CustomSwitchPreferences: SwitchPreference{
 
 
-    constructor(context: Context): super(context){
-
-    }
-    constructor(context: Context, attrs: AttributeSet): super(context, attrs){
-
-    }
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr:Int): super(context, attrs, defStyleAttr){
-
-    }
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr:Int, defStyleRes:Int): super(context, attrs, defStyleAttr, defStyleRes){
-
-    }
+    constructor( context: Context): super(context)
+    constructor(context: Context, attrs: AttributeSet): super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr:Int): super(context, attrs, defStyleAttr)
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr:Int, defStyleRes:Int): super(context, attrs, defStyleAttr, defStyleRes)
 
 
-    override fun isSelectable(): Boolean {
-        return super.isSelectable()
-    }
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: PreferenceViewHolder?) {
         super.onBindViewHolder(holder)
 
         Log.d("MyCont", "onBindViewHolder")
-        var textViewTitle = holder!!.itemView.findViewById<TextView>(android.R.id.title)!!
+        val textViewTitle = holder!!.itemView.findViewById<TextView>(android.R.id.title)!!
         if(isSelectable){
             Log.d("MyCont", "setTextColor(R.color.colorAccent)")
-            //  textViewTitle.setTextColor(R.color.colorAccent)
-            textViewTitle.text = "fghgfhgf"
-            textViewTitle.setTextColor(Color.parseColor("#4ab837"))
+
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M){
+                textViewTitle.setTextColor(context.getColor(R.color.colorBlackText))
+            } else {
+                textViewTitle.setTextColor(context.resources.getColor(R.color.colorBlackText))
+            }
+
         }
 
     }
