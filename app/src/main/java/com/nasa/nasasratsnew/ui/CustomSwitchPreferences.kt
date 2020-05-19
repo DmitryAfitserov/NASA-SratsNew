@@ -2,7 +2,9 @@ package com.nasa.nasasratsnew.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.TextView
 import androidx.preference.PreferenceViewHolder
 import androidx.preference.SwitchPreference
@@ -10,7 +12,6 @@ import com.nasa.nasasratsnew.R
 
 class CustomSwitchPreferences: SwitchPreference{
 
-    lateinit var textViewTitle:TextView
 
     constructor(context: Context): super(context){
 
@@ -33,13 +34,18 @@ class CustomSwitchPreferences: SwitchPreference{
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: PreferenceViewHolder?) {
         super.onBindViewHolder(holder)
-        textViewTitle = holder!!.itemView!!.findViewById<TextView>(android.R.id.title)!!
-        if(isSelectable){
-            textViewTitle.setTextColor(R.color.colorAccent)
-        }
-        notifyChanged()
 
+        Log.d("MyCont", "onBindViewHolder")
+        var textViewTitle = holder!!.itemView.findViewById<TextView>(android.R.id.title)!!
+        if(isSelectable){
+            Log.d("MyCont", "setTextColor(R.color.colorAccent)")
+            //  textViewTitle.setTextColor(R.color.colorAccent)
+            textViewTitle.text = "fghgfhgf"
+            textViewTitle.setTextColor(Color.parseColor("#4ab837"))
+        }
 
     }
+
+
 
 }

@@ -65,8 +65,10 @@ class CustomPreferenceFragment : PreferenceFragmentCompat(),
         if (languageValue == MainActivity.languageDefault){
             switchPreference?.isSelectable = false
             switchPreference?.isChecked = false
+            Log.d("MyCont", "isSelectable = false")
         } else {
             switchPreference?.isSelectable = true
+            Log.d("MyCont", "isSelectable = true")
 
         }
 
