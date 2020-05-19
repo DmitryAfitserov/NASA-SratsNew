@@ -20,7 +20,6 @@ class CustomSwitchPreferences: SwitchPreference{
     constructor(context: Context, attrs: AttributeSet, defStyleAttr:Int, defStyleRes:Int): super(context, attrs, defStyleAttr, defStyleRes)
 
 
-
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: PreferenceViewHolder?) {
         super.onBindViewHolder(holder)
@@ -39,7 +38,5 @@ class CustomSwitchPreferences: SwitchPreference{
         }
 
     }
-
-
 
 }
