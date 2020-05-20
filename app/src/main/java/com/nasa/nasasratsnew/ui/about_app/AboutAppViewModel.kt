@@ -1,10 +1,10 @@
-package com.nasa.nasasratsnew.ui.share
+package com.nasa.nasasratsnew.ui.about_app
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ShareViewModel : ViewModel() {
+class AboutAppViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is share Fragment"

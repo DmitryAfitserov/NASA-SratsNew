@@ -28,7 +28,6 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
         val typeMediaImage = "image"
 
 
-
         if(getItem(position) is ApodData){
 
 

@@ -10,16 +10,24 @@
 
 
 
+// info
+    <string name="developing">Данный раздел приложение находится в стадии разработки и будет доступен в следующих версиях приложения</string>
+
+
 
     //toolbar
+    <string name="title_group_feedback">Обратная связь</string>
+
     <string name="settings">Насторйки</string>
-    <string name="fragment_apod">Day news</string>
-    <string name="menu_apod">Day news</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+
+    <string name="fragment_apod">Новость дня</string>
+    <string name="menu_apod">Новость дня</string>
+
+    <string name="menu_asteroids">Астероиды</string>
+
+    <string name="menu_mars_photo">Фотографии Марса</string>
+
+    <string name="menu_about_app">О приложении</string>
 
     //Toast
     <string name="settings_change_use_two_text">Для применения изменений переоткройте новость</string>

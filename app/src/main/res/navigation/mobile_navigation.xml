@@ -36,34 +36,25 @@
         tools:layout="@layout/fragment_apod_layout" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.nasa.nasasratsnew.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_asteroids"
+        android:name="com.nasa.nasasratsnew.ui.asteroids.AsteroidsFragment"
+        android:label="@string/menu_asteroids"
+        tools:layout="@layout/fragment_asteroids" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.nasa.nasasratsnew.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_mars_photo"
+        android:name="com.nasa.nasasratsnew.ui.photo_mars.MarsPhotoFragment"
+        android:label="@string/menu_mars_photo"
+        tools:layout="@layout/fragment_mars_photo" />
+
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.nasa.nasasratsnew.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/nav_about_app"
+        android:name="com.nasa.nasasratsnew.ui.about_app.AboutAppFragment"
+        android:label="@string/menu_about_app"
+        tools:layout="@layout/fragment_about_app" />
 
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="com.nasa.nasasratsnew.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
 
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="com.nasa.nasasratsnew.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
 
 
 </navigation>
