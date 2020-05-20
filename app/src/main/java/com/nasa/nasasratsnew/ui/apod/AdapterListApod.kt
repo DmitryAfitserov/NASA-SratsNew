@@ -14,7 +14,9 @@ import androidx.fragment.app.FragmentActivity
 import com.nasa.nasasratsnew.MainActivity
 import com.nasa.nasasratsnew.R
 import com.nasa.nasasratsnew.data.ApodData
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
@@ -23,14 +25,14 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
     var vi: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val id:Int = 155
     private val typeMediaImage = "image"
+    private var positionGlobal = 0
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val holder: ViewHolder
         val retView: View
 
-
-
         if(getItem(position) is ApodData){
+            positionGlobal = position
 
             if(convertView == null || convertView.id == id){
                 retView = vi.inflate(R.layout.custom_item_apod, null)
@@ -53,6 +55,7 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
                 fillImageView(holder, position, convertView)
 
+                convertView.clearFocus()
                 return convertView
             }
         } else {
@@ -73,7 +76,7 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                     retView.tag = holder
             }
         }
-
+        retView.clearFocus()
         return retView
     }
 
@@ -81,6 +84,7 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
         if(MainActivity.language == MainActivity.languageDefault){
             holder.text?.text = (getItem(position) as ApodData).text
             holder.title?.text = (getItem(position) as ApodData).title
+
         } else {
             (getItem(position) as ApodData).textTranslate?.let {
                 holder.text?.text = (getItem(position) as ApodData).textTranslate
@@ -94,6 +98,13 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                 holder.title?.text = (getItem(position) as ApodData).title
             }
         }
+        when(holder.title?.lineCount){
+            1 -> holder.text?.maxLines = 9
+            2 -> holder.text?.maxLines = 8
+            3 -> holder.text?.maxLines = 7
+
+        }
+
         holder.date?.text = (getItem(position) as ApodData).date
     }
 
@@ -102,11 +113,11 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
         if(isImageLoad){
             holder.image?.let {
 
-                picassoLoad((getItem(position) as ApodData).url, holder)
+                picassoLoad((getItem(position) as ApodData).url, holder, position)
 
             } ?: run {
                 holder.image = customView.findViewById(R.id.imageView) as ImageView?
-                picassoLoad((getItem(position) as ApodData).url, holder)
+                picassoLoad((getItem(position) as ApodData).hdUrl, holder, position)
             }
 
         } else {
@@ -119,7 +130,6 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                 picassoLoad(holder)
             }
         }
-
     }
 
     private fun picassoLoad(holder:ViewHolder){
@@ -127,15 +137,36 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
             .load(R.drawable.nasa)
             //  .placeholder(R.drawable.user_placeholder)
             //  .error(R.drawable.user_placeholder_error)
-            .into(holder.image)
+            .into(holder.image, object : Callback{
+                override fun onSuccess() {
+                    val h = holder.image?.height
+                    val w = holder.image?.width
+                    Log.d("MyCont", "h = $h , w = $w , tag =  ${holder.image?.tag}")
+                }
+
+                override fun onError(e: Exception?) {
+
+                }
+            })
     }
 
-    private fun picassoLoad(url:String?, holder:ViewHolder){
+
+    private fun picassoLoad(url:String?, holder:ViewHolder, position: Int){
         Picasso.get()
             .load(url)
             //  .placeholder(R.drawable.user_placeholder)
             //  .error(R.drawable.user_placeholder_error)
-            .into(holder.image)
+            .into(holder.image, object : Callback{
+                override fun onSuccess() {
+                    val h = holder.image?.height
+                    val w = holder.image?.width
+                    Log.d("MyCont", "h = $h , w = $w , tag =  $position")
+                }
+
+                override fun onError(e: Exception?) {
+
+                }
+            })
     }
 
 

@@ -194,9 +194,12 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
                 controller.work(sendedFirstItem)
             }
         } else {
+            apodViewModel?.position = position
             Navigation.findNavController(view!!).navigate(R.id.to_fragment_apod)
         }
     }
+
+
 }
 
 
