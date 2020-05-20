@@ -18,7 +18,7 @@ class ApodFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_apod_layout, container, false)
-        val imageView = root.findViewById<ImageView>(R.id.imageView)
+       // val imageView = root.findViewById<ImageView>(R.id.imageView)
 
 
         Log.d("MyCont", "isHDImage  @${MainActivity.isHDImage}")

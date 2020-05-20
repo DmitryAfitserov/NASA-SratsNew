@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
+import com.nasa.nasasratsnew.MainActivity
 import com.nasa.nasasratsnew.R
 import com.nasa.nasasratsnew.data.ApodData
 import com.squareup.picasso.Picasso
@@ -21,84 +22,36 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
     var vi: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val id:Int = 155
+    private val typeMediaImage = "image"
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val holder: ViewHolder
         val retView: View
-        val typeMediaImage = "image"
+
 
 
         if(getItem(position) is ApodData){
-
 
             if(convertView == null || convertView.id == id){
                 retView = vi.inflate(R.layout.custom_item_apod, null)
                 holder = ViewHolder()
 
-                holder.text = retView.findViewById(R.id.text) as TextView?
+                holder.text = retView.findViewById(R.id.text_text_view) as TextView?
+                holder.title = retView.findViewById(R.id.title_text_view) as TextView?
+                holder.date = retView.findViewById(R.id.date_text_view) as TextView?
 
-                holder.text?.text = (getItem(position) as ApodData).id.toString()
+                fillTextView(holder, position)
 
-
-                if((getItem(position) as ApodData).typeMedia == typeMediaImage){
-                    holder.image = retView.findViewById(R.id.imageView) as ImageView?
-
-                    Picasso.get()
-                        .load((getItem(position) as ApodData).url)
-                        //  .placeholder(R.drawable.user_placeholder)
-                        //  .error(R.drawable.user_placeholder_error)
-                        // .transform(trans)
-                        .into(holder.image)
-                }
-
+                fillImageView(holder, position, retView)
 
                 retView.tag = holder
 
             } else {
                 holder = convertView.tag as ViewHolder
-                holder.text?.text = (getItem(position) as ApodData).id.toString()
 
+                fillTextView(holder, position)
 
-                if((getItem(position) as ApodData).typeMedia == typeMediaImage) {
-
-                    holder.image?.let {
-                        Picasso.get()
-                        .load((getItem(position) as ApodData).url)
-                        //  .placeholder(R.drawable.user_placeholder)
-                        //  .error(R.drawable.user_placeholder_error)
-                        .into(it)
-                    } ?: run {
-
-                        holder.image = convertView.findViewById(R.id.imageView) as ImageView?
-                        Picasso.get()
-                            .load((getItem(position) as ApodData).url)
-                            //  .placeholder(R.drawable.user_placeholder)
-                            //  .error(R.drawable.user_placeholder_error)
-                            .into(holder.image)
-
-                    }
-
-                } else {
-
-                    holder.image?.let {
-
-                        Picasso.get()
-                            .load(R.drawable.nasa)
-                            //  .placeholder(R.drawable.user_placeholder)
-                            //  .error(R.drawable.user_placeholder_error)
-                            .into(holder.image)
-
-                    } ?: run {
-                        holder.image = convertView.findViewById(R.id.imageView) as ImageView?
-                        Picasso.get()
-                            .load((getItem(position) as ApodData).url)
-                            //  .placeholder(R.drawable.user_placeholder)
-                            //  .error(R.drawable.user_placeholder_error)
-                            .into(holder.image)
-                    }
-
-                }
-
+                fillImageView(holder, position, convertView)
 
                 return convertView
             }
@@ -111,29 +64,85 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
                 holder.text = retView.findViewById(R.id.text) as TextView?
 
-
                 retView.tag = holder
             } else {
-
                     retView = vi.inflate(R.layout.custom_item_apod_loading, null)
                     retView.id = id
                     holder = ViewHolder()
 
-                //    holder.text = retView.findViewById(R.id.text) as TextView?
-
-
                     retView.tag = holder
-
             }
         }
 
         return retView
     }
 
+    private fun fillTextView(holder:ViewHolder, position:Int){
+        if(MainActivity.language == MainActivity.languageDefault){
+            holder.text?.text = (getItem(position) as ApodData).text
+            holder.title?.text = (getItem(position) as ApodData).title
+        } else {
+            (getItem(position) as ApodData).textTranslate?.let {
+                holder.text?.text = (getItem(position) as ApodData).textTranslate
+            } ?: run {
+                holder.text?.text = (getItem(position) as ApodData).text
+            }
+
+            (getItem(position) as ApodData).titleTranslate?.let {
+                holder.title?.text = (getItem(position) as ApodData).titleTranslate
+            } ?: run {
+                holder.title?.text = (getItem(position) as ApodData).title
+            }
+        }
+        holder.date?.text = (getItem(position) as ApodData).date
+    }
+
+    private fun fillImageView(holder:ViewHolder, position: Int, customView:View){
+        val isImageLoad = typeMediaImage == (getItem(position) as ApodData).typeMedia
+        if(isImageLoad){
+            holder.image?.let {
+
+                picassoLoad((getItem(position) as ApodData).url, holder)
+
+            } ?: run {
+                holder.image = customView.findViewById(R.id.imageView) as ImageView?
+                picassoLoad((getItem(position) as ApodData).url, holder)
+            }
+
+        } else {
+            holder.image?.let {
+
+                picassoLoad(holder)
+
+            } ?: run {
+                holder.image = customView.findViewById(R.id.imageView) as ImageView?
+                picassoLoad(holder)
+            }
+        }
+
+    }
+
+    private fun picassoLoad(holder:ViewHolder){
+        Picasso.get()
+            .load(R.drawable.nasa)
+            //  .placeholder(R.drawable.user_placeholder)
+            //  .error(R.drawable.user_placeholder_error)
+            .into(holder.image)
+    }
+
+    private fun picassoLoad(url:String?, holder:ViewHolder){
+        Picasso.get()
+            .load(url)
+            //  .placeholder(R.drawable.user_placeholder)
+            //  .error(R.drawable.user_placeholder_error)
+            .into(holder.image)
+    }
 
 
     internal class ViewHolder {
         var text: TextView? = null
+        var title: TextView? = null
+        var date: TextView? = null
         var image: ImageView? = null
     }
 
