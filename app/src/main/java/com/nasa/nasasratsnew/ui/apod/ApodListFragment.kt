@@ -5,10 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
-import android.widget.ListView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.ViewModelProviders
@@ -45,7 +42,8 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         val root = inflater.inflate(R.layout.list_fragment_apod, null)
         pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
         pullToRefresh?.setOnRefreshListener{
-          controller.work(-1)
+            sendedFirstItem = -1
+          controller.work(sendedFirstItem)
         }
 
         controller = ApodControllerText(context!!, this, listApod)
@@ -143,7 +141,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         hideViewErrorElements()
         hideProgressBarScrollUpdate()
         listAdapterApod!!.notifyDataSetChanged()
-        if(listApod.size < sendedFirstItem){
+        if(listApod.size < sendedFirstItem || sendedFirstItem < 0){
             sendedFirstItem =1
         }
 
@@ -154,6 +152,10 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     override fun errorLoadData(error: String) {
         showViewElements()
         hideProgressBarScrollUpdate()
+        if(sendedFirstItem < 0){
+            sendedFirstItem = 1
+            Toast.makeText(context, R.string.error_load_data, Toast.LENGTH_SHORT).show()
+        }
         if(listApod.isEmpty()){
             showViewErrorElements()
         } else {
@@ -170,7 +172,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         visibleItemCount: Int,
         totalItemCount: Int
     ) {
-        if(firstVisibleItem > sendedFirstItem){
+        if(sendedFirstItem in 0 until firstVisibleItem){
             sendedFirstItem = firstVisibleItem
             controller.work(sendedFirstItem)
             Log.d("MyCont", "onScroll() firstVisibleItem = $firstVisibleItem ")

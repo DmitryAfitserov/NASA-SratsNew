@@ -177,7 +177,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
     }
 
-    private fun responseErrorLoad(error:String){  // not processing error
+    private fun responseErrorLoad(error:String){
 
 
             if(keyBatch >= 1){

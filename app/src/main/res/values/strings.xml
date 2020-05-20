@@ -24,6 +24,7 @@
     //Toast
     <string name="settings_change_use_two_text">Для применения изменений переоткройте новость</string>
     <string name="settings_change_language">Для применения изменений перезагрузите данные</string>
+    <string name="error_load_data">Ошибка загрузки данных</string>
 
 
     //preferences
