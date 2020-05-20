@@ -111,16 +111,20 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
     private fun fillImageView(holder:ViewHolder, position: Int, customView:View){
         val isImageLoad = typeMediaImage == (getItem(position) as ApodData).typeMedia
         if(isImageLoad){
+          //  val url = if(MainActivity.isHDImage) (getItem(position) as ApodData).hdUrl
+            //    else (getItem(position) as ApodData).url
+            val url = (getItem(position) as ApodData).url
+
             holder.image?.let {
 
-                picassoLoad((getItem(position) as ApodData).url, holder, position)
+                picassoLoad(url, holder, position)
 
             } ?: run {
                 holder.image = customView.findViewById(R.id.imageView) as ImageView?
-                picassoLoad((getItem(position) as ApodData).hdUrl, holder, position)
+                picassoLoad(url, holder, position)
             }
 
-        } else {
+        } else {  // video
             holder.image?.let {
 
                 picassoLoad(holder)
@@ -137,17 +141,7 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
             .load(R.drawable.nasa)
             //  .placeholder(R.drawable.user_placeholder)
             //  .error(R.drawable.user_placeholder_error)
-            .into(holder.image, object : Callback{
-                override fun onSuccess() {
-                    val h = holder.image?.height
-                    val w = holder.image?.width
-                    Log.d("MyCont", "h = $h , w = $w , tag =  ${holder.image?.tag}")
-                }
-
-                override fun onError(e: Exception?) {
-
-                }
-            })
+            .into(holder.image)
     }
 
 
@@ -158,9 +152,13 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
             //  .error(R.drawable.user_placeholder_error)
             .into(holder.image, object : Callback{
                 override fun onSuccess() {
-                    val h = holder.image?.height
-                    val w = holder.image?.width
-                    Log.d("MyCont", "h = $h , w = $w , tag =  $position")
+
+                    if(holder.image?.drawable?.bounds?.width()!! > 0){
+                        (getItem(position) as ApodData).width = holder.image?.drawable?.bounds?.width()
+                        (getItem(position) as ApodData).height = holder.image?.drawable?.bounds?.height()
+                        Log.d("MyCont", " width = @${(getItem(position) as ApodData).width} , height = @${(getItem(position) as ApodData).height} , position = $position , id = @${(getItem(position) as ApodData).id}")
+
+                    }
                 }
 
                 override fun onError(e: Exception?) {

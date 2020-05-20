@@ -1,5 +1,8 @@
 package com.nasa.nasasratsnew.ui.apod
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -33,21 +36,29 @@ class ApodFragment : Fragment(){
 
         apod = apodViewModel.getApod()
 
-        Log.d("MyCont", "onScroll() firstVisibleItem = ${apod.id}")
 
 
         val imageView = root.findViewById<ImageView>(R.id.image_title_apod)
         val titleTextView = root.findViewById<TextView>(R.id.title_text_apod)
         val textTextView = root.findViewById<TextView>(R.id.text_text_apod)
 
-        titleTextView.text = apod.title
-        textTextView.text = apod.text
 
-        Picasso.get()
-            .load(apod.hdUrl)
-              .placeholder(R.drawable.nasa)
-            //  .error(R.drawable.user_placeholder_error)
-            .into(imageView)
+        if(apod.typeMedia == typeMediaImage){
+            val url = if(MainActivity.isHDImage) apod.hdUrl else apod.url
+            var placeholder = creatorDrawable()
+
+
+            placeholder?.let {
+                picassoLoad(placeholder, imageView, url!!)
+                Log.d("MyCont", "used placeholder")
+            } ?: run {
+                picassoLoad(R.drawable.nasa ,imageView, url!!)
+            }
+        } else {
+
+            // create intent for video
+        }
+
 
 //        if(MainActivity.twoText){
 //
@@ -55,6 +66,9 @@ class ApodFragment : Fragment(){
 //
 //        }
 
+
+        titleTextView.text = apod.title
+        textTextView.text = apod.text
 
         Log.d("MyCont", "isHDImage  @${MainActivity.isHDImage}")
         Log.d("MyCont", "language  @${MainActivity.language}")
@@ -65,5 +79,35 @@ class ApodFragment : Fragment(){
 
         return root
     }
+
+    private fun picassoLoad(res:Int, imageView: ImageView, url:String){
+        Picasso.get()
+            .load(url)
+            .placeholder(R.drawable.nasa)
+            //  .error(R.drawable.user_placeholder_error)
+            .into(imageView)
+    }
+
+    private fun picassoLoad(drawable: Drawable, imageView: ImageView, url:String){
+        Picasso.get()
+            .load(url)
+            .placeholder(drawable)
+            //  .error(R.drawable.user_placeholder_error)
+            .into(imageView)
+    }
+
+    private fun creatorDrawable(): Drawable? {
+        apod.height?.let {
+            apod.width?.let {
+                val bitmap = Bitmap.createBitmap(apod.width!!, apod.height!!, Bitmap.Config.ARGB_8888)
+                Log.d("MyCont", "Drawable created")
+                return BitmapDrawable(resources, bitmap)
+            }
+        }
+        return null
+    }
+
+
+
 }
 
