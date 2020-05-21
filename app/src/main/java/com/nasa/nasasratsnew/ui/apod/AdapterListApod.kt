@@ -156,8 +156,6 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                     if(holder.image?.drawable?.bounds?.width()!! > 0){
                         (getItem(position) as ApodData).width = holder.image?.drawable?.bounds?.width()
                         (getItem(position) as ApodData).height = holder.image?.drawable?.bounds?.height()
-                        Log.d("MyCont", " width = @${(getItem(position) as ApodData).width} , height = @${(getItem(position) as ApodData).height} , position = $position , id = @${(getItem(position) as ApodData).id}")
-
                     }
                 }
 

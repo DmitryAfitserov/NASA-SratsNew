@@ -26,6 +26,12 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     private var listAdapterApod:AdapterListApod? = null
     private var pullToRefresh:SwipeRefreshLayout? = null
     private var sendedFirstItem = 0
+    private var root:View? = null
+    private lateinit var layoutError:LinearLayout
+    private lateinit var textViewError:TextView
+    private lateinit var buttonError:Button
+    private lateinit var progressBarError:ProgressBar
+
 
 
     override fun onCreateView(
@@ -39,8 +45,15 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
         listApod = apodViewModel!!.listApodData
 
-        val root = inflater.inflate(R.layout.list_fragment_apod, null)
-        pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
+        root = inflater.inflate(R.layout.list_fragment_apod, null)
+
+        layoutError = root!!.findViewById(R.id.layout_error)
+        textViewError = root!!.findViewById(R.id.text_view_error)
+        buttonError = root!!.findViewById(R.id.button_error)
+        progressBarError = root!!.findViewById(R.id.progress_bar_error)
+
+
+        pullToRefresh = root?.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
         pullToRefresh?.setOnRefreshListener{
             sendedFirstItem = -1
           controller.work(sendedFirstItem)
@@ -97,18 +110,15 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     private fun showViewErrorElements(){
         activity.let {
-            (activity as AppCompatActivity).layout_error.visibility = View.VISIBLE
+            layoutError.visibility = View.VISIBLE
 
-            val progressBar = (activity as AppCompatActivity).progress_bar_error
-            progressBar.visibility = View.INVISIBLE
+            progressBarError.visibility = View.INVISIBLE
 
-            val textViewError = (activity as AppCompatActivity).text_view_error
             textViewError.visibility = View.VISIBLE
 
-            val buttonError = (activity as AppCompatActivity).button_error
             buttonError.visibility = View.VISIBLE
             buttonError.setOnClickListener {
-                progressBar.visibility = View.VISIBLE
+                progressBarError.visibility = View.VISIBLE
                 controller.work(0)
             }
         }
@@ -118,10 +128,10 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
     private fun hideViewErrorElements(){
         if(listApod.isNotEmpty() && listApod.size < controller.startCountObjects + 3) {
             activity?.let {
-                (activity as AppCompatActivity).layout_error.visibility = View.INVISIBLE
-                (activity as AppCompatActivity).text_view_error.visibility = View.INVISIBLE
-                (activity as AppCompatActivity).button_error.visibility = View.INVISIBLE
-                (activity as AppCompatActivity).progress_bar_error.visibility = View.INVISIBLE
+                layoutError.visibility = View.INVISIBLE
+                textViewError.visibility = View.INVISIBLE
+                buttonError.visibility = View.INVISIBLE
+                progressBarError.visibility = View.INVISIBLE
             }
         }
     }
@@ -145,7 +155,6 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
             sendedFirstItem =1
         }
 
-//            Log.d("MyCont", "error showContent() listSize = ${(apod as ApodData).id}")
 
     }
 
