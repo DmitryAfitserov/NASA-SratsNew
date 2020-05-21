@@ -158,6 +158,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
     }
 
+    
     override fun errorLoadData(error: String) {
         showViewElements()
         hideProgressBarScrollUpdate()
