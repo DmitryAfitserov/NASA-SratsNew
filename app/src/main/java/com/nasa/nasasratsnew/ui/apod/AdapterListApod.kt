@@ -25,14 +25,12 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
     var vi: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val id:Int = 155
     private val typeMediaImage = "image"
-    private var positionGlobal = 0
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val holder: ViewHolder
         val retView: View
 
         if(getItem(position) is ApodData){
-            positionGlobal = position
 
             if(convertView == null || convertView.id == id){
                 retView = vi.inflate(R.layout.custom_item_apod, null)
@@ -99,11 +97,13 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
             }
         }
         when(holder.title?.lineCount){
+
             1 -> holder.text?.maxLines = 9
             2 -> holder.text?.maxLines = 8
             3 -> holder.text?.maxLines = 7
 
         }
+        Log.d("MyCont", "title?.lineCount $position")
 
         holder.date?.text = (getItem(position) as ApodData).date
     }

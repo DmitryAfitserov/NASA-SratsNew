@@ -31,24 +31,22 @@ class ApodFragment : Fragment(){
     ): View? {
         val root = inflater.inflate(R.layout.fragment_apod_layout, container, false)
 
-
+        Log.d("MyCont", "onCreateView")
         apodViewModel =
             ViewModelProviders.of(activity!!).get(ApodViewModel::class.java)
 
         apod = apodViewModel.getApod()
 
-
-
         val imageView = root.findViewById<ImageView>(R.id.image_title_apod) // work with image
 
         if(apod.typeMedia == typeMediaImage){
             val url = if(MainActivity.isHDImage) apod.hdUrl else apod.url
-            var placeholder = creatorDrawable()
+            val placeholder = creatorDrawable()
 
 
             placeholder?.let {
                 picassoLoad(placeholder, imageView, url!!)
-                Log.d("MyCont", "used placeholder")
+
             } ?: run {
                 picassoLoad(R.drawable.nasa ,imageView, url!!)
             }

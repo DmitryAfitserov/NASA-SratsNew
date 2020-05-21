@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         languageRegion = resources.getString(R.string.region)
-        Log.d("MyCont", "region $languageRegion")
+
 
 
         drawerLayout = findViewById(R.id.drawer_layout)

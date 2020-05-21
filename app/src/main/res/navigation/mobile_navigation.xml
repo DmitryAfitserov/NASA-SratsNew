@@ -15,7 +15,7 @@
             android:id="@+id/to_fragment_apod"
             app:destination="@+id/fragment_apod"
             app:popUpTo="@id/nav_apod"
-            />
+            app:popUpToInclusive="false" />
 
     </fragment>
 
