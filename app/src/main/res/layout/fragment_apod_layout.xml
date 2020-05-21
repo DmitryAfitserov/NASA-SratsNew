@@ -6,7 +6,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:orientation="vertical">
 
 
@@ -19,6 +18,39 @@
             android:adjustViewBounds="true"
 
             />
+
+        <TextView
+            android:id="@+id/title_text_apod_translate"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+
+
+            />
+
+        <TextView
+            android:id="@+id/text_text_apod_translate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_translate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/title_text_apod"
@@ -42,7 +74,32 @@
             android:layout_marginBottom="16dp"
             />
 
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/translate_sarvice_name"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+
+
+            />
+
+
+    </LinearLayout>
+
+
 
 
 

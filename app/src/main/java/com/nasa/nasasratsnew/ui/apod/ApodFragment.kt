@@ -38,10 +38,7 @@ class ApodFragment : Fragment(){
 
 
 
-        val imageView = root.findViewById<ImageView>(R.id.image_title_apod)
-        val titleTextView = root.findViewById<TextView>(R.id.title_text_apod)
-        val textTextView = root.findViewById<TextView>(R.id.text_text_apod)
-
+        val imageView = root.findViewById<ImageView>(R.id.image_title_apod) // work with image
 
         if(apod.typeMedia == typeMediaImage){
             val url = if(MainActivity.isHDImage) apod.hdUrl else apod.url
@@ -54,36 +51,47 @@ class ApodFragment : Fragment(){
             } ?: run {
                 picassoLoad(R.drawable.nasa ,imageView, url!!)
             }
-        } else {
+        } else {    // work with video
 
             // create intent for video
         }
 
+        // work with text
 
-//        if(MainActivity.twoText){
-//
-//        } else {
-//
-//        }
+        val titleTextViewTranslate = root.findViewById<TextView>(R.id.title_text_apod_translate)
+        val textTextViewTranslate = root.findViewById<TextView>(R.id.text_text_apod_translate)
 
+        if(MainActivity.language == MainActivity.languageDefault){
+            titleTextViewTranslate.text = apod.title
+            textTextViewTranslate.text = apod.text
+        } else {
+            apod.textTranslate?.let {
+                apod.titleTranslate?.let {
+                    titleTextViewTranslate.text = apod.titleTranslate
+                    textTextViewTranslate.text = apod.textTranslate
+                }
+            }
+        }
 
-        titleTextView.text = apod.title
-        textTextView.text = apod.text
+        if(MainActivity.twoText){
+            val linearLayout = root.findViewById<TextView>(R.id.linear_layout_translate)
+            linearLayout.visibility = View.VISIBLE
+            val titleTextView = root.findViewById<TextView>(R.id.title_text_apod)
+            val textTextView = root.findViewById<TextView>(R.id.text_text_apod)
 
-        Log.d("MyCont", "isHDImage  @${MainActivity.isHDImage}")
-        Log.d("MyCont", "language  @${MainActivity.language}")
-        Log.d("MyCont", "twoText  @${MainActivity.twoText}")
+            titleTextView.text = apod.title
+            textTextView.text = apod.text
 
-
-
+        }
 
         return root
     }
 
+
     private fun picassoLoad(res:Int, imageView: ImageView, url:String){
         Picasso.get()
             .load(url)
-            .placeholder(R.drawable.nasa)
+            .placeholder(res)
             //  .error(R.drawable.user_placeholder_error)
             .into(imageView)
     }
