@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -61,20 +62,31 @@ class ApodFragment : Fragment(){
         val titleTextViewTranslate = root.findViewById<TextView>(R.id.title_text_apod_translate)
         val textTextViewTranslate = root.findViewById<TextView>(R.id.text_text_apod_translate)
 
+        val textViewService = root.findViewById<TextView>(R.id.translate_sarvice_name)
+
         if(MainActivity.language == MainActivity.languageDefault){
+            textViewService.visibility = View.GONE
             titleTextViewTranslate.text = apod.title
             textTextViewTranslate.text = apod.text
         } else {
+
             apod.textTranslate?.let {
-                apod.titleTranslate?.let {
-                    titleTextViewTranslate.text = apod.titleTranslate
-                    textTextViewTranslate.text = apod.textTranslate
-                }
+                textTextViewTranslate.text = apod.textTranslate
+                textViewService.visibility = View.VISIBLE
+            } ?: run {
+                textTextViewTranslate.text = apod.text
+                textViewService.visibility = View.GONE
+            }
+            apod.titleTranslate?.let {
+                titleTextViewTranslate.text = apod.titleTranslate
+            } ?: run {
+                titleTextViewTranslate.text = apod.title
             }
         }
 
+        val linearLayout = root.findViewById<LinearLayout>(R.id.linear_layout_translate)
         if(MainActivity.twoText){
-            val linearLayout = root.findViewById<TextView>(R.id.linear_layout_translate)
+
             linearLayout.visibility = View.VISIBLE
             val titleTextView = root.findViewById<TextView>(R.id.title_text_apod)
             val textTextView = root.findViewById<TextView>(R.id.text_text_apod)
@@ -82,6 +94,8 @@ class ApodFragment : Fragment(){
             titleTextView.text = apod.title
             textTextView.text = apod.text
 
+        } else {
+            linearLayout.visibility = View.GONE
         }
 
         return root

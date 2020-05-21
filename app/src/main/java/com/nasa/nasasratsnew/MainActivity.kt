@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navView: NavigationView
     private lateinit var imageNasa: ImageView
     private lateinit var navController: NavController
+    private var languageRegion:String = "en"
     companion object {
         var isHDImage = false
         var language = "en"
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         val key_use_hd = "use_hd"
         val key_language = "language"
         val key_two_text = "show_two_texts"
+
     }
 
 
@@ -56,6 +58,8 @@ class MainActivity : AppCompatActivity() {
         appBarLauout = findViewById(R.id.app_bar_layout)
 
         setSupportActionBar(toolbar)
+        languageRegion = resources.getString(R.string.region)
+        Log.d("MyCont", "region $languageRegion")
 
 
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -107,7 +111,13 @@ class MainActivity : AppCompatActivity() {
     private fun getPreferencesData(){
         val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         isHDImage = prefs.getBoolean(key_use_hd, isHDImageDefault)
-        language = prefs.getString(key_language, "en")!!
+        language = prefs.getString(key_language, "empty")!!
+        if(language == "empty"){
+            language = languageRegion
+            val editor = prefs.edit()
+            editor.putString(key_language, language)
+            editor.apply()
+        }
         twoText = prefs.getBoolean(key_two_text, twoTextDefault)
     }
 

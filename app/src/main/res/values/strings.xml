@@ -48,6 +48,11 @@
     <string name="show_two_texts">Показыать два текста</string>
     <string name="show_two_texts_summary">Показывать оригинал и перевод текста</string>
 
+    //service name
+    <string name="service_name_in_apod_fragment">Перевод предоставлен сервисом Yandex Переводчик</string>
+
+
+    <string name="region">ru</string>
 
 
 

@@ -9,99 +9,93 @@
         android:orientation="vertical">
 
 
-        <ImageView
-            android:id="@+id/image_title_apod"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxHeight="350dp"
-
-            android:adjustViewBounds="true"
-
-            />
-
-        <TextView
-            android:id="@+id/title_text_apod_translate"
-            android:textSize="20sp"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:orientation="vertical">
 
 
-            />
+            <ImageView
+                android:id="@+id/image_title_apod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="350dp"
 
-        <TextView
-            android:id="@+id/text_text_apod_translate"
+                android:adjustViewBounds="true"
+
+                />
+
+            <TextView
+                android:id="@+id/title_text_apod_translate"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+
+
+                />
+
+            <TextView
+                android:id="@+id/text_text_apod_translate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_translate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            />
+            android:visibility="invisible"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_text_apod"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
 
 
+                />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linear_layout_translate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/title_text_apod"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            <TextView
+                android:id="@+id/text_text_apod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                />
 
 
-            />
-
-        <TextView
-            android:id="@+id/text_text_apod"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            />
+        </LinearLayout>
 
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/translate_sarvice_name"
+                android:text="@string/service_name_in_apod_fragment"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:orientation="vertical">
+                />
 
-
-        <TextView
-            android:id="@+id/translate_sarvice_name"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-
-
-            />
-
-
-    </LinearLayout>
-
-
-
-
+        </LinearLayout>
 
 
 </ScrollView>
