@@ -8,7 +8,6 @@
 
     <TextView
         android:id="@+id/text_view_error_item"
-        android:layout_margin="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
