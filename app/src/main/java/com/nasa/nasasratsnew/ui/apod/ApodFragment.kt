@@ -96,6 +96,9 @@ class ApodFragment : Fragment(){
             linearLayout.visibility = View.GONE
         }
 
+        val textViewDate = root.findViewById<TextView>(R.id.date_in_apod_fragment)
+        textViewDate.text = apod.date
+
         return root
     }
 
