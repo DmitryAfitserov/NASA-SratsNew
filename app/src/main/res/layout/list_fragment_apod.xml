@@ -41,7 +41,7 @@
             android:id="@+id/text_view_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Error load data"
+            android:text="@string/error_load_data"
             android:textSize="20sp"
             android:visibility="invisible"
 
@@ -52,7 +52,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="repite"
+            android:text="@string/button_reply_load"
+            android:textColor="@color/colorGrayText"
+            android:background="@drawable/shape"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="normal"
             android:visibility="invisible"/>
 
         <ProgressBar

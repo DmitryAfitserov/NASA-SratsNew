@@ -31,10 +31,12 @@
 
     <string name="menu_about_app">О приложении</string>
 
-    //Toast
+    //Toast button
     <string name="settings_change_use_two_text">Для применения изменений переоткройте новость</string>
     <string name="settings_change_language">Для применения изменений перезагрузите данные</string>
-    <string name="error_load_data">Ошибка загрузки данных</string>
+    <string name="error_load_data">Ошибка загрузки</string>
+    <string name="button_reply_load">Повторить</string>
+
 
 
     //preferences
@@ -52,6 +54,7 @@
 
     //service name
     <string name="service_name_in_apod_fragment">Перевод предоставлен сервисом Yandex Переводчик</string>
+
 
 
     <string name="region">ru</string>
