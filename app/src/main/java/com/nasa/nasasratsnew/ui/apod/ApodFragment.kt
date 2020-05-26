@@ -18,6 +18,8 @@ import com.nasa.nasasratsnew.R
 import com.nasa.nasasratsnew.data.ApodData
 import com.squareup.picasso.Picasso
 
+
+
 class ApodFragment : Fragment(){
 
     private lateinit var apodViewModel: ApodViewModel
@@ -50,10 +52,42 @@ class ApodFragment : Fragment(){
             } ?: run {
                 picassoLoad(R.drawable.nasa ,imageView, url!!)
             }
+
+
+
+
+
         } else {    // work with video
 
             // create intent for video
         }
+
+
+        var isImageFitToScreen = false
+
+        imageView.setOnClickListener {
+            if (isImageFitToScreen) {
+                isImageFitToScreen = false
+                imageView.setLayoutParams(
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                )
+                imageView.setAdjustViewBounds(true)
+            } else {
+                isImageFitToScreen = true
+                imageView.setLayoutParams(
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                    )
+                )
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY)
+            }
+        }
+
+
 
         // work with text
 
