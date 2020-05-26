@@ -59,9 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         languageRegion = resources.getString(R.string.region)
-
-
-
+        
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
         imageNasa = findViewById(R.id.nasa_start_image)

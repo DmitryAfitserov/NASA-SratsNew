@@ -14,17 +14,22 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.nasa.nasasratsnew.MainActivity
-import com.nasa.nasasratsnew.R
+//import com.nasa.nasasratsnew.R
 import com.nasa.nasasratsnew.data.ApodData
 import com.squareup.picasso.Picasso
-
+import android.content.Intent
+import android.net.Uri
+import android.content.ActivityNotFoundException
+import com.nasa.nasasratsnew.R
 
 
 class ApodFragment : Fragment(){
 
     private lateinit var apodViewModel: ApodViewModel
     private lateinit var apod:ApodData
+    private lateinit var imageView:ImageView
     private val typeMediaImage = "image"
+    private val typeMediaVideo = "video"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,53 +44,33 @@ class ApodFragment : Fragment(){
 
         apod = apodViewModel.getApod()
 
-        val imageView = root.findViewById<ImageView>(R.id.image_title_apod) // work with image
-
-        if(apod.typeMedia == typeMediaImage){
-            val url = if(MainActivity.isHDImage) apod.hdUrl else apod.url
-            val placeholder = creatorDrawable()
+        imageView = root.findViewById<ImageView>(R.id.image_title_apod) // work with image
 
 
-            placeholder?.let {
-                picassoLoad(placeholder, imageView, url!!)
+        when(apod.typeMedia){
 
-            } ?: run {
-                picassoLoad(R.drawable.nasa ,imageView, url!!)
+            typeMediaImage -> {
+                val url = if(MainActivity.isHDImage) apod.hdUrl else apod.url
+                val placeholder = creatorDrawable()
+
+                placeholder?.let {
+                    picassoLoad(placeholder, imageView, url!!)
+
+                } ?: run {
+                    picassoLoad(R.drawable.nasa ,imageView, url!!)
+                }
             }
 
+            typeMediaVideo -> {
+                picassoLoad(R.drawable.nasa, imageView)
 
-
-
-
-        } else {    // work with video
-
-            // create intent for video
-        }
-
-
-        var isImageFitToScreen = false
-
-        imageView.setOnClickListener {
-            if (isImageFitToScreen) {
-                isImageFitToScreen = false
-                imageView.setLayoutParams(
-                    LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                    )
-                )
-                imageView.setAdjustViewBounds(true)
-            } else {
-                isImageFitToScreen = true
-                imageView.setLayoutParams(
-                    LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT
-                    )
-                )
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY)
+                imageView.setOnClickListener {
+                    startVideoIntent(apod.url!!)
+                }
             }
+
         }
+
 
 
 
@@ -145,6 +130,14 @@ class ApodFragment : Fragment(){
             .into(imageView)
     }
 
+    private fun picassoLoad(res:Int, imageView: ImageView){
+        Picasso.get()
+            .load(res)
+            .placeholder(res)
+            //  .error(R.drawable.user_placeholder_error)
+            .into(imageView)
+    }
+
     private fun picassoLoad(drawable: Drawable, imageView: ImageView, url:String){
         Picasso.get()
             .load(url)
@@ -157,11 +150,30 @@ class ApodFragment : Fragment(){
         apod.height?.let {
             apod.width?.let {
                 val bitmap = Bitmap.createBitmap(apod.width!!, apod.height!!, Bitmap.Config.ARGB_8888)
-                Log.d("MyCont", "Drawable created")
+
                 return BitmapDrawable(resources, bitmap)
             }
         }
         return null
+    }
+
+
+
+    private fun startVideoIntent(url: String){
+
+            Log.d("MyCont", " $url")
+
+            val webIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(url)
+            )
+            try {
+                context!!.startActivity(webIntent)
+            } catch (ex: ActivityNotFoundException) {
+              //  context!!.startActivity(webIntent)
+                Log.d("MyCont", " error context!!.startActivity(webIntent)")
+            }
+
     }
 
 
