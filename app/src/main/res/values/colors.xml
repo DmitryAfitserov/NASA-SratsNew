@@ -5,6 +5,8 @@
     <color name="colorAccent">#242b30</color>
     <color name="colorBlackText">#060606</color>
     <color name="colorGrayText">#242b30</color>
+    <color name="colorBlueText">#4682B4</color>
+
     <color name="colorGrayBlackText">#242b30</color>
     <color name="colorGrayBackground">#eeeeee</color>
 </resources>

@@ -12,13 +12,15 @@
 
             <TextView
                 android:id="@+id/name_app"
-                android:textSize="16sp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+
                 android:text="@string/name_app"
+                android:textSize="20sp"
 
                 />
 
@@ -30,7 +32,22 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+
                 android:text="@string/about_app"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/about_app_v2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+
+                android:text="@string/about_app_v2"
+                android:textSize="16sp"
                 />
 
             <TextView
@@ -41,7 +58,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+
                 android:text="@string/data_from_nasa"
+                android:textSize="16sp"
                 />
 
             <TextView
@@ -52,7 +71,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+
                 android:text="@string/original_language"
+                android:textSize="16sp"
                 />
 
             <TextView
@@ -63,7 +84,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+
                 android:text="@string/translate_service"
+                android:textSize="16sp"
                 />
 
             <TextView
@@ -74,18 +97,27 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+
                 android:text="@string/service"
+                android:textSize="16sp"
                 />
 
             <TextView
-                android:id="@+id/our_in_market"
+                android:id="@+id/app_in_market"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+
                 android:text="@string/app_in_market"
+                android:textSize="16sp"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:linksClickable="true"
+                android:textColorLink="@color/colorBlueText"
                 />
 
     </LinearLayout>
