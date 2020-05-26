@@ -59,6 +59,16 @@
 
     <string name="region">ru</string>
 
+    // about app
+
+
+    <string name="name_app">NASA - Stars news</string>
+    <string name="about_app">В разделе "Новости" собраны астрономические картины дня - главное за день в Астрономии</string>
+    <string name="data_from_nasa">Данные получены предоставлены Космическим Агенством NASA</string>
+    <string name="original_language">Оригинальный язык получаемых данных - Английский</string>
+    <string name="translate_service">Перевод на другие языки выполняется сервисом</string>
+    <string name="service">Yandex Переводчик</string>
+    <string name="app_in_market">Приложение в Play Market</string>
 
 
 

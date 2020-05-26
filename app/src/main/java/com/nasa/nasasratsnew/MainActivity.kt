@@ -20,7 +20,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.preference.PreferenceManager
 import com.google.android.material.appbar.AppBarLayout
 
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         languageRegion = resources.getString(R.string.region)
-        
+
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
         imageNasa = findViewById(R.id.nasa_start_image)

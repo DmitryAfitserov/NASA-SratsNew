@@ -38,13 +38,12 @@ class ApodFragment : Fragment(){
     ): View? {
         val root = inflater.inflate(R.layout.fragment_apod_layout, container, false)
 
-        Log.d("MyCont", "onCreateView")
         apodViewModel =
             ViewModelProviders.of(activity!!).get(ApodViewModel::class.java)
 
         apod = apodViewModel.getApod()
 
-        imageView = root.findViewById<ImageView>(R.id.image_title_apod) // work with image
+        imageView = root.findViewById(R.id.image_title_apod) // work with image
 
 
         when(apod.typeMedia){
@@ -62,7 +61,12 @@ class ApodFragment : Fragment(){
             }
 
             typeMediaVideo -> {
-                picassoLoad(R.drawable.nasa, imageView)
+
+                if(apod.url!!.contains("youtube.com")){
+                    picassoLoad(R.drawable.nasa, imageView)
+                } else {
+                    picassoLoad(R.drawable.nasa, imageView)
+                }
 
                 imageView.setOnClickListener {
                     startVideoIntent(apod.url!!)
@@ -70,7 +74,6 @@ class ApodFragment : Fragment(){
             }
 
         }
-
 
 
 
@@ -158,10 +161,8 @@ class ApodFragment : Fragment(){
     }
 
 
-
     private fun startVideoIntent(url: String){
 
-            Log.d("MyCont", " $url")
 
             val webIntent = Intent(
                 Intent.ACTION_VIEW,
@@ -171,9 +172,8 @@ class ApodFragment : Fragment(){
                 context!!.startActivity(webIntent)
             } catch (ex: ActivityNotFoundException) {
               //  context!!.startActivity(webIntent)
-                Log.d("MyCont", " error context!!.startActivity(webIntent)")
-            }
 
+            }
     }
 
 
