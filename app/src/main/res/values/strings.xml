@@ -22,8 +22,8 @@
 
     <string name="settings">Насторйки</string>
 
-    <string name="fragment_apod">Новость дня</string>
-    <string name="menu_apod">Новость дня</string>
+    <string name="fragment_apod">Новости</string>
+    <string name="menu_apod">Новости</string>
 
     <string name="menu_asteroids">Астероиды</string>
 
@@ -63,14 +63,12 @@
 
 
     <string name="name_app">NASA - Stars news</string>
-    <string name="about_app">В разделе "Новости" собраны астрономические картины дня - главное за день в Астрономии</string>
-    <string name="about_app_v2">Разделы "Астероиды" и "Фотографии Марса" будут доступны в следующих версиях приложения </string>
-    <string name="data_from_nasa">Данные предоставлены Космическим Агенством NASA</string>
-    <string name="original_language">Оригинальный язык получаемых данных - Английский</string>
-    <string name="translate_service">Перевод на другие языки выполняется сервисом</string>
-    <string name="service">Yandex Переводчик</string>
-    <string name="app_in_market">Приложение в Play Market</string>
-
+    <string name="about_app">    В разделе "Новости" собраны астрономические картины дня - главное за день в Астрономии</string>
+    <string name="about_app_v2">    Разделы "Астероиды" и "Фотографии Марса" будут доступны в следующих версиях приложения </string>
+    <string name="data_from_nasa">    Данные предоставлены Космическим Агенством NASA</string>
+    <string name="original_language">    Оригинальный язык получаемых данных - Английский</string>
+    <string name="translate_service">Перевод на другие языки выполняется сервисом &lt;a href="http://translate.yandex.ru">Yandex Переводчик&lt;/a></string>
+    <string name="app_in_market">Приложение в <u>Play Market</u></string>
 
 
 

@@ -76,6 +76,8 @@
                 android:textSize="16sp"
                 />
 
+
+
             <TextView
                 android:id="@+id/translate_by_service"
                 android:layout_width="wrap_content"
@@ -87,19 +89,10 @@
 
                 android:text="@string/translate_service"
                 android:textSize="16sp"
-                />
 
-            <TextView
-                android:id="@+id/service"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
 
-                android:text="@string/service"
-                android:textSize="16sp"
+                android:linksClickable="true"
+                android:textColorLink="@color/colorPrimary"
                 />
 
             <TextView
@@ -115,8 +108,7 @@
                 android:textSize="16sp"
 
                 android:clickable="true"
-                android:focusable="true"
-                android:linksClickable="true"
+
                 android:textColorLink="@color/colorBlueText"
                 />
 

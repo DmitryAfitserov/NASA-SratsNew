@@ -12,6 +12,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.nasa.nasasratsnew.R
 import android.content.Intent
 import android.net.Uri
+import android.text.Html
+import android.text.Spanned
+import androidx.core.text.HtmlCompat
 
 
 class AboutAppFragment : Fragment() {
@@ -49,12 +52,17 @@ class AboutAppFragment : Fragment() {
 
         }
 
+        val textViewService = root.findViewById<TextView>(R.id.translate_by_service)
+
+        textViewService.movementMethod = LinkMovementMethod.getInstance()
+
+        var policy:Spanned = HtmlCompat.fromHtml(getString(R.string.translate_service), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        textViewService.text = policy
+
 //        val textView: TextView = root.findViewById(R.id.text_share)
 //        shareViewModel.text.observe(this, Observer {
 //            textView.text = it
 //        })
-
-
 
 
         return root
