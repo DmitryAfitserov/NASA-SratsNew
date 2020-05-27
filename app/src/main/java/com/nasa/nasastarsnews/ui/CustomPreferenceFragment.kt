@@ -36,7 +36,7 @@ class CustomPreferenceFragment : PreferenceFragmentCompat(),
             manageSwitchTwoText()
         } else if (key == MainActivity.key_two_text){
             MainActivity.twoText = sharedPreferences?.getBoolean(key, MainActivity.twoTextDefault)!!
-            Toast.makeText(context, R.string.settings_change_use_two_text, Toast.LENGTH_SHORT).show()
+          //  Toast.makeText(context, R.string.settings_change_use_two_text, Toast.LENGTH_SHORT).show()
 
         }
     }

@@ -5,7 +5,7 @@
         android:id="@+id/action_settings"
         app:showAsAction="always"
         android:orderInCategory="100"
-        android:icon="@drawable/icon_hd"
+        android:icon="@drawable/icon_hd_36"
         android:title="@string/action_settings"
  />
 </menu>

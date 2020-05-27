@@ -35,7 +35,7 @@
             android:title="@string/settings_use_hd"
             android:summary="@string/settings_use_hd_summary"
             android:defaultValue="false"
-            android:icon="@drawable/icon_hd"
+            android:icon="@drawable/icon_hd_36"
             />
 
 
