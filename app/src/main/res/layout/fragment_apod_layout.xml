@@ -19,7 +19,7 @@
                 android:id="@+id/image_title_apod"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxHeight="350dp"
+                android:maxHeight="380dp"
 
                 android:adjustViewBounds="true"
 

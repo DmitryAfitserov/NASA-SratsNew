@@ -13,12 +13,14 @@
             android:dialogTitle="@string/language_title_dialog"
             android:entries="@array/language"
             android:entryValues="@array/language_key"
+            android:icon="@drawable/icon_language_36"
             />
 
         <com.nasa.nasastarsnews.ui.CustomSwitchPreferences
 
             android:defaultValue="false"
             android:key="show_two_texts"
+            android:icon="@drawable/icon_translate_36"
             android:summary="@string/show_two_texts_summary"
             android:title="@string/show_two_texts" />
 
@@ -32,7 +34,9 @@
             android:key="use_hd"
             android:title="@string/settings_use_hd"
             android:summary="@string/settings_use_hd_summary"
-            android:defaultValue="false"/>
+            android:defaultValue="false"
+            android:icon="@drawable/icon_hd"
+            />
 
 
     </PreferenceCategory>

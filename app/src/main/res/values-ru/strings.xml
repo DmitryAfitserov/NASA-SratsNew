@@ -20,9 +20,9 @@
     //toolbar
     <string name="title_group_feedback">Обратная связь</string>
 
-    <string name="settings">Насторйки en</string>
+    <string name="settings">Насторйки ru</string>
 
-    <string name="fragment_apod">Новости en</string>
+    <string name="fragment_apod">Новости ru</string>
     <string name="menu_apod">Новости</string>
 
     <string name="menu_asteroids">Астероиды</string>
@@ -57,7 +57,7 @@
 
 
 
-    <string name="region">en</string>
+    <string name="region">ru</string>
 
     // about app
 

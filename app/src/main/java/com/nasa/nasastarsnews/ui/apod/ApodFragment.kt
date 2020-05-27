@@ -55,16 +55,16 @@ class ApodFragment : Fragment(){
                     picassoLoad(placeholder, imageView, url!!)
 
                 } ?: run {
-                    picassoLoad(R.drawable.nasa ,imageView, url!!)
+                    picassoLoad(R.drawable.nasa_logo_256 ,imageView, url!!)
                 }
             }
 
             typeMediaVideo -> {
 
                 if(apod.url!!.contains("youtube.com")){
-                    picassoLoad(R.drawable.nasa, imageView)
+                    picassoLoad(R.drawable.nasa_logo_256, imageView)
                 } else {
-                    picassoLoad(R.drawable.nasa, imageView)
+                    picassoLoad(R.drawable.nasa_logo_256, imageView)
                 }
 
                 imageView.setOnClickListener {

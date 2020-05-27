@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/na"
+        android:icon="@drawable/nasa_start_icon"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/na"
+        android:roundIcon="@drawable/nasa_start_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity

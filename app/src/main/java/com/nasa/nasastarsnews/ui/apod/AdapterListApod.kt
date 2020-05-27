@@ -136,7 +136,7 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
     private fun picassoLoad(holder:ViewHolder){
         Picasso.get()
-            .load(R.drawable.nasa)
+            .load(R.drawable.nasa_logo_256)
             //  .placeholder(R.drawable.user_placeholder)
             //  .error(R.drawable.user_placeholder_error)
             .into(holder.image)
