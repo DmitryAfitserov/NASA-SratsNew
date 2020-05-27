@@ -15,7 +15,7 @@
         android:contentDescription="@string/nav_header_desc"
         android:scaleType="centerCrop"
 
-        app:srcCompat="@drawable/nasa_drawer_v2" />
+        app:srcCompat="@drawable/nasa_drawer_v5" />
 
 
 
