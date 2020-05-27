@@ -28,34 +28,13 @@ class AboutAppFragment : Fragment() {
             ViewModelProviders.of(this).get(AboutAppViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_about_app, container, false)
 
-        val textViewAppInMarket = root.findViewById<TextView>(R.id.app_in_market)
-        textViewAppInMarket.setOnClickListener {
 
-            val appPackageName = context!!.packageName // getPackageName() from Context or Activity object
-            try {
-                startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("market://details?id=$appPackageName")
-                    )
-                )
-            } catch (anfe: android.content.ActivityNotFoundException) {
-                startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
-                    )
-                )
-            }
+        val textViewAboutApp = root.findViewById<TextView>(R.id.about_app)
 
-        }
+        textViewAboutApp.movementMethod = LinkMovementMethod.getInstance()
 
-        val textViewService = root.findViewById<TextView>(R.id.translate_by_service)
-
-        textViewService.movementMethod = LinkMovementMethod.getInstance()
-
-        var policy:Spanned = HtmlCompat.fromHtml(getString(R.string.translate_service), HtmlCompat.FROM_HTML_MODE_LEGACY)
-        textViewService.text = policy
+        val policyAboutApp:Spanned = HtmlCompat.fromHtml(getString(R.string.about_app), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        textViewAboutApp.text = policyAboutApp
 
 //        val textView: TextView = root.findViewById(R.id.text_share)
 //        shareViewModel.text.observe(this, Observer {

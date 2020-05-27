@@ -42,7 +42,7 @@
     //preferences
 
     <string name="language_group">Язык</string>
-    <string name="image_group">Изображение</string>
+    <string name="image_group">Изображения</string>
 
     <string name="settings_use_hd">HD изображения</string>
     <string name="settings_use_hd_summary">загружать изображения в HD</string>
@@ -53,7 +53,7 @@
     <string name="show_two_texts_summary">Показывать оригинал и перевод текста</string>
 
     //service name
-    <string name="service_name_in_apod_fragment">Перевод предоставлен сервисом Yandex Переводчик</string>
+    <string name="service_name_in_apod_fragment">Перевод выполнен сервисом Yandex Переводчик</string>
 
 
 
@@ -62,13 +62,17 @@
     // about app
 
 
-    <string name="name_app">NASA - Stars news</string>
-    <string name="about_app"><p>В разделе "Новости" собраны астрономические картины дня - главное за день в Астрономии.</p>
-        <p> Разделы "/Астероиды/" и /"Фотографии Марса/" будут доступны в следующих версиях приложения</p></string>
-    <string name="data_from_nasa">    Данные предоставлены Космическим Агенством NASA</string>
-    <string name="original_language">    Оригинальный язык получаемых данных - Английский</string>
-    <string name="translate_service">Перевод на другие языки выполняется сервисом &lt;a href="http://translate.yandex.ru">Yandex Переводчик&lt;/a></string>
-    <string name="app_in_market">Приложение NASA - Stars news в &lt;a href="https://play.google.com/store/apps/details?id=com.app.soundlevelmeter">Play Market&lt;/a></string>
+    <string name="about_app">
+        &lt;h1>NASA - Stars news&lt;/h1>
+        &lt;p align="justify">В разделе \"Новости\" собраны астрономические картины дня - главное за день в Астрономии.&lt;/p>
+        &lt;p align="justify"> Разделы \"Астероиды\" и \"Фотографии Марса\" будут доступны в следующих версиях приложения.&lt;/p>
+        &lt;p align="justify">Данные предоставлены Космическим Агенством NASA.&lt;/p>
+        &lt;p align="justify">Оригинальный язык получаемых данных - Английский.&lt;/p>
+        &lt;p align="justify">Перевод на другие языки выполняется сервисом &lt;a href="http://translate.yandex.ru">Yandex Переводчик&lt;/a>.&lt;/p>
+        &lt;p align="justify">Приложение &lt;b>NASA - Stars news&lt;/b> в &lt;a href="https://play.google.com/store/apps/details?id=com.nasa.nasastarsnews">Play Market&lt;/a>.&lt;/p>
+
+    </string>
+
 
 
 
