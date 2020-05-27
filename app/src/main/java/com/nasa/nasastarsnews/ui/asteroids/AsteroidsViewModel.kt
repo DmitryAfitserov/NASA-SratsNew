@@ -1,4 +1,4 @@
-package com.nasa.nasasratsnew.ui.asteroids
+package com.nasa.nasastarsnews.ui.asteroids
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

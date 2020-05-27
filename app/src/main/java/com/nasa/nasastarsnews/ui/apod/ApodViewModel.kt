@@ -1,9 +1,9 @@
-package com.nasa.nasasratsnew.ui.apod
+package com.nasa.nasastarsnews.ui.apod
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.nasa.nasasratsnew.data.ApodData
+import com.nasa.nasastarsnews.data.ApodData
 
 class ApodViewModel : ViewModel() {
 

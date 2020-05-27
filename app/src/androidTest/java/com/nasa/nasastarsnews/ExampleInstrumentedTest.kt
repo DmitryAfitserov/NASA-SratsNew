@@ -1,4 +1,4 @@
-package com.nasa.nasasratsnew
+package com.nasa.nasastarsnews
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

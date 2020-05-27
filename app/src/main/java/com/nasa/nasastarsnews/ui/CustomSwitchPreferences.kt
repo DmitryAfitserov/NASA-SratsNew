@@ -1,15 +1,13 @@
-package com.nasa.nasasratsnew.ui
+package com.nasa.nasastarsnews.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.Color
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.TextView
 import androidx.preference.PreferenceViewHolder
 import androidx.preference.SwitchPreference
-import com.nasa.nasasratsnew.R
+import com.nasa.nasastarsnews.R
 
 class CustomSwitchPreferences: SwitchPreference{
 

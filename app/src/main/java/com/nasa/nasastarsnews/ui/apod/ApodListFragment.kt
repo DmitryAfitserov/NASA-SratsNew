@@ -1,4 +1,4 @@
-package com.nasa.nasasratsnew.ui.apod
+package com.nasa.nasastarsnews.ui.apod
 
 import android.os.Bundle
 import android.util.Log
@@ -11,9 +11,9 @@ import androidx.fragment.app.ListFragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.nasa.nasasratsnew.R
-import com.nasa.nasasratsnew.controller.ApodControllerText
-import com.nasa.nasasratsnew.interfaces.InterfaceForListApod
+import com.nasa.nasastarsnews.R
+import com.nasa.nasastarsnews.controller.ApodControllerText
+import com.nasa.nasastarsnews.interfaces.InterfaceForListApod
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 

@@ -1,4 +1,4 @@
-package com.nasa.nasasratsnew
+package com.nasa.nasastarsnews
 
 import org.junit.Test
 

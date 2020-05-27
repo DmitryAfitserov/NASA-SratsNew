@@ -1,4 +1,4 @@
-package com.nasa.nasasratsnew.interfaces
+package com.nasa.nasastarsnews.interfaces
 
 interface InterfaceForListApod {
 

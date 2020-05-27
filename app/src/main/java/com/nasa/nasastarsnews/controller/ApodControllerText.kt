@@ -1,14 +1,13 @@
-package com.nasa.nasasratsnew.controller
+package com.nasa.nasastarsnews.controller
 
 
 
 
 import android.content.Context
 import android.util.Log
-import com.nasa.nasasratsnew.MainActivity
 
-import com.nasa.nasasratsnew.data.ApodData
-import com.nasa.nasasratsnew.ui.apod.ApodListFragment
+import com.nasa.nasastarsnews.data.ApodData
+import com.nasa.nasastarsnews.ui.apod.ApodListFragment
 import java.text.SimpleDateFormat
 import java.util.*
 

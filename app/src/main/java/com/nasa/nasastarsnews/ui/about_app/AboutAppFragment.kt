@@ -1,4 +1,4 @@
-package com.nasa.nasasratsnew.ui.about_app
+package com.nasa.nasastarsnews.ui.about_app
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.nasa.nasasratsnew.R
+import com.nasa.nasastarsnews.R
 import android.content.Intent
 import android.net.Uri
-import android.text.Html
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
 

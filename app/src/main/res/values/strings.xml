@@ -63,12 +63,12 @@
 
 
     <string name="name_app">NASA - Stars news</string>
-    <string name="about_app">    В разделе "Новости" собраны астрономические картины дня - главное за день в Астрономии</string>
-    <string name="about_app_v2">    Разделы "Астероиды" и "Фотографии Марса" будут доступны в следующих версиях приложения </string>
+    <string name="about_app"><p>В разделе "Новости" собраны астрономические картины дня - главное за день в Астрономии.</p>
+        <p> Разделы "/Астероиды/" и /"Фотографии Марса/" будут доступны в следующих версиях приложения</p></string>
     <string name="data_from_nasa">    Данные предоставлены Космическим Агенством NASA</string>
     <string name="original_language">    Оригинальный язык получаемых данных - Английский</string>
     <string name="translate_service">Перевод на другие языки выполняется сервисом &lt;a href="http://translate.yandex.ru">Yandex Переводчик&lt;/a></string>
-    <string name="app_in_market">Приложение в <u>Play Market</u></string>
+    <string name="app_in_market">Приложение NASA - Stars news в &lt;a href="https://play.google.com/store/apps/details?id=com.app.soundlevelmeter">Play Market&lt;/a></string>
 
 
 

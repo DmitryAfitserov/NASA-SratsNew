@@ -1,8 +1,6 @@
-package com.nasa.nasasratsnew.ui.apod
+package com.nasa.nasastarsnews.ui.apod
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Resources
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +9,9 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
-import com.nasa.nasasratsnew.MainActivity
-import com.nasa.nasasratsnew.R
-import com.nasa.nasasratsnew.data.ApodData
+import com.nasa.nasastarsnews.MainActivity
+import com.nasa.nasastarsnews.R
+import com.nasa.nasastarsnews.data.ApodData
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception

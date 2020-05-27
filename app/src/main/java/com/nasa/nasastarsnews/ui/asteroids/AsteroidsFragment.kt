@@ -1,4 +1,4 @@
-package com.nasa.nasasratsnew.ui.photo_mars
+package com.nasa.nasastarsnews.ui.asteroids
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,22 +8,22 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.nasa.nasasratsnew.R
+import com.nasa.nasastarsnews.R
 
-class MarsPhotoFragment : Fragment() {
+class AsteroidsFragment : Fragment() {
 
-    private lateinit var slideshowViewModel: MarsPhotoViewModel
+    private lateinit var galleryViewModel: AsteroidsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        slideshowViewModel =
-            ViewModelProviders.of(this).get(MarsPhotoViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_mars_photo, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
-        slideshowViewModel.text.observe(this, Observer {
+        galleryViewModel =
+            ViewModelProviders.of(this).get(AsteroidsViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_asteroids, container, false)
+        val textView: TextView = root.findViewById(R.id.text_gallery)
+        galleryViewModel.text.observe(this, Observer {
             textView.text = context?.getString(R.string.developing)
         })
         return root

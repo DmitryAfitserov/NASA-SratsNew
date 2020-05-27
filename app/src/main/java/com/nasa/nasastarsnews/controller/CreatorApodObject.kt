@@ -1,9 +1,9 @@
-package com.nasa.nasasratsnew.controller
+package com.nasa.nasastarsnews.controller
 
 import android.content.Context
 import android.util.Log
-import com.nasa.nasasratsnew.MainActivity
-import com.nasa.nasasratsnew.data.ApodData
+import com.nasa.nasastarsnews.MainActivity
+import com.nasa.nasastarsnews.data.ApodData
 import org.json.JSONObject
 
 class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val context: Context,

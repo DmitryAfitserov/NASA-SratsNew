@@ -1,10 +1,9 @@
-package com.nasa.nasasratsnew.ui.apod
+package com.nasa.nasastarsnews.ui.apod
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +12,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.nasa.nasasratsnew.MainActivity
+import com.nasa.nasastarsnews.MainActivity
 //import com.nasa.nasasratsnew.R
-import com.nasa.nasasratsnew.data.ApodData
+import com.nasa.nasastarsnews.data.ApodData
 import com.squareup.picasso.Picasso
 import android.content.Intent
 import android.net.Uri
 import android.content.ActivityNotFoundException
-import com.nasa.nasasratsnew.R
+import com.nasa.nasastarsnews.R
 
 
 class ApodFragment : Fragment(){

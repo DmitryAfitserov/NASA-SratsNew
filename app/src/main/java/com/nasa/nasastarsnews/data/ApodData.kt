@@ -1,4 +1,4 @@
-package com.nasa.nasasratsnew.data
+package com.nasa.nasastarsnews.data
 
 
 data class ApodData(val id:Int, val date:String, val text: String , val typeMedia: String, val title:String){

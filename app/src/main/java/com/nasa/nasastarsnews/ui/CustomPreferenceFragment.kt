@@ -1,19 +1,12 @@
-package com.nasa.nasasratsnew.ui
+package com.nasa.nasastarsnews.ui
 
-import android.annotation.SuppressLint
 import android.content.SharedPreferences
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
-import androidx.navigation.Navigation
-import androidx.navigation.contains
 import androidx.preference.*
-import androidx.recyclerview.widget.RecyclerView
-import com.nasa.nasasratsnew.MainActivity
-import com.nasa.nasasratsnew.R
-import kotlinx.android.synthetic.main.nav_header_main.*
+import com.nasa.nasastarsnews.MainActivity
+import com.nasa.nasastarsnews.R
 
 class CustomPreferenceFragment : PreferenceFragmentCompat(),
     SharedPreferences.OnSharedPreferenceChangeListener {
