@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="language">
-        <item>Английский</item>
-        <item>Итальянский</item>
-        <item>Испанский</item>
-        <item>Китайский</item>
+        <item>English</item>
+        <item>Italiano</item>
+        <item>Español</item>
+        <item>Português</item>
 
-        <item>Немецкий</item>
+        <item>Deutsche</item>
         <item>Русский</item>
-        <item>Французский</item>
-        <item>Японский</item>
+        <item>Français</item>
+        <item>Türk</item>
     </string-array>
 
     <string-array name="language_key">
         <item>en</item>
         <item>it</item>
         <item>es</item>
-        <item>zh</item>
+        <item>pt</item>
 
         <item>de</item>
         <item>ru</item>
         <item>fr</item>
-        <item>ja</item>
+        <item>tr</item>
     </string-array>
 
 </resources>

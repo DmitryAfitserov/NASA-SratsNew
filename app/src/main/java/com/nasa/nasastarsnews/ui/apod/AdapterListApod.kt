@@ -136,9 +136,9 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
     private fun picassoLoad(holder:ViewHolder){
         Picasso.get()
-            .load(R.drawable.nasa_logo_256)
+            .load(R.drawable.video_white_placeholder)
             //  .placeholder(R.drawable.user_placeholder)
-            //  .error(R.drawable.user_placeholder_error)
+            .error(R.drawable.error_placeholder)
             .into(holder.image)
     }
 
@@ -146,8 +146,8 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
     private fun picassoLoad(url:String?, holder:ViewHolder, position: Int){
         Picasso.get()
             .load(url)
-            //  .placeholder(R.drawable.user_placeholder)
-            //  .error(R.drawable.user_placeholder_error)
+            .placeholder(R.drawable.image_placeholder)
+            .error(R.drawable.error_placeholder)
             .into(holder.image, object : Callback{
                 override fun onSuccess() {
 

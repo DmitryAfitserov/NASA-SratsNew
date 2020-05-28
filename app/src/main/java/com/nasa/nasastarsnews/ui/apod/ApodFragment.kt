@@ -13,13 +13,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.nasa.nasastarsnews.MainActivity
-//import com.nasa.nasasratsnew.R
+import com.nasa.nasastarsnews.R
 import com.nasa.nasastarsnews.data.ApodData
 import com.squareup.picasso.Picasso
 import android.content.Intent
 import android.net.Uri
 import android.content.ActivityNotFoundException
-import com.nasa.nasastarsnews.R
+
 
 
 class ApodFragment : Fragment(){
@@ -55,16 +55,16 @@ class ApodFragment : Fragment(){
                     picassoLoad(placeholder, imageView, url!!)
 
                 } ?: run {
-                    picassoLoad(R.drawable.nasa_logo_256 ,imageView, url!!)
+                    picassoLoad(R.drawable.image_placeholder_dr ,imageView, url!!)
                 }
             }
 
             typeMediaVideo -> {
 
                 if(apod.url!!.contains("youtube.com")){
-                    picassoLoad(R.drawable.nasa_logo_256, imageView)
+                    picassoLoad(R.drawable.video_grey_placeholder_dr, imageView)
                 } else {
-                    picassoLoad(R.drawable.nasa_logo_256, imageView)
+                    picassoLoad(R.drawable.video_grey_placeholder_dr, imageView)
                 }
 
                 imageView.setOnClickListener {
@@ -128,14 +128,14 @@ class ApodFragment : Fragment(){
         Picasso.get()
             .load(url)
             .placeholder(res)
-            //  .error(R.drawable.user_placeholder_error)
+            .error(R.drawable.error_placeholder_dr)
             .into(imageView)
     }
 
     private fun picassoLoad(res:Int, imageView: ImageView){
         Picasso.get()
             .load(res)
-            .placeholder(res)
+          //  .placeholder(res)
             //  .error(R.drawable.user_placeholder_error)
             .into(imageView)
     }
@@ -144,7 +144,7 @@ class ApodFragment : Fragment(){
         Picasso.get()
             .load(url)
             .placeholder(drawable)
-            //  .error(R.drawable.user_placeholder_error)
+            .error(R.drawable.error_placeholder_dr)
             .into(imageView)
     }
 
