@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">NASA - Звездные новости</string>
 
-    
+
 
 // info
-    <string name="developing">Данный раздел приложение разрабатывается и будет доступен в следующих версиях приложения</string>
+    <string name="developing">Данный раздел приложения разрабатывается и будет доступен в следующих версиях приложения</string>
 
 
     //toolbar
@@ -22,7 +22,6 @@
     <string name="menu_about_app">О приложении</string>
 
     //Toast button
-    <string name="settings_change_use_two_text">Для применения изменений перезагрузите данные</string>
     <string name="settings_change_language">Для применения изменений перезагрузите данные</string>
     <string name="error_load_data">Ошибка загрузки</string>
     <string name="button_reply_load">Повторить</string>
@@ -37,10 +36,10 @@
     <string name="settings_use_hd">HD изображения</string>
     <string name="settings_use_hd_summary">загружать изображения в HD</string>
     <string name="language">Язык текста</string>
-    <string name="language_title_dialog">Веберите язык</string>
+    <string name="language_title_dialog">Веберите язык:</string>
 
     <string name="show_two_texts">Показыать два текста</string>
-    <string name="show_two_texts_summary">Показывать оригинал и перевод текста</string>
+    <string name="show_two_texts_summary">Показывать оригинальный текст и перевод</string>
 
     //service name
     <string name="service_name_in_apod_fragment">Перевод выполнен сервисом Yandex Переводчик</string>
@@ -56,7 +55,7 @@
         &lt;h1>NASA - Stars news&lt;/h1>
         &lt;p align="justify">В разделе \"Новости\" собраны астрономические картины дня - главное за день в Астрономии.&lt;/p>
         &lt;p align="justify"> Разделы \"Астероиды\" и \"Фотографии Марса\" будут доступны в следующих версиях приложения.&lt;/p>
-        &lt;p align="justify">Данные предоставлены Космическим Агенством NASA.&lt;/p>
+        &lt;p align="justify">Данные предоставлены Космическим Агентством NASA.&lt;/p>
         &lt;p align="justify">Оригинальный язык получаемых данных - Английский.&lt;/p>
         &lt;p align="justify">Перевод на другие языки выполняется сервисом &lt;a href="http://translate.yandex.ru">Yandex Переводчик&lt;/a>.&lt;/p>
         &lt;p align="justify">Приложение &lt;b>NASA - Stars news&lt;/b> в &lt;a href="https://play.google.com/store/apps/details?id=com.nasa.nasastarsnews">Play Market&lt;/a>.&lt;/p>
