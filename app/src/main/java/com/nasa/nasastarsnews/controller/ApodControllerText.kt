@@ -125,6 +125,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
         if(key == keyBatch){   // check batch
 
             error?.let {
+                Log.d("MyCont", "error = ${error}")
                 responseErrorLoad(it)
                 return
             }

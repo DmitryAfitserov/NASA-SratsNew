@@ -24,7 +24,9 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
         if(status){
             parserNasaJson(response)
             if(MainActivity.language != MainActivity.languageDefault){
+                Log.d("MyCont", " translate(apod)  ")
                 translate(apod)
+
             } else {
                 callbackToController(apod, null, keyBatch_)
             }
@@ -53,8 +55,11 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
 
     private fun translate(apodEnglish:ApodData?){
 
-        val translateUrlTitle = creatorTranslateUrl(apodEnglish?.title)
-        val translateUrlText = creatorTranslateUrl(apodEnglish?.text)
+        val titleTemp = apodEnglish?.title!!.replace(" ", "%20")
+        val translateUrlTitle = creatorTranslateUrl(titleTemp)
+
+        val textTemp = apodEnglish.text.replace(" ", "%20")
+        val translateUrlText = creatorTranslateUrl(textTemp)
 
         RequestByUrl(context, translateUrlText, callbackToCreatorText)
         RequestByUrl(context, translateUrlTitle, callbackToCreatorTitle)
