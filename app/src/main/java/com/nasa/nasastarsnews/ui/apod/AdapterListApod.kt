@@ -108,7 +108,11 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
 
     private fun fillImageView(holder:ViewHolder, position: Int, customView:View){
         val isImageLoad = typeMediaImage == (getItem(position) as ApodData).typeMedia
+
         if(isImageLoad){
+            holder.imageIconVideo?.let {
+                it.visibility = View.GONE
+            }
           //  val url = if(MainActivity.isHDImage) (getItem(position) as ApodData).hdUrl
             //    else (getItem(position) as ApodData).url
             val url = (getItem(position) as ApodData).url
@@ -123,6 +127,10 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
             }
 
         } else {  // video
+            if(holder.imageIconVideo == null){
+                holder.imageIconVideo = customView.findViewById(R.id.video_icon)
+            }
+
             holder.image?.let {
 
                 picassoLoadForVideo(holder, (getItem(position) as ApodData).youtubeId)
@@ -143,6 +151,9 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                 .placeholder(R.drawable.video_white_placeholder)
                 .error(R.drawable.error_placeholder)
                 .into(holder.image)
+
+            holder.imageIconVideo!!.setImageResource(R.drawable.youtube_icon)
+
         } ?: run {
             Picasso.get()
                 .load(R.drawable.video_white_placeholder)
@@ -150,6 +161,7 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
                 .error(R.drawable.error_placeholder)
                 .into(holder.image)
         }
+        holder.imageIconVideo!!.visibility = View.VISIBLE
 
     }
 
@@ -180,6 +192,7 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
         var title: TextView? = null
         var date: TextView? = null
         var image: ImageView? = null
+        var imageIconVideo: ImageView? = null
     }
 
 
