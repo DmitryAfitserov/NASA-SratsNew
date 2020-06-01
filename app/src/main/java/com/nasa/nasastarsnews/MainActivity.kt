@@ -2,6 +2,7 @@ package com.nasa.nasastarsnews
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -85,9 +86,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.action_settings){
-         //   navController.
-            navController.navigate(R.id.to_fragment_preferences)
 
+           if(navController.currentDestination!!.id != R.id.fragment_preferences){
+               navController.navigate(R.id.to_fragment_preferences)
+               Log.d("MyCont", "navController.currentDestination!!.id != R.id.fragment_preferences")
+           }
 
         }
 

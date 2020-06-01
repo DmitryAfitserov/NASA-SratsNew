@@ -184,7 +184,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         if(sendedFirstItem in 0 until firstVisibleItem){
             sendedFirstItem = firstVisibleItem
             controller.work(sendedFirstItem)
-            Log.d("MyCont", "onScroll() firstVisibleItem = $firstVisibleItem ")
+
         }
 
     }

@@ -7,6 +7,9 @@ data class ApodData(val id:Int, val date:String, val text: String , val typeMedi
     var hdUrl:String? = null
     var url:String? = null
 
+
+
+
     var textTranslate:String? = null
     var titleTranslate:String? = null
 
