@@ -76,6 +76,9 @@ class ApodFragment : Fragment(){
                     StfalconImageViewer.Builder<ImageView>(context, list) { view, image ->
                         Picasso.get()
                             .load(url)
+                            .resize(screenWidth, screenHeight)
+                            .onlyScaleDown()
+                            .centerInside()
                             .into(view)
                     }.show()
 
@@ -154,6 +157,9 @@ class ApodFragment : Fragment(){
             .load(url)
             .placeholder(res)
             .error(R.drawable.error_placeholder_dr)
+            .resize(screenWidth, screenHeight)
+            .onlyScaleDown()
+            .centerInside()
             .into(imageView)
     }
 
