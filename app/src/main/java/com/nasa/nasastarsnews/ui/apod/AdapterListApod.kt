@@ -125,21 +125,49 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
         } else {  // video
             holder.image?.let {
 
-                picassoLoad(holder)
+                picassoLoadForVideo(holder, position)
+
 
             } ?: run {
                 holder.image = customView.findViewById(R.id.imageView) as ImageView?
-                picassoLoad(holder)
+                picassoLoadForVideo(holder, position)
             }
         }
     }
 
-    private fun picassoLoad(holder:ViewHolder){
-        Picasso.get()
-            .load(R.drawable.video_white_placeholder)
-            //  .placeholder(R.drawable.user_placeholder)
-            .error(R.drawable.error_placeholder)
-            .into(holder.image)
+    private fun picassoLoadForVideo(holder:ViewHolder, position: Int){
+        val url = (getItem(position) as ApodData).url!!
+        if(url.contains("https://www.youtube.com/embed/")){
+            var tempId = url.substring(30)
+
+            Log.d("MyCont", "substring 1  = $url ")
+            var id = ""
+            tempId.forEach {
+                if(it != '/' && it != '?'){
+                    id +=it
+                    Log.d("MyCont", "id  = $id ")
+
+                } else {
+                    return@forEach
+                }
+            }
+
+            Picasso.get()
+                .load("https://img.youtube.com/vi/$id/0.jpg")
+                  .placeholder(R.drawable.video_white_placeholder)
+                .error(R.drawable.error_placeholder)
+                .into(holder.image)
+
+        } else {
+
+            Picasso.get()
+                .load(R.drawable.video_white_placeholder)
+                //  .placeholder(R.drawable.user_placeholder)
+                .error(R.drawable.error_placeholder)
+                .into(holder.image)
+
+        }
+
     }
 
 
