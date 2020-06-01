@@ -64,10 +64,6 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
             controller.work(0)
 
-//        val textView: TextView = root.findViewById(R.id.text_home)
-//        homeViewModel.text.observe(this, Observer {
-//            textView.text = it
-//        })
 
 
         return root
@@ -172,8 +168,6 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
         }
 
     }
-
-
 
     override fun onScroll(
         view: AbsListView?,

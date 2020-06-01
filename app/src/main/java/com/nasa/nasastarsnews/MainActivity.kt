@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity() {
 
         getPreferencesData()
 
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

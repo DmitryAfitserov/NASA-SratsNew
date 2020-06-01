@@ -4,9 +4,6 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -19,7 +16,13 @@ import com.squareup.picasso.Picasso
 import android.content.Intent
 import android.net.Uri
 import android.content.ActivityNotFoundException
-
+import com.stfalcon.imageviewer.StfalconImageViewer
+import android.R.attr.y
+import android.R.attr.x
+import android.content.Context
+import android.graphics.Point
+import android.util.Log
+import android.view.*
 
 
 class ApodFragment : Fragment(){
@@ -29,6 +32,8 @@ class ApodFragment : Fragment(){
     private lateinit var imageView:ImageView
     private val typeMediaImage = "image"
     private val typeMediaVideo = "video"
+    private var screenHeight:Int = 0
+    private var screenWidth :Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +49,13 @@ class ApodFragment : Fragment(){
 
         imageView = root.findViewById(R.id.image_title_apod) // work with image
 
+        val display = (context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        screenWidth = size.x
+        screenHeight = size.y
+        Log.d("MyCont", "screenWidth = $screenWidth,  screenHeight = $screenHeight ")
+
 
         when(apod.typeMedia){
 
@@ -57,6 +69,19 @@ class ApodFragment : Fragment(){
                 } ?: run {
                     picassoLoad(R.drawable.image_placeholder_dr ,imageView, url!!)
                 }
+
+
+                imageView.setOnClickListener {
+                    val list = arrayOf(imageView)
+                    StfalconImageViewer.Builder<ImageView>(context, list) { view, image ->
+                        Picasso.get()
+                            .load(url)
+                            .into(view)
+                    }.show()
+
+                }
+
+
             }
 
             typeMediaVideo -> {
@@ -145,6 +170,9 @@ class ApodFragment : Fragment(){
             .load(url)
             .placeholder(drawable)
             .error(R.drawable.error_placeholder_dr)
+            .resize(screenWidth, screenHeight)
+            .onlyScaleDown()
+            .centerInside()
             .into(imageView)
     }
 
