@@ -125,47 +125,30 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
         } else {  // video
             holder.image?.let {
 
-                picassoLoadForVideo(holder, position)
+                picassoLoadForVideo(holder, (getItem(position) as ApodData).youtubeId)
 
 
             } ?: run {
                 holder.image = customView.findViewById(R.id.imageView) as ImageView?
-                picassoLoadForVideo(holder, position)
+                picassoLoadForVideo(holder, (getItem(position) as ApodData).youtubeId)
             }
         }
     }
 
-    private fun picassoLoadForVideo(holder:ViewHolder, position: Int){
-        val url = (getItem(position) as ApodData).url!!
-        if(url.contains("https://www.youtube.com/embed/")){
-            var tempId = url.substring(30)
+    private fun picassoLoadForVideo(holder:ViewHolder, youtubeId:String?){
 
-            Log.d("MyCont", "substring 1  = $url ")
-            var id = ""
-            tempId.forEach {
-                if(it != '/' && it != '?'){
-                    id +=it
-                    Log.d("MyCont", "id  = $id ")
-
-                } else {
-                    return@forEach
-                }
-            }
-
+        youtubeId?.let {
             Picasso.get()
-                .load("https://img.youtube.com/vi/$id/0.jpg")
-                  .placeholder(R.drawable.video_white_placeholder)
+                .load("https://img.youtube.com/vi/$youtubeId/0.jpg")
+                .placeholder(R.drawable.video_white_placeholder)
                 .error(R.drawable.error_placeholder)
                 .into(holder.image)
-
-        } else {
-
+        } ?: run {
             Picasso.get()
                 .load(R.drawable.video_white_placeholder)
                 //  .placeholder(R.drawable.user_placeholder)
                 .error(R.drawable.error_placeholder)
                 .into(holder.image)
-
         }
 
     }

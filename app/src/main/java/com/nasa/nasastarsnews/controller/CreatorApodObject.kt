@@ -15,6 +15,7 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
     private val callbackToCreatorText = {response:String, status:Boolean -> responseTextTranslate(response, status)}
     private val callbackToCreatorTitle = {response:String, status:Boolean -> responseTitleTranslate(response, status)}
     private var apod:ApodData? = null
+    private val typeMediaVideo = "video"
 
     init{
         RequestByUrl(context, nasaUrl, callbackToCreator )
@@ -42,13 +43,34 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
         val date:String = json.getString("date")
         val text:String = json.getString("explanation")
         val typeMedia:String = json.getString("media_type")
-        val title:String = json.getString("title")
         val url:String = json.getString("url")
+
+        val title:String = json.getString("title")
+
         val hdUrl:String? = json.optString("hdurl")
 
         apod = ApodData(id, date, text, typeMedia, title)
         apod?.url = url
         apod?.hdUrl = hdUrl
+
+        if(typeMedia == typeMediaVideo && url.contains("https://www.youtube.com/embed/")){
+
+            val tempId = url.substring(30)
+
+            var id = ""
+            run loop@{
+                tempId.forEach {
+                    if(it != '/' && it != '?'){
+                        id +=it
+                        Log.d("MyCont", "id  = $id ")
+
+                    } else {
+                        return@loop
+                    }
+                }
+            }
+            apod?.youtubeId = id
+        }
         Log.d("MyCont", "id = $id , date= $date , typemedia= $typeMedia")
 
     }

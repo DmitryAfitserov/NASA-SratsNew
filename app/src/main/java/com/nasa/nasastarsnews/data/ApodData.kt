@@ -15,6 +15,7 @@ data class ApodData(val id:Int, val date:String, val text: String , val typeMedi
 
     var width:Int? = null
     var height:Int? = null
+    var youtubeId:String? = null
 
 
 
