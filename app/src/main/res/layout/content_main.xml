@@ -22,7 +22,7 @@
         android:id="@+id/nasa_start_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/nasa_logo"
+        android:background="@drawable/start_logo"
 
 
         app:layout_constraintBottom_toBottomOf="parent"

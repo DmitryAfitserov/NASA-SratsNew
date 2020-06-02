@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
 
-        app:srcCompat="@drawable/nasa_drawer_v5" />
+        app:srcCompat="@drawable/drawer_v7" />
 
 
 
