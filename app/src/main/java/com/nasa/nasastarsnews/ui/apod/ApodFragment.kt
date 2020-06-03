@@ -34,6 +34,7 @@ class ApodFragment : Fragment(){
     private val typeMediaVideo = "video"
     private var screenHeight:Int = 0
     private var screenWidth :Int = 0
+    private var imageViewer:StfalconImageViewer<ImageView>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,20 +68,24 @@ class ApodFragment : Fragment(){
                     picassoLoad(placeholder, imageView, url!!)
 
                 } ?: run {
-                    picassoLoad(R.drawable.image_placeholder_dr ,imageView, url!!)
+                    picassoLoad(R.drawable.image_placeholder ,imageView, url!!)
                 }
 
 
                 imageView.setOnClickListener {
                     val list = arrayOf(imageView)
-                    StfalconImageViewer.Builder<ImageView>(context, list) { view, image ->
-                        Picasso.get()
-                            .load(url)
-                            .resize(screenWidth, screenHeight)
-                            .onlyScaleDown()
-                            .centerInside()
-                            .into(view)
-                    }.show()
+
+                        imageViewer = StfalconImageViewer.Builder<ImageView>(context, list) { view, image ->
+                            Picasso.get()
+                                .load(url)
+                                .resize(screenWidth, screenHeight)
+                                .onlyScaleDown()
+                                .centerInside()
+                                .into(view)
+                        }.build()
+
+
+                    imageViewer?.show()
 
                 }
 
@@ -89,10 +94,17 @@ class ApodFragment : Fragment(){
 
             typeMediaVideo -> {
 
-                if(apod.url!!.contains("youtube.com")){
-                    picassoLoad(R.drawable.video_grey_placeholder_dr, imageView)
-                } else {
-                    picassoLoad(R.drawable.video_grey_placeholder_dr, imageView)
+                apod.youtubeId?.let {
+                    Picasso.get()
+                        .load("https://img.youtube.com/vi/$it/0.jpg")
+                        .placeholder(R.drawable.video_grey_placeholder_dr)
+                        .into(imageView)
+                } ?: run {
+                    Picasso.get()
+                        .load(R.drawable.video_grey_placeholder_dr)
+                        //  .placeholder(res)
+                        //  .error(R.drawable.user_placeholder_error)
+                        .into(imageView)
                 }
 
                 imageView.setOnClickListener {
@@ -101,6 +113,8 @@ class ApodFragment : Fragment(){
             }
 
         }
+
+
 
 
 
@@ -151,31 +165,31 @@ class ApodFragment : Fragment(){
         return root
     }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        Log.d("MyCont", "onViewStateRestored")
+        super.onViewStateRestored(savedInstanceState)
+    }
+
+
 
     private fun picassoLoad(res:Int, imageView: ImageView, url:String){
         Picasso.get()
             .load(url)
             .placeholder(res)
-            .error(R.drawable.error_placeholder_dr)
+            .error(R.drawable.error_placeholder)
             .resize(screenWidth, screenHeight)
             .onlyScaleDown()
             .centerInside()
             .into(imageView)
     }
 
-    private fun picassoLoad(res:Int, imageView: ImageView){
-        Picasso.get()
-            .load(res)
-          //  .placeholder(res)
-            //  .error(R.drawable.user_placeholder_error)
-            .into(imageView)
-    }
+
 
     private fun picassoLoad(drawable: Drawable, imageView: ImageView, url:String){
         Picasso.get()
             .load(url)
             .placeholder(drawable)
-            .error(R.drawable.error_placeholder_dr)
+            .error(R.drawable.error_placeholder)
             .resize(screenWidth, screenHeight)
             .onlyScaleDown()
             .centerInside()
@@ -209,7 +223,10 @@ class ApodFragment : Fragment(){
             }
     }
 
-
-
+    override fun onStop() {
+        Log.d("MyCont", "onStop")
+        imageViewer?.dismiss()
+        super.onStop()
+    }
 }
 
