@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_apod"
-        android:name="com.sn.starsnews.ui.apod.ApodListFragment"
+        android:name="com.nasa.nasastarsnews.ui.apod.ApodListFragment"
         android:label="@string/menu_apod"
         tools:layout="@layout/list_fragment_apod">
 
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/fragment_preferences"
-        android:name="com.sn.starsnews.ui.CustomPreferenceFragment"
+        android:name="com.nasa.nasastarsnews.ui.CustomPreferenceFragment"
         android:label="@string/settings" />
 
     <action android:id="@+id/to_fragment_preferences"
@@ -31,26 +31,26 @@
 
     <fragment
         android:id="@+id/fragment_apod"
-        android:name="com.sn.starsnews.ui.apod.ApodFragment"
+        android:name="com.nasa.nasastarsnews.ui.apod.ApodFragment"
         android:label="@string/fragment_apod"
         tools:layout="@layout/fragment_apod_layout" />
 
     <fragment
         android:id="@+id/nav_asteroids"
-        android:name="com.sn.starsnews.ui.asteroids.AsteroidsFragment"
+        android:name="com.nasa.nasastarsnews.ui.asteroids.AsteroidsFragment"
         android:label="@string/menu_asteroids"
         tools:layout="@layout/fragment_asteroids" />
 
     <fragment
         android:id="@+id/nav_mars_photo"
-        android:name="com.sn.starsnews.ui.photo_mars.MarsPhotoFragment"
+        android:name="com.nasa.nasastarsnews.ui.photo_mars.MarsPhotoFragment"
         android:label="@string/menu_mars_photo"
         tools:layout="@layout/fragment_mars_photo" />
 
 
     <fragment
         android:id="@+id/nav_about_app"
-        android:name="com.sn.starsnews.ui.about_app.AboutAppFragment"
+        android:name="com.nasa.nasastarsnews.ui.about_app.AboutAppFragment"
         android:label="@string/menu_about_app"
         tools:layout="@layout/fragment_about_app" />
 

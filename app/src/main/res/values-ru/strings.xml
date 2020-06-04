@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NASA - Звездные новости</string>
+    <string name="app_name">Stars News - Новости из NASA</string>
 
 
 
@@ -52,7 +52,7 @@
 
 
     <string name="about_app">
-        &lt;h1>NASA - Stars news&lt;/h1>
+        &lt;h1>Stars News - news from NASA&lt;/h1>
         &lt;p align="justify">В разделе \"Новости\" собраны астрономические картины дня - главное за день в Астрономии.&lt;/p>
         &lt;p align="justify"> Разделы \"Астероиды\" и \"Фотографии Марса\" будут доступны в следующих версиях приложения.&lt;/p>
         &lt;p align="justify">Данные предоставлены Космическим Агентством NASA.&lt;/p>

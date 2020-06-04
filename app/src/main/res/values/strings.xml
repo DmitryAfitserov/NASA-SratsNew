@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NASA Stars News</string>
+    <string name="app_name">Stars News - news from NASA</string>
 
 
 
@@ -55,7 +55,7 @@
 
 
     <string name="about_app">
-        &lt;h1>NASA - Stars news&lt;/h1>
+        &lt;h1>Stars News - news from NASA&lt;/h1>
         &lt;p align="justify">In the \"News\" section collected astronomical pictures of the day - the main thing for the day in astronomy.&lt;/p>
         &lt;p align="justify"> Sections \"Asteroids\" and \"Photo of Mars\" will be available in future versions of the application.&lt;/p>
         &lt;p align="justify">Data provided by NASA Space Agency.&lt;/p>
