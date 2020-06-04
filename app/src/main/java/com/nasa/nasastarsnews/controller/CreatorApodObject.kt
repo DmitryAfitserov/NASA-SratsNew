@@ -62,7 +62,7 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
                 tempId.forEach {
                     if(it != '/' && it != '?'){
                         id +=it
-                        Log.d("MyCont", "id  = $id ")
+                       // Log.d("MyCont", "id  = $id ")
 
                     } else {
                         return@loop

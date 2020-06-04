@@ -102,9 +102,15 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
         while (listURL.size < listSize){
             listURL.add(null)
+            Log.d("MyCont", " listURL.add(null)")
         }
 
-        val ofsetDay = listURL.size
+
+        var ofsetDay = listURL.size
+        if(listURL.size > 0 && isFirstError){
+            ofsetDay++
+        }
+
         val cal:Calendar = Calendar.getInstance()
         cal.time = dateNow
 
@@ -125,9 +131,10 @@ class ApodControllerText(private val context: Context, private val apodListFragm
         if(key == keyBatch){   // check batch
 
             error?.let {
-                Log.d("MyCont", "error = ${error}")
+                Log.d("MyCont", "error = ${error} ")
                 if(error == "com.android.volley.ServerError" && (apod as Int) == 0){
                     isFirstError = true
+                    listURL.removeAt(0)
                     Log.d("MyCont", "error = ${error} (apod as Int) == 0")
                 } else {
                     responseErrorLoad(it)
@@ -137,6 +144,9 @@ class ApodControllerText(private val context: Context, private val apodListFragm
             } ?: run {
 
                 listTemp.add(apod as ApodData)
+                if(apod.id == 0){
+                    isFirstError = false
+                }
 
             }
 
@@ -146,7 +156,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
                 if(listTemp.size ==startCountObjects + 1 || listTemp.size ==startCountObjects && isFirstError){
                     Log.d("MyCont", "keyBatch <= 1")
                     responseSuccessLoad()
-                    isFirstError = false
+
                 }
             } else {
                 if(listTemp.size ==usuallyCountObjects + 1 ){
@@ -161,6 +171,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
     private fun responseSuccessLoad(){
         Log.d("MyCont", "responseSuccessLoad")
         listTemp.sortBy { it.id }
+        Log.d("MyCont", "sortBy listTemp.size = ${listTemp.size}")
         if(keyBatch < 0){
             Log.d("MyCont", "isSaveList == true")
             listApodData.clear()
