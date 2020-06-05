@@ -101,7 +101,6 @@ class AdapterListApod(activity: FragmentActivity, list: MutableList<Any?>) :
             3 -> holder.text?.maxLines = 7
 
         }
-        Log.d("MyCont", "title?.lineCount $position")
 
         holder.date?.text = (getItem(position) as ApodData).date
     }
