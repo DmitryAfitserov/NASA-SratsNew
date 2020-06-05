@@ -25,7 +25,7 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
         if(status){
             parserNasaJson(response)
             if(MainActivity.language != MainActivity.languageDefault){
-                Log.d("MyCont", " translate(apod)  ")
+            //    Log.d("MyCont", " translate(apod)  ")
                 translate(apod)
 
             } else {
@@ -133,7 +133,7 @@ class CreatorApodObject (val id:Int,private val keyBatch_:Int, private val conte
         }
 
         if(apod?.titleTranslate != null && apod?.textTranslate != null){
-            Log.d("MyCont", "id = $id , date= ${apod!!.date} , text translate = ${apod!!.textTranslate}e")
+          //  Log.d("MyCont", "id = $id , date= ${apod!!.date} , text translate = ${apod!!.textTranslate}e")
             callbackToController.invoke(apod!!, null, keyBatch_)
         }
 

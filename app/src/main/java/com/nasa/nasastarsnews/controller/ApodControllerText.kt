@@ -41,9 +41,9 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
 
     fun work(firstVisibleItem:Int): Boolean{
-        Log.d("MyCont", "countNotDataGlobal == ${countNotDataGlobal.value}")
+    //    Log.d("MyCont", "countNotDataGlobal == ${countNotDataGlobal.value}")
         if(firstVisibleItem == -1 && keyBatch >= 0){
-            Log.d("MyCont", "firstVisibleItem == -1")
+         //   Log.d("MyCont", "firstVisibleItem == -1")
             keyBatch = -1
             countNotDataLocal = 0
             countNotDataGlobal.value = 0
@@ -58,7 +58,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
 
         if (listApodData.isEmpty() && listURL.isEmpty() && keyBatch >= 0){
-             Log.d("MyCont", "startCountObjects = 5")
+          //   Log.d("MyCont", "startCountObjects = 5")
             keyBatch = 1
             countNotDataLocal = 0
              getData(startCountObjects)
@@ -66,11 +66,11 @@ class ApodControllerText(private val context: Context, private val apodListFragm
          }
         if(firstVisibleItem +11 > listApodData.size && listApodData.isNotEmpty() && keyBatch >= 0){
             if(listApodData.size < listURL.size){
-                Log.d("MyCont", " return false")
+          //      Log.d("MyCont", " return false")
                 return false
             }
 
-            Log.d("MyCont", "usuallycountObjects = 3")
+       //     Log.d("MyCont", "usuallycountObjects = 3")
             if(keyBatch < 2){
                 keyBatch = 2
             } else {
@@ -80,7 +80,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
             getData(usuallyCountObjects)
         }
-        Log.d("MyCont", "work")
+     //   Log.d("MyCont", "work")
         return true
 
     }
@@ -111,7 +111,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
         while (listURL.size < listSize){
             listURL.add(null)
-            Log.d("MyCont", " listURL.add(null)")
+         //   Log.d("MyCont", " listURL.add(null)")
         }
 
 
@@ -146,20 +146,22 @@ class ApodControllerText(private val context: Context, private val apodListFragm
                 if(error == "com.android.volley.ServerError" || error == "com.android.volley.ClientError"){
                     countNotDataLocal++
                     // lits not work
-                    Log.d("MyCont", "error id = ${(apod as Int)} ")
+                 //   Log.d("MyCont", "error id = ${(apod as Int)} ")
 
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         listURL.removeIf { it!!.id == (apod as Int) }
                     } else {
-                        
+                        val index = listURL.indexOfFirst { it!!.id == (apod as Int) }
+                      //  Log.d("MyCont", "delete by index = $index ")
+                        listURL.removeAt(index)
                     }
 
-                    for(i in listURL){
-                        Log.d("MyCont", "listUrl after remove id = ${i?.id} ")
-                    }
+//                    for(i in listURL){
+//                      //  Log.d("MyCont", "listUrl after remove id = ${i?.id} ")
+//                    }
 
-                    Log.d("MyCont", "error = ${error} (apod as Int) == 0")
+                 //   Log.d("MyCont", "error = ${error} (apod as Int) == 0")
                 } else {
                     responseErrorLoad(it)
                     return
@@ -175,7 +177,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
             if(keyBatch <= 1){
                 if(listTemp.size ==startCountObjects + 1 - countNotDataLocal){
-                    Log.d("MyCont", "keyBatch <= 1")
+                  //  Log.d("MyCont", "keyBatch <= 1")
                     countNotDataGlobal.value = countNotDataLocal + countNotDataGlobal.value!!
                     responseSuccessLoad()
 
@@ -194,11 +196,11 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
     private fun responseSuccessLoad(){
 
-        Log.d("MyCont", "responseSuccessLoad")
+     //   Log.d("MyCont", "responseSuccessLoad")
         listTemp.sortBy { it.id }
-        Log.d("MyCont", "sortBy listTemp.size = ${listTemp.size}")
+     //   Log.d("MyCont", "sortBy listTemp.size = ${listTemp.size}")
         if(keyBatch < 0){
-            Log.d("MyCont", "isSaveList == true")
+     //       Log.d("MyCont", "isSaveList == true")
             listApodData.clear()
             listApodData.addAll(listTemp)
             keyBatch = 1
@@ -243,7 +245,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
 
         listTemp.clear()
-        Log.d("MyCont", "responseErrorLoad")
+     //   Log.d("MyCont", "responseErrorLoad")
 
         apodListFragment.errorLoadData(error)
     }

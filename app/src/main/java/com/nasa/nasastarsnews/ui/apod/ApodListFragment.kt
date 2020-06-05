@@ -188,7 +188,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
 
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
-        Log.d("MyCont", "position = $position ")
+      //  Log.d("MyCont", "position = $position ")
         if(position == listApod.size - 1){
             if(listApod[listApod.size - 1] == true){
                 val progressBar = v.findViewById<ProgressBar>(R.id.progress_bar_error_item)
