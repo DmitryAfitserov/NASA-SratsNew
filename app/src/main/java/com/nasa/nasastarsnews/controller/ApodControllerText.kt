@@ -4,10 +4,13 @@ package com.nasa.nasastarsnews.controller
 
 
 import android.content.Context
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 
 import com.nasa.nasastarsnews.data.ApodData
+import com.nasa.nasastarsnews.data.UrlData
 import com.nasa.nasastarsnews.ui.apod.ApodListFragment
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,7 +23,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
     private var dateFormat:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
     private var dateNow:Date = Date()
 
-    private var listURL = arrayListOf<String?>()
+    private var listURL = arrayListOf<UrlData?>()
 
     val startCountObjects:Int = 5 // 6 is really
 
@@ -49,7 +52,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
             creatorURL(startCountObjects)
 
             for(i in 0..startCountObjects){
-                CreatorApodObject(i,keyBatch,  context, listURL[i], callbackToController)
+                CreatorApodObject(i,keyBatch,  context, listURL[i]?.url, callbackToController)
             }
         }
 
@@ -91,7 +94,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
 
         for(i in listSize..listSize+countLoadObjects){
-            CreatorApodObject(i,keyBatch,  context, listURL[i], callbackToController)
+            CreatorApodObject(i,keyBatch,  context, listURL[i]?.url, callbackToController)
         }
 
     }
@@ -123,12 +126,16 @@ class ApodControllerText(private val context: Context, private val apodListFragm
         for (count in 0..countCreateURL){
             cal.add(Calendar.DATE, -(offsetDay + count))
             workDate = cal.time
-            listURL.add(URL + URL_date + dateFormat.format(workDate))
+            val url = UrlData(URL + URL_date + dateFormat.format(workDate), listURL.size)
+            listURL.add(url)
+
+          //  listURL.add(URL + URL_date + dateFormat.format(workDate))
 //            Log.d("MyCont", listURL[count]!!)
             cal.time = dateNow
         }
 
     }
+
 
     private fun responseFromCreator(apod:Any, error:String?, key:Int){
 
@@ -139,7 +146,19 @@ class ApodControllerText(private val context: Context, private val apodListFragm
                 if(error == "com.android.volley.ServerError" || error == "com.android.volley.ClientError"){
                     countNotDataLocal++
                     // lits not work
-                    listURL.removeAt((apod as Int))
+                    Log.d("MyCont", "error id = ${(apod as Int)} ")
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        listURL.removeIf { it!!.id == (apod as Int) }
+                    } else {
+                        
+                    }
+
+                    for(i in listURL){
+                        Log.d("MyCont", "listUrl after remove id = ${i?.id} ")
+                    }
+
                     Log.d("MyCont", "error = ${error} (apod as Int) == 0")
                 } else {
                     responseErrorLoad(it)
@@ -171,6 +190,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
         }
 
     }
+
 
     private fun responseSuccessLoad(){
 
