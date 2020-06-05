@@ -5,13 +5,14 @@ package com.nasa.nasastarsnews.controller
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 
 import com.nasa.nasastarsnews.data.ApodData
 import com.nasa.nasastarsnews.ui.apod.ApodListFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ApodControllerText(private val context: Context, private val apodListFragment: ApodListFragment, private var listApodData:MutableList<Any?>) {
+class ApodControllerText(private val context: Context, private val apodListFragment: ApodListFragment, private var listApodData:MutableList<Any?>, private var countNotDataGlobal:MutableLiveData<Int>) {
 
     private var URL = "https://api.nasa.gov/planetary/apod?api_key=mtLZUxtBo45hYfKLteWj3rH8qBv0b93cZz7aXqDe"
     private var URL_date = "&date="
@@ -32,15 +33,17 @@ class ApodControllerText(private val context: Context, private val apodListFragm
     private var listTemp = mutableListOf<ApodData>()
 
     private var keyBatch:Int = 1
-    private var isFirstError = false
 
+    private var countNotDataLocal = 0
 
 
     fun work(firstVisibleItem:Int): Boolean{
-
+        Log.d("MyCont", "countNotDataGlobal == ${countNotDataGlobal.value}")
         if(firstVisibleItem == -1 && keyBatch >= 0){
             Log.d("MyCont", "firstVisibleItem == -1")
             keyBatch = -1
+            countNotDataLocal = 0
+            countNotDataGlobal.value = 0
          //   isSaveList = true
             listURL.clear()
             creatorURL(startCountObjects)
@@ -54,6 +57,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
         if (listApodData.isEmpty() && listURL.isEmpty() && keyBatch >= 0){
              Log.d("MyCont", "startCountObjects = 5")
             keyBatch = 1
+            countNotDataLocal = 0
              getData(startCountObjects)
 
          }
@@ -62,12 +66,14 @@ class ApodControllerText(private val context: Context, private val apodListFragm
                 Log.d("MyCont", " return false")
                 return false
             }
+
             Log.d("MyCont", "usuallycountObjects = 3")
             if(keyBatch < 2){
                 keyBatch = 2
             } else {
                 keyBatch++
             }
+            countNotDataLocal = 0
 
             getData(usuallyCountObjects)
         }
@@ -80,7 +86,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
         creatorURL(countLoadObjects)
         var listSize = 0
         if(listApodData.isNotEmpty()){
-            listSize = listApodData.size -1
+            listSize = listApodData.size - 1 //- countNotDataGlobal
         }
 
 
@@ -106,10 +112,8 @@ class ApodControllerText(private val context: Context, private val apodListFragm
         }
 
 
-        var ofsetDay = listURL.size
-        if(listURL.size > 0 && isFirstError){
-            ofsetDay++
-        }
+        val offsetDay = listURL.size + countNotDataGlobal.value!!
+
 
         val cal:Calendar = Calendar.getInstance()
         cal.time = dateNow
@@ -117,7 +121,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
         var workDate:Date
 
         for (count in 0..countCreateURL){
-            cal.add(Calendar.DATE, -(ofsetDay + count))
+            cal.add(Calendar.DATE, -(offsetDay + count))
             workDate = cal.time
             listURL.add(URL + URL_date + dateFormat.format(workDate))
 //            Log.d("MyCont", listURL[count]!!)
@@ -132,9 +136,10 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
             error?.let {
                 Log.d("MyCont", "error = ${error} ")
-                if(error == "com.android.volley.ServerError" && (apod as Int) == 0){
-                    isFirstError = true
-                    listURL.removeAt(0)
+                if(error == "com.android.volley.ServerError" || error == "com.android.volley.ClientError"){
+                    countNotDataLocal++
+                    // lits not work
+                    listURL.removeAt((apod as Int))
                     Log.d("MyCont", "error = ${error} (apod as Int) == 0")
                 } else {
                     responseErrorLoad(it)
@@ -144,22 +149,21 @@ class ApodControllerText(private val context: Context, private val apodListFragm
             } ?: run {
 
                 listTemp.add(apod as ApodData)
-                if(apod.id == 0){
-                    isFirstError = false
-                }
 
             }
 
 
 
             if(keyBatch <= 1){
-                if(listTemp.size ==startCountObjects + 1 || listTemp.size ==startCountObjects && isFirstError){
+                if(listTemp.size ==startCountObjects + 1 - countNotDataLocal){
                     Log.d("MyCont", "keyBatch <= 1")
+                    countNotDataGlobal.value = countNotDataLocal + countNotDataGlobal.value!!
                     responseSuccessLoad()
 
                 }
             } else {
-                if(listTemp.size ==usuallyCountObjects + 1 ){
+                if(listTemp.size ==usuallyCountObjects + 1 - countNotDataLocal ){
+                    countNotDataGlobal.value =countNotDataLocal + countNotDataGlobal.value!!
                     responseSuccessLoad()
                 }
             }
@@ -169,6 +173,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
     }
 
     private fun responseSuccessLoad(){
+
         Log.d("MyCont", "responseSuccessLoad")
         listTemp.sortBy { it.id }
         Log.d("MyCont", "sortBy listTemp.size = ${listTemp.size}")
@@ -193,7 +198,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
         if(keyBatch == 1){
             keyBatch++
-            getData(usuallyCountObjects)
+            work(4)
 
         }
 
@@ -210,7 +215,7 @@ class ApodControllerText(private val context: Context, private val apodListFragm
                 if(listApodData[listApodData.size -1] != true){
                     listApodData[listApodData.size -1] = true
                 }
-                for(i in 0..usuallyCountObjects){
+                for(i in 0..usuallyCountObjects - countNotDataLocal){
                     listURL.removeAt(listURL.size - 1)
                 }
             }

@@ -59,7 +59,7 @@ class ApodListFragment : ListFragment(), InterfaceForListApod, AbsListView.OnScr
           controller.work(sendedFirstItem)
         }
 
-        controller = ApodControllerText(context!!, this, listApod)
+        controller = ApodControllerText(context!!, this, listApod, apodViewModel!!.countNotDataGlobal)
 
 
             controller.work(0)
