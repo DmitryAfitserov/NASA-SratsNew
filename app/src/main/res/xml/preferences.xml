@@ -8,6 +8,7 @@
         >
         <ListPreference
             android:summary="%s"
+            android:enabled="false"
             android:key="language"
             android:title="@string/language"
             android:dialogTitle="@string/language_title_dialog"
@@ -19,6 +20,7 @@
         <com.nasa.nasastarsnews.ui.CustomSwitchPreferences
 
             android:defaultValue="false"
+            android:enabled="false"
             android:key="show_two_texts"
             android:icon="@drawable/icon_translate_32"
             android:summary="@string/show_two_texts_summary"

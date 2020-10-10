@@ -38,16 +38,17 @@ class ApodFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val root = inflater.inflate(R.layout.fragment_apod_layout, container, false)
 
         apodViewModel =
-            ViewModelProviders.of(activity!!).get(ApodViewModel::class.java)
+            ViewModelProviders.of(requireActivity()).get(ApodViewModel::class.java)
 
         apod = apodViewModel.getApod()
 
         imageView = root.findViewById(R.id.image_title_apod) // work with image
 
-        val display = (context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+        val display = (requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
         val size = Point()
         display.getSize(size)
         screenWidth = size.x
@@ -207,7 +208,7 @@ class ApodFragment : Fragment(){
                 Uri.parse(url)
             )
             try {
-                context!!.startActivity(webIntent)
+                requireContext().startActivity(webIntent)
             } catch (ex: ActivityNotFoundException) {
               //  context!!.startActivity(webIntent)
 

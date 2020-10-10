@@ -29,7 +29,6 @@ class ApodControllerText(private val context: Context, private val apodListFragm
 
     private val usuallyCountObjects:Int = 3 // 4 is really
 
-
     private val callbackToController =
         {apod:Any, error:String?, keyBatch:Int -> responseFromCreator(apod, error, keyBatch) }
 
@@ -241,8 +240,6 @@ class ApodControllerText(private val context: Context, private val apodListFragm
                     listURL.removeAt(listURL.size - 1)
                 }
             }
-
-
 
         listTemp.clear()
      //   Log.d("MyCont", "responseErrorLoad")

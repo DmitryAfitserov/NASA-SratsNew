@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         appBarLauout = findViewById(R.id.app_bar_layout)
 
         setSupportActionBar(toolbar)
-        languageRegion = resources.getString(R.string.region)
+        languageRegion = "en" //resources.getString(R.string.region)
 
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
@@ -91,7 +91,6 @@ class MainActivity : AppCompatActivity() {
 
            if(navController.currentDestination!!.id != R.id.fragment_preferences){
                navController.navigate(R.id.to_fragment_preferences)
-               Log.d("MyCont", "navController.currentDestination!!.id != R.id.fragment_preferences")
            }
 
         }
@@ -110,12 +109,13 @@ class MainActivity : AppCompatActivity() {
         val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         isHDImage = prefs.getBoolean(key_use_hd, isHDImageDefault)
         language = prefs.getString(key_language, "empty")!!
-        if(language == "empty"){
-            language = languageRegion
-            val editor = prefs.edit()
-            editor.putString(key_language, language)
-            editor.apply()
-        }
+        language = "en"
+//        if(language == "empty"){
+//            language = languageRegion
+//            val editor = prefs.edit()
+//            editor.putString(key_language, language)
+//            editor.apply()
+//        }
         twoText = prefs.getBoolean(key_two_text, twoTextDefault)
     }
 
