@@ -202,7 +202,6 @@ class ApodFragment : Fragment(){
 
     private fun startVideoIntent(url: String){
 
-
             val webIntent = Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse(url)

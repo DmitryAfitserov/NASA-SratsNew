@@ -75,9 +75,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         getPreferencesData()
-
-
-
+        
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
